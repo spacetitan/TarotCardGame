@@ -11,12 +11,24 @@ config_version=5
 [application]
 
 config/name="Tarot Card Game"
-config/features=PackedStringArray("4.2", "Mobile")
+config/features=PackedStringArray("4.2", "C#", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+EventManager="*res://Scripts/GlobalManagers/EventManager.cs"
+AudioManager="*res://Scenes/GlobalManagers/AudioManager.tscn"
+UIManager="*res://Scenes/GlobalManagers/UIManager.tscn"
+ToolsManager="*res://Scripts/GlobalManagers/ToolsManager.cs"
+VfxManager="*res://Scripts/GlobalManagers/VFXManager.cs"
 
 [dotnet]
 
 project/assembly_name="Tarot Card Game"
+
+[editor]
+
+script/templates_search_path="res://Scripts/_ScriptTemplates"
 
 [rendering]
 

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bn865ppkrix6r"]
+
+[ext_resource type="Script" path="res://Scripts/GlobalManagers/UIManager.cs" id="1_wd2ph"]
+
+[node name="UIManager" type="Node"]
+script = ExtResource("1_wd2ph")

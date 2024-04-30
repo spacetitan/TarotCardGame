@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://cunt8n0nc4rtc"]
+
+[ext_resource type="Script" path="res://Scripts/GlobalManagers/AudioManager.cs" id="1_ixyep"]
+[ext_resource type="Script" path="res://Scripts/Audio/AudioPlayer.cs" id="2_5nkgg"]
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_ixyep")
+
+[node name="MusicPlayer" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_5nkgg")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MusicPlayer"]
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="MusicPlayer"]
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="MusicPlayer"]
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="MusicPlayer"]
+
+[node name="SFXPlayer" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_5nkgg")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SFXPlayer"]
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="SFXPlayer"]
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="SFXPlayer"]
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="SFXPlayer"]
+
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="SFXPlayer"]
+
+[node name="AudioStreamPlayer6" type="AudioStreamPlayer" parent="SFXPlayer"]
+
+[node name="AudioStreamPlayer7" type="AudioStreamPlayer" parent="SFXPlayer"]
+
+[node name="AudioStreamPlayer8" type="AudioStreamPlayer" parent="SFXPlayer"]
