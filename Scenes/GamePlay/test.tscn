@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0v8sw40nm0xc"]
+
+[ext_resource type="PackedScene" uid="uid://bncbv6l3bqram" path="res://Scenes/CardUI.tscn" id="1_i3x6u"]
+[ext_resource type="Resource" uid="uid://st2vr4deir3" path="res://Resources/CardStats/TestCard.tres" id="2_f1lka"]
+
+[node name="Test" type="Node"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CardUI" parent="CanvasLayer" instance=ExtResource("1_i3x6u")]
+cardStats = ExtResource("2_f1lka")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

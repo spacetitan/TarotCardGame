@@ -4,3 +4,7 @@
 
 [node name="UIManager" type="Node"]
 script = ExtResource("1_wd2ph")
+
+[node name="CanvasLayerHUD" type="CanvasLayer" parent="."]
+
+[node name="CanvasLayerInteract" type="CanvasLayer" parent="."]
