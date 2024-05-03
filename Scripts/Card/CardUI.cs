@@ -4,6 +4,8 @@ using Godot;
 [GlobalClass]
 public partial class CardUI : Control
 {
+	[Signal] public delegate void ReturnToHandEventHandler(CardUI card);
+	public int originalIndex = 0;
 	[Export] public CardStats cardStats{ get; private set; }
 	private CardStateMachine cardStateMachine;
 
@@ -27,6 +29,8 @@ public partial class CardUI : Control
 		cardStateMachine = new CardStateMachine(this);
 		GetSceneNodes();
 		ConnectEventSignals();
+
+		this.originalIndex = this.GetIndex();
 		
 		if(this.cardStats != null)
 		{
@@ -59,7 +63,24 @@ public partial class CardUI : Control
 		this.cardMana.Text = "Cost: " + cardStats.cardCost.ToString() + " Gen: " + cardStats.cardGen.ToString();
 	}
 
-	public void SetPlayable(bool value){}
+	public void SetPlayable(bool value)
+	{
+		this.isPlayable = value;
+		// if(!isPlayable)
+		// {
+		// 	costLabel.AddThemeColorOverride("font_color", Colors.Red);
+		// 	icon.Modulate = new Color(1,1,1,.05f);
+		// }
+		// else
+		// {
+		// 	costLabel.RemoveThemeColorOverride("font_color");
+		// 	icon.Modulate = new Color(1,1,1,1);
+		// }
+	}
+	public void SetDisabled(bool value)
+	{
+		this.isDisabled = value;
+	}
 	public void Play(){}
 	public void Burn(){}
 	public void Discard(){}

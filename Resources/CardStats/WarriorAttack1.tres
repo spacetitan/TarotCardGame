@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardStats" load_steps=3 format=3 uid="uid://cma75ouxhsyne"]
+
+[ext_resource type="Script" path="res://Scripts/_Resources/CardStats.cs" id="1_0shxt"]
+[ext_resource type="Texture2D" uid="uid://yhlbe2jwllm4" path="res://Art/Card/WideAtt1.png" id="1_bbuvs"]
+
+[resource]
+script = ExtResource("1_0shxt")
+cardName = "Wide Slash"
+cardType = 1
+cardTag = 1
+cardDesc = "5 dmg"
+cardCost = 2
+cardGen = 1
+cardArt = ExtResource("1_bbuvs")
+target = 3

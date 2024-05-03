@@ -40,13 +40,12 @@ public partial class CardDefaultState : CardInteractState
 
     public override void Enter()
 	{
-		
-
 		if(cardUI.tween != null && cardUI.tween.IsRunning())
 		{
 			cardUI.tween.Kill();
 		}
 
+		cardUI.EmitSignal(CardUI.SignalName.ReturnToHand, this.cardUI);
 		cardUI.PivotOffset = Vector2.Zero;
 	}
 
@@ -114,7 +113,12 @@ public partial class CardDraggingState : CardInteractState
 
     public override void Enter()
 	{
-		
+		Node uilayer = cardUI.GetTree().GetFirstNodeInGroup("BattleUI");
+
+		if(uilayer != null)
+		{
+			cardUI.Reparent(uilayer);
+		}
 
 		EventManager.instance.EmitSignal(EventManager.SignalName.CardDragStarted, cardUI);
 		this.minimumDragTimeElapsed = false;

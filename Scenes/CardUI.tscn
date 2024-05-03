@@ -14,17 +14,27 @@ font_size = 8
 size = Vector2(97, 131)
 
 [node name="CardUI" type="Control"]
+custom_minimum_size = Vector2(112.5, 150)
 layout_mode = 3
-anchors_preset = 0
-offset_right = 112.5
-offset_bottom = 150.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1039.5
+offset_bottom = -498.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_6nknc")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.25
+offset_top = -75.0
+offset_right = 56.25
+offset_bottom = 75.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -100,7 +110,7 @@ vertical_alignment = 1
 [node name="Area2DPlayArea" type="Area2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(15, 15)
-collision_mask = 2
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DPlayArea"]
 position = Vector2(41.5, 59.5)

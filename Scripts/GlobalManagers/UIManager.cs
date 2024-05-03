@@ -12,9 +12,26 @@ public partial class UIManager : Node
 		}
 	}
 
+	private CanvasLayer battle;
+	private CanvasLayer VFX;
+
+
 	public override void _Ready()
 	{
-		init();
+		GetSceneNodes();
+
+		SetBattleUIVisibility(true);
+	}
+
+	private void GetSceneNodes()
+	{
+		this.battle = GetNode<CanvasLayer>("%CanvasLayerBattle");
+		this.VFX = GetNode<CanvasLayer>("%CanvasLayerVFX");
+	}
+
+	public void SetBattleUIVisibility(bool value)
+	{
+		this.battle.Visible = value;
 	}
 }
 

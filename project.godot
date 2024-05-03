@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Tarot Card Game"
-run/main_scene="res://Scenes/GamePlay/test.tscn"
+run/main_scene="res://Scenes/GamePlay/CombatScene.tscn"
 config/features=PackedStringArray("4.2", "C#", "Mobile")
 config/icon="res://icon.svg"
 
@@ -22,6 +22,11 @@ AudioManager="*res://Scenes/GlobalManagers/AudioManager.tscn"
 UIManager="*res://Scenes/GlobalManagers/UIManager.tscn"
 ToolsManager="*res://Scripts/GlobalManagers/ToolsManager.cs"
 VfxManager="*res://Scripts/GlobalManagers/VFXManager.cs"
+
+[display]
+
+window/size/window_width_override=1280
+window/size/window_height_override=720
 
 [dotnet]
 
@@ -48,7 +53,9 @@ RightMouse={
 
 2d_physics/layer_1="Card Target Selector"
 2d_physics/layer_2="Card Drop Area"
+2d_physics/layer_3="Card Burn Area"
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
