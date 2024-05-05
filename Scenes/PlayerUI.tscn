@@ -20,24 +20,28 @@ offset_bottom = 50.0
 alignment = 1
 
 [node name="TextureRectArmor" type="TextureRect" parent="HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("2_sl2j8")
 stretch_mode = 5
 
 [node name="LabelArmor" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "6"
 horizontal_alignment = 1
 
 [node name="TextureRectHealth" type="TextureRect" parent="HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("3_pgr7a")
 stretch_mode = 5
 
 [node name="LabelHealth" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "9"

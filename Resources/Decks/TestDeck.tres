@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CardPile" load_steps=5 format=3 uid="uid://ckpxtdqht3jaf"]
+
+[ext_resource type="Script" path="res://Scripts/_Resources/CardPile.cs" id="1_c8tha"]
+[ext_resource type="Resource" uid="uid://cma75ouxhsyne" path="res://Resources/CardStats/WarriorAttack1.tres" id="1_ufnam"]
+[ext_resource type="Resource" uid="uid://il4x7eei7kos" path="res://Resources/CardStats/WarriorAttack2.tres" id="2_a6qfb"]
+[ext_resource type="Resource" uid="uid://c4laimu52rucf" path="res://Resources/CardStats/WarriorBlock.tres" id="3_gcofp"]
+
+[resource]
+script = ExtResource("1_c8tha")
+cardStates = Array[Object]([ExtResource("1_ufnam"), ExtResource("1_ufnam"), ExtResource("1_ufnam"), ExtResource("1_ufnam"), ExtResource("2_a6qfb"), ExtResource("2_a6qfb"), ExtResource("2_a6qfb"), ExtResource("2_a6qfb"), ExtResource("3_gcofp"), ExtResource("3_gcofp"), ExtResource("3_gcofp"), ExtResource("3_gcofp")])

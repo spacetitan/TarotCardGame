@@ -4,16 +4,20 @@ using System;
 public partial class Hand : HBoxContainer
 {
     [Export] public CardStats spawnCard;
+
+	public PlayerStats playerStats{ get; private set; }
+
     const string CARD_UI_PATH = "res://Scenes/CardUI.tscn";
     int cardsPlayedThisTurn = 0;
 
     public override void _Ready()
 	{
-		//EventManager.instance.CardPlayed += OnCardPlayed;
-        AddCard(spawnCard);
-        AddCard(spawnCard);
-        //AddCard(spawnCard);
-        //AddCard(spawnCard);
+		EventManager.instance.CardPlayed += OnCardPlayed;
+	}
+
+	public void SetPlayerStats(PlayerStats player)
+	{
+		playerStats = player;
 	}
 
     public void AddCard(CardStats cardStats)
@@ -50,7 +54,7 @@ public partial class Hand : HBoxContainer
 		MoveChild(child, newIndex);
 	}
 
-	void OnCardPlayed(CardStats _card)
+	void OnCardPlayed()
 	{
 		cardsPlayedThisTurn++;
 	}

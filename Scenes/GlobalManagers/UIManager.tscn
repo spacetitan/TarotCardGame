@@ -1,12 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://bn865ppkrix6r"]
+[gd_scene load_steps=6 format=3 uid="uid://bn865ppkrix6r"]
 
 [ext_resource type="Script" path="res://Scripts/GlobalManagers/UIManager.cs" id="1_wd2ph"]
 [ext_resource type="Script" path="res://Scripts/UI/Hand.cs" id="2_aoxfe"]
+[ext_resource type="Script" path="res://Scripts/UI/BattleUI.cs" id="3_8fk0u"]
 [ext_resource type="Resource" uid="uid://c4laimu52rucf" path="res://Resources/CardStats/WarriorBlock.tres" id="3_32do1"]
 [ext_resource type="Script" path="res://Scripts/UI/VFXRedFlash.cs" id="4_xutay"]
 
-[node name="UIManager" type="Node"]
+[node name="UIManager" type="Node" node_paths=PackedStringArray("battle")]
 script = ExtResource("1_wd2ph")
+battle = NodePath("CanvasLayerBattle")
 
 [node name="CanvasLayerHUD" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -36,8 +38,10 @@ one_shot = true
 
 [node name="CanvasLayerBattle" type="CanvasLayer" parent="." groups=["BattleUI"]]
 unique_name_in_owner = true
+script = ExtResource("3_8fk0u")
 
 [node name="HBoxContainerHand" type="HBoxContainer" parent="CanvasLayerBattle"]
+unique_name_in_owner = true
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0

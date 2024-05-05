@@ -7,13 +7,25 @@ public partial class StatsData : Resource
 	[Signal] public delegate void StatsChangedEventHandler();
 
 	[Export] public Texture2D art;
-	[Export] public int maxHealth { get; set;} 
-	[Export]public int health{ get; set;}
-	[Export]public int armor{ get; set;}
+	[Export] public int maxHealth { get; private set;} 
+	[Export] public int health{ get; private set;}
+	[Export] public int armor{ get; private set;}
 
-	public void SetHealth(int value)
+	private void SetHealth(int value)
 	{
 		this.health = Math.Clamp(value, 0, this.maxHealth);
+		EmitSignal(SignalName.StatsChanged);
+	}
+
+	public void SetMaxHealth(int value)
+	{
+		this.maxHealth = value;
+		EmitSignal(SignalName.StatsChanged);
+	}
+
+	public void ResetHealth()
+	{
+		this.health = this.maxHealth;
 		EmitSignal(SignalName.StatsChanged);
 	}
 
@@ -54,12 +66,19 @@ public partial class StatsData : Resource
 		EmitSignal(SignalName.StatsChanged);
 	}
 
+	public void ResetArmor()
+	{
+		this.armor = 0;
+		EmitSignal(SignalName.StatsChanged);
+	}
+
 	public virtual Resource CreateInstance()
 	{
 		StatsData instance = (StatsData)this.Duplicate();
 		instance.art = this.art;
-		instance.health = maxHealth;
-		instance.armor = 0;
+		instance.SetMaxHealth(this.maxHealth);
+		instance.ResetHealth();
+		instance.ResetArmor();
 		return instance;
 	}
 }

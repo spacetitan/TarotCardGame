@@ -3,9 +3,9 @@ using Godot;
 [GlobalClass]
 public partial class PlayerStatsUI : Node
 {
-	HBoxContainer armor;
+	TextureRect armor;
 	Label armorLabel;
-	HBoxContainer health;
+	TextureRect health;
 	Label healthLabel;
 
     public override void _Ready()
@@ -15,15 +15,19 @@ public partial class PlayerStatsUI : Node
 
 	private void GetSceneNodes()
 	{
-
+		this.armor = GetNode<TextureRect>("%TextureRectArmor");
+		this.armorLabel = GetNode<Label>("%LabelArmor");
+		this.health = GetNode<TextureRect>("%TextureRectHealth");
+		this.healthLabel = GetNode<Label>("%LabelHealth");
 	}
 
-    public void UpdateStats()
+    public void UpdateStats(PlayerStats playerStats)
 	{
-		// armorLabel.Text = stats.armor.ToString();
-		// healthLabel.Text = stats.health.ToString();
+		this.armorLabel.Text = playerStats.armor.ToString();
+		this.healthLabel.Text = playerStats.health.ToString();
 
-		// armor.Visible = stats.armor > 0;
+		this.armor.Visible = playerStats.armor > 0;
+		this.armorLabel.Visible = playerStats.armor > 0;
 		// health.Visible = stats.health > 0;
 	}
 }
