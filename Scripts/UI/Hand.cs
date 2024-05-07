@@ -30,7 +30,7 @@ public partial class Hand : HBoxContainer
 		newCardUI.ReturnToHand += OnCardReturnedtoHand;
 		newCardUI.SetCardStats(cardStats);
 		newCardUI.Reparent(this);
-		//newCardUI.characterStats = this.characterStats;
+		newCardUI.SetPlayerStats(this.playerStats);
 	}
 
 	public void DiscardCard(CardUI card)

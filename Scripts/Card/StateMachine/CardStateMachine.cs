@@ -66,7 +66,7 @@ public partial class CardStateMachine : Node
 
 	public void OnStateChanged(CardInteractState from, int to)
 	{
-		GD.Print(from.state.ToString() + " -> " + ((CardStates)to).ToString());
+		//GD.Print(from.state.ToString() + " -> " + ((CardStates)to).ToString());
 		if(from != currentState)
 			return;
 

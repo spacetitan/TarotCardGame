@@ -1,15 +1,15 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=3 format=3 uid="uid://c4laimu52rucf"]
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://c4laimu52rucf"]
 
-[ext_resource type="Texture2D" uid="uid://bi0fklyjcf2vj" path="res://Art/Card/Armor.png" id="1_xsnti"]
-[ext_resource type="Script" path="res://Scripts/_Resources/CardStats.cs" id="2_xqtol"]
+[ext_resource type="Texture2D" uid="uid://blbrvh7iyh8wm" path="res://Art/Card/Armor2.png" id="1_lsf1r"]
+[ext_resource type="Script" path="res://Scripts/_Resources/Cards/BasicArmor.cs" id="2_21gad"]
 
 [resource]
-script = ExtResource("2_xqtol")
+script = ExtResource("2_21gad")
 cardName = "Armor Up"
 cardType = 1
 cardTag = 2
 cardDesc = "4 Armor"
 cardCost = 1
 cardGen = 2
-cardArt = ExtResource("1_xsnti")
+cardArt = ExtResource("1_lsf1r")
 target = 1

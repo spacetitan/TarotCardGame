@@ -30,7 +30,8 @@ public partial class Player : Node2D
 
 	public void SetPlayerStats(PlayerStats playerStats)
 	{
-		this.stats = playerStats.CreateInstance();
+		this.stats = null;
+		this.stats = playerStats;
 		this.stats.StatsChanged -= UpdateStatsUI;
 		this.stats.StatsChanged += UpdateStatsUI;
 

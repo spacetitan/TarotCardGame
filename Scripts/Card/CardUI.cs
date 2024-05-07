@@ -7,6 +7,7 @@ public partial class CardUI : Control
 	[Signal] public delegate void ReturnToHandEventHandler(CardUI card);
 	public int originalIndex = 0;
 	[Export] public CardStats cardStats{ get; private set; }
+	private PlayerStats playerStats;
 	private CardStateMachine cardStateMachine;
 
 	#region Scene Nodes
@@ -19,6 +20,7 @@ public partial class CardUI : Control
 	#endregion
 
 	public List<Node2D> targets = new List<Node2D>();
+	public Node2D burner = null;
 	public Tween tween;
 
 	public bool isPlayable{ get; private set;} = false;
@@ -63,6 +65,19 @@ public partial class CardUI : Control
 		this.cardMana.Text = "Cost: " + cardStats.cardCost.ToString() + " Gen: " + cardStats.cardGen.ToString();
 	}
 
+	public void SetPlayerStats(PlayerStats value)
+	{
+		this.playerStats = value;
+		this.playerStats.StatsChanged += OnStatsChanged;
+		SetPlayable(playerStats.CanPlayCard(this));
+	}
+
+	private void OnStatsChanged()
+	{
+		this.isPlayable = playerStats.CanPlayCard(this);
+		SetPlayable(playerStats.CanPlayCard(this));
+	}
+
 	public void SetPlayable(bool value)
 	{
 		this.isPlayable = value;
@@ -81,8 +96,26 @@ public partial class CardUI : Control
 	{
 		this.isDisabled = value;
 	}
-	public void Play(){}
-	public void Burn(){}
+	public void Play()
+	{
+		if(this.cardStats == null)
+		{
+			return;
+		}
+
+		cardStats.Play(playerStats, targets);
+		DestroyCard();
+	}
+	public void Burn()
+	{
+		if(this.cardStats == null)
+		{
+			return;
+		}
+
+		cardStats.Burn(playerStats);
+		DestroyCard();
+	}
 	public void Discard(){}
 	public void DestroyCard()
 	{
@@ -112,6 +145,13 @@ public partial class CardUI : Control
 
 	void OnPlayAreaEntered(Area2D area)
 	{
+		//GD.Print("Adding Target");
+		if(area.IsInGroup("Burner"))
+		{
+			//GD.Print("Adding burner");
+			burner = area;
+		}
+
 		if(!targets.Contains(area))
 		{
 			targets.Add(area as Node2D);
@@ -119,6 +159,7 @@ public partial class CardUI : Control
 	}
 	void OnPlayAreaExited(Area2D area)
 	{
+		burner = null;
 		targets.Remove(area as Node2D);
 	}
 

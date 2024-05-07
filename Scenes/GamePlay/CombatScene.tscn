@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/SceneManagers/CombatScene.cs" id="1_6bgin"]
 [ext_resource type="PackedScene" uid="uid://bcocl40xi65yn" path="res://Scenes/Player.tscn" id="2_c076a"]
 [ext_resource type="Resource" uid="uid://cnebs6xuv48e0" path="res://Resources/Player/Warrior.tres" id="2_i34i0"]
-[ext_resource type="Resource" uid="uid://dp0srt1b0iv5q" path="res://Resources/Player/TestCharacer.tres" id="3_1dqhb"]
+[ext_resource type="Texture2D" uid="uid://c4204rp8lo5l3" path="res://Art/Card/TestArt.png" id="3_6sw4y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rvbwx"]
 size = Vector2(1000, 300)
@@ -40,14 +40,20 @@ collision_layer = 2
 position = Vector2(562, 202)
 shape = SubResource("RectangleShape2D_rvbwx")
 
-[node name="Area2DCardBurnArea" type="Area2D" parent="."]
+[node name="Area2DCardBurnArea" type="Area2D" parent="." groups=["Burner"]]
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DCardBurnArea"]
 position = Vector2(107, 528.5)
 shape = SubResource("RectangleShape2D_hjmmb")
 
+[node name="Burner" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Burner"]
+position = Vector2(106.5, 529)
+scale = Vector2(12.0625, 12.875)
+texture = ExtResource("3_6sw4y")
+
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("2_c076a")]
 unique_name_in_owner = true
 position = Vector2(93, 131)
-stats = ExtResource("3_1dqhb")

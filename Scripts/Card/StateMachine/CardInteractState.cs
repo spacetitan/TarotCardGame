@@ -78,9 +78,7 @@ public partial class CardClickedState : CardInteractState
 
     public override void Enter()
 	{
-		
-
-		cardUI.playArea.Monitorable = true;
+		this.cardUI.playArea.Monitorable = true;
 	}
 
 	public override void Exit(){}
@@ -146,13 +144,13 @@ public partial class CardDraggingState : CardInteractState
 
 		if(mouseMotion)
 		{
-			cardUI.GlobalPosition = cardUI.GetGlobalMousePosition() - cardUI.PivotOffset;
+			this.cardUI.GlobalPosition = cardUI.GetGlobalMousePosition() - cardUI.PivotOffset;
 		}
 
 		if(cancel)
 		{
 			EmitSignal(SignalName.ChangeState, this, (int)CardStates.DEFAULT);
-			//cardUI.Burn();
+			this.cardUI.Burn();
 		}
 		else if(minimumDragTimeElapsed && confirm)
 		{
@@ -206,9 +204,14 @@ public partial class CardReleasedState : CardInteractState
 
     public override void Enter()
 	{
-		
-
 		played = false;
+
+		if(cardUI.burner != null)
+		{
+			GD.Print("Burning Card");
+			cardUI.Burn();
+			return;
+		}
 
 		if(cardUI.targets.Any() && cardUI.isPlayable)
 		{

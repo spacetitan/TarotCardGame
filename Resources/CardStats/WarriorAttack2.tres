@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="CardStats" load_steps=3 format=3 uid="uid://il4x7eei7kos"]
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://il4x7eei7kos"]
 
 [ext_resource type="Texture2D" uid="uid://dbgau48o2n3l8" path="res://Art/Card/TestAttack.png" id="1_4jyuj"]
-[ext_resource type="Script" path="res://Scripts/_Resources/CardStats.cs" id="1_ctvqa"]
+[ext_resource type="Script" path="res://Scripts/_Resources/Cards/BasicAttack.cs" id="2_nxdwo"]
 
 [resource]
-script = ExtResource("1_ctvqa")
+script = ExtResource("2_nxdwo")
 cardName = "Slash"
 cardType = 1
 cardTag = 1
