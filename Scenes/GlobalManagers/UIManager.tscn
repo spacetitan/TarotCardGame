@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://bn865ppkrix6r"]
+[gd_scene load_steps=8 format=3 uid="uid://bn865ppkrix6r"]
 
 [ext_resource type="Script" path="res://Scripts/GlobalManagers/UIManager.cs" id="1_wd2ph"]
 [ext_resource type="Script" path="res://Scripts/UI/Hand.cs" id="2_aoxfe"]
 [ext_resource type="Script" path="res://Scripts/UI/BattleUI.cs" id="3_8fk0u"]
 [ext_resource type="Resource" uid="uid://c4laimu52rucf" path="res://Resources/CardStats/WarriorBlock.tres" id="3_32do1"]
 [ext_resource type="Script" path="res://Scripts/UI/VFXRedFlash.cs" id="4_xutay"]
+[ext_resource type="Script" path="res://Scripts/UI/ManaUI.cs" id="6_mq3ll"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ythap"]
+font_size = 40
 
 [node name="UIManager" type="Node" node_paths=PackedStringArray("battle")]
 script = ExtResource("1_wd2ph")
@@ -57,3 +61,32 @@ mouse_filter = 2
 alignment = 1
 script = ExtResource("2_aoxfe")
 spawnCard = ExtResource("3_32do1")
+
+[node name="ManaUI" type="Panel" parent="CanvasLayerBattle"]
+unique_name_in_owner = true
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 37.0
+offset_top = -220.0
+offset_right = 175.0
+offset_bottom = -89.0
+grow_vertical = 0
+script = ExtResource("6_mq3ll")
+
+[node name="LabelMana" type="Label" parent="CanvasLayerBattle/ManaUI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "5"
+label_settings = SubResource("LabelSettings_ythap")
+horizontal_alignment = 1
+vertical_alignment = 1
