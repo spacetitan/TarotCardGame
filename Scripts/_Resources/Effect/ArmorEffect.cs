@@ -19,13 +19,12 @@ public partial class ArmorEffect : Effect
 				continue;
 			}
 
-			// if(target is Enemy)
-			// {
-			// 	Enemy enemy = (Enemy)target;
-			// 	enemy.stats.AddArmor(amount);
-			// }
-			// else 
-            if(target is Player)
+			if(target is Enemy)
+			{
+				Enemy enemy = (Enemy)target;
+				enemy.stats.AddArmor(amount);
+			}
+			else if(target is Player)
 			{
 				Player player = target as Player;
 				player.stats.AddArmor(amount);

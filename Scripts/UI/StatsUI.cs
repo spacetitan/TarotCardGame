@@ -1,7 +1,7 @@
 using Godot;
 
 [GlobalClass]
-public partial class PlayerStatsUI : Node
+public partial class StatsUI : Node
 {
 	TextureRect armor;
 	Label armorLabel;
@@ -21,13 +21,13 @@ public partial class PlayerStatsUI : Node
 		this.healthLabel = GetNode<Label>("%LabelHealth");
 	}
 
-    public void UpdateStats(PlayerStats playerStats)
+    public void UpdateStats(CharacterStats stats)
 	{
-		this.armorLabel.Text = playerStats.armor.ToString();
-		this.healthLabel.Text = playerStats.health.ToString();
+		this.armorLabel.Text = stats.armor.ToString();
+		this.healthLabel.Text = stats.health.ToString();
 
-		this.armor.Visible = playerStats.armor > 0;
-		this.armorLabel.Visible = playerStats.armor > 0;
+		this.armor.Visible = stats.armor > 0;
+		this.armorLabel.Visible = stats.armor > 0;
 		// health.Visible = stats.health > 0;
 	}
 }

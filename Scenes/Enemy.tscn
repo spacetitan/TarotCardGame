@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://dk2jos4xobojm"]
+
+[ext_resource type="PackedScene" uid="uid://dqgi8ta50ru8y" path="res://Scenes/PlayerUI.tscn" id="1_8ehys"]
+[ext_resource type="Texture2D" uid="uid://cr0g37oytxpow" path="res://Art/Enemies/tile_0108.png" id="1_efu7d"]
+[ext_resource type="Script" path="res://Scripts/Characters/Enemies/Enemy.cs" id="1_onuao"]
+[ext_resource type="Texture2D" uid="uid://dn65xlnxgux42" path="res://Art/Misc/tile_0099.png" id="2_07vj1"]
+[ext_resource type="Resource" uid="uid://bt7ycasbbiu7y" path="res://Resources/Enemies/TestEnemy.tres" id="2_62b2x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ptu2"]
+size = Vector2(80, 80)
+
+[node name="Enemy" type="Area2D" groups=["Enemies"]]
+collision_layer = 8
+script = ExtResource("1_onuao")
+stats = ExtResource("2_62b2x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(60, 97)
+shape = SubResource("RectangleShape2D_5ptu2")
+
+[node name="Sprite2DEnemy" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(60, 97)
+scale = Vector2(5, 5)
+texture = ExtResource("1_efu7d")
+
+[node name="Sprite2DArrow" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(61, 30)
+rotation = 1.5708
+scale = Vector2(5, 5)
+texture = ExtResource("2_07vj1")
+
+[node name="StatsUI" parent="." instance=ExtResource("1_8ehys")]
+unique_name_in_owner = true
+offset_top = 141.0
+offset_bottom = 141.0
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
+[connection signal="area_exited" from="." to="." method="OnAreaExited"]

@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://beid3bjetllo2"]
+
+[ext_resource type="Script" path="res://Scripts/Card/CardTargetSelector.cs" id="1_2nk1g"]
+[ext_resource type="Texture2D" uid="uid://dhwm4r3sm85i2" path="res://Art/Misc/tile_0129.png" id="2_l4r0l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xp13w"]
+
+[sub_resource type="Curve" id="Curve_a7ny2"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="CardTargetSelector" type="Node2D"]
+script = ExtResource("1_2nk1g")
+
+[node name="Sprite2DTargeter" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 5
+texture = ExtResource("2_l4r0l")
+
+[node name="Area2DTargetArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DTargetArea"]
+shape = SubResource("RectangleShape2D_xp13w")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Line2DTargetArc" type="Line2D" parent="CanvasLayer"]
+unique_name_in_owner = true
+width_curve = SubResource("Curve_a7ny2")
+
+[connection signal="area_entered" from="Area2DTargetArea" to="." method="OnArea2DEntered"]
+[connection signal="area_exited" from="Area2DTargetArea" to="." method="OnArea2DExited"]

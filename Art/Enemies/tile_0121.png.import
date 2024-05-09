@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://boqero2tcco4w"
-path="res://.godot/imported/Ranger.png-4c36bda7933e17870fba236bf9c0ee51.ctex"
+uid="uid://cyytsoby66in1"
+path="res://.godot/imported/tile_0121.png-b06b681ef0be581badb717d863eceb63.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Player/Ranger.png"
-dest_files=["res://.godot/imported/Ranger.png-4c36bda7933e17870fba236bf9c0ee51.ctex"]
+source_file="res://Art/Enemies/tile_0121.png"
+dest_files=["res://.godot/imported/tile_0121.png-b06b681ef0be581badb717d863eceb63.ctex"]
 
 [params]
 

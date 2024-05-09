@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Linq;
 using Godot;
 
@@ -136,11 +137,11 @@ public partial class CardDraggingState : CardInteractState
 		bool cancel = inputEvent.IsActionPressed("RightMouse");
 		bool confirm = inputEvent.IsActionReleased("LeftMouse") || inputEvent.IsActionPressed("LeftMouse");
 
-		// if(singleTargeted && mouseMotion && cardUI.targets.Count > 0)
-		// {
-		// 	EmitSignal(SignalName.ChangeState, this, (int)CardStates.AIMING);
-		// 	return;
-		// }
+		if(singleTargeted && mouseMotion && cardUI.targets.Count > 0)
+		{
+			EmitSignal(SignalName.ChangeState, this, (int)CardStates.AIMING);
+			return;
+		}
 
 		if(mouseMotion)
 		{
@@ -152,7 +153,7 @@ public partial class CardDraggingState : CardInteractState
 			EmitSignal(SignalName.ChangeState, this, (int)CardStates.DEFAULT);
 			this.cardUI.Burn();
 		}
-		else if(minimumDragTimeElapsed && confirm)
+		else if(this.minimumDragTimeElapsed && confirm)
 		{
 			cardUI.GetViewport().SetInputAsHandled();
 			EmitSignal(SignalName.ChangeState, this, (int)CardStates.RELEASED);
@@ -169,6 +170,7 @@ public partial class CardDraggingState : CardInteractState
 public partial class CardAimingState : CardInteractState
 {
 	public CardStates states = CardStates.AIMING;
+	const float MOUSE_Y_SNAPBACK_THRESHOLD = 525;
 
     public CardAimingState(CardStates initialState) : base(initialState)
     {
@@ -177,13 +179,36 @@ public partial class CardAimingState : CardInteractState
 
     public override void Enter()
 	{
-		
+		cardUI.targets.Clear();
 
+		Vector2 offset = new Vector2(cardUI.hand.Size.X /2, -cardUI.hand.Size.Y + 10);
+		offset.X -= cardUI.Size.X / 2;
+		cardUI.AnimateToPosition(cardUI.hand.GlobalPosition + offset, 0.2f);
+		
+		cardUI.playArea.Monitorable = false;
+		EventManager.instance.EmitSignal(EventManager.SignalName.CardAimStarted, cardUI);
 	}
 
-	public override void Exit(){}
+	public override void Exit()
+	{
+		EventManager.instance.EmitSignal(EventManager.SignalName.CardAimEnded);
+	}
 
-	public override void OnInput(InputEvent inputEvent){}
+	public override void OnInput(InputEvent inputEvent)
+	{
+		bool mouseMotion = inputEvent is InputEventMouseMotion;
+		bool mouseAtBotton = cardUI.hand.GlobalPosition.Y > MOUSE_Y_SNAPBACK_THRESHOLD;
+
+		if((mouseMotion && mouseAtBotton) || inputEvent.IsActionPressed("RightMouse"))
+		{
+			EmitSignal(SignalName.ChangeState, this, (int)CardStates.DEFAULT);
+		}
+		else if(inputEvent.IsActionReleased("LeftMouse") || inputEvent.IsActionPressed("LeftMouse"))
+		{
+			this.cardUI.GetViewport().SetInputAsHandled();
+			EmitSignal(SignalName.ChangeState, this, (int)CardStates.RELEASED);
+		}
+	}
 
 	public override void OnGuiInput(InputEvent inputEvent){}
 
@@ -217,6 +242,10 @@ public partial class CardReleasedState : CardInteractState
 		{
 			played = true;
 			cardUI.Play();
+		}
+		else if(!cardUI.isPlayable)
+		{
+			GD.Print("Card is not playable");
 		}
 		else
 		{

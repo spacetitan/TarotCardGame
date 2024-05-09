@@ -1,11 +1,10 @@
 using Godot;
-using System;
 
 public partial class Player : Node2D
 {
 	[Export] public PlayerStats stats { get; private set; }
 	[Export] public Sprite2D playerSprite { get; private set; }
-	[Export] public PlayerStatsUI statsUI { get; private set; }
+	[Export] public StatsUI statsUI { get; private set; }
 
 	public Hand hand{ get; private set; }
 	const float HAND_DRAW_INTERVAL = .25F;
@@ -24,7 +23,7 @@ public partial class Player : Node2D
 	private void GetSceneNodes()
 	{
 		this.playerSprite = GetNode<Sprite2D>("%PlayerSprite");
-		this.statsUI = GetNode<PlayerStatsUI>("%PlayerUI");
+		this.statsUI = GetNode<StatsUI>("%PlayerUI");
 		this.SetHand(UIManager.instance.battle.hand);
 	}
 

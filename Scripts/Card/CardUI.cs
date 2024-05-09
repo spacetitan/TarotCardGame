@@ -16,7 +16,8 @@ public partial class CardUI : Control
 	private Label cardTags;
 	private Label cardDesc;
 	private Label cardMana;
-	public Area2D playArea;
+	public Area2D playArea { get; private set;}
+	public HBoxContainer hand { get; private set;}
 	#endregion
 
 	public List<Node2D> targets = new List<Node2D>();
@@ -70,6 +71,11 @@ public partial class CardUI : Control
 		this.playerStats = value;
 		this.playerStats.StatsChanged += OnStatsChanged;
 		SetPlayable(playerStats.CanPlayCard(this));
+	}
+
+	public void SetHand(HBoxContainer value)
+	{
+		this.hand = value;
 	}
 
 	private void OnStatsChanged()

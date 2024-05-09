@@ -54,6 +54,7 @@ RightMouse={
 2d_physics/layer_1="Card Target Selector"
 2d_physics/layer_2="Card Drop Area"
 2d_physics/layer_3="Card Burn Area"
+2d_physics/layer_4="Enemies"
 
 [rendering]
 

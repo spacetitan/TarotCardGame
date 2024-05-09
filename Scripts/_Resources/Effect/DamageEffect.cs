@@ -14,13 +14,12 @@ public partial class DamageEffect : Effect
 				continue;
 			}
 
-			// if(target is Enemy)
-			// {
-			// 	Enemy enemy = (Enemy)target;
-			// 	enemy.TakeDamage(amount);
-			// }
-			// else 
-            if(target is Player)
+			if(target is Enemy)
+			{
+				Enemy enemy = (Enemy)target;
+				enemy.TakeDamage(amount);
+			}
+			else if(target is Player)
 			{
 				Player player = (Player)target;
 				player.TakeDamage(amount);
