@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bn865ppkrix6r"]
+[gd_scene load_steps=9 format=3 uid="uid://bn865ppkrix6r"]
 
 [ext_resource type="Script" path="res://Scripts/GlobalManagers/UIManager.cs" id="1_wd2ph"]
 [ext_resource type="Script" path="res://Scripts/UI/Hand.cs" id="2_aoxfe"]
@@ -9,6 +9,9 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_ythap"]
 font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_4mtcx"]
+font_size = 64
 
 [node name="UIManager" type="Node" node_paths=PackedStringArray("battle")]
 script = ExtResource("1_wd2ph")
@@ -88,5 +91,47 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "5"
 label_settings = SubResource("LabelSettings_ythap")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonEndTurn" type="Button" parent="CanvasLayerBattle"]
+unique_name_in_owner = true
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -157.0
+offset_right = -48.0
+offset_bottom = -77.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "End Turn
+"
+
+[node name="Panel" type="Panel" parent="CanvasLayerBattle"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -318.0
+offset_right = -50.0
+offset_bottom = -173.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="LabelRemaingCards" type="Label" parent="CanvasLayerBattle/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "25"
+label_settings = SubResource("LabelSettings_4mtcx")
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -122,7 +122,10 @@ public partial class CardUI : Control
 		cardStats.Burn(playerStats);
 		DestroyCard();
 	}
-	public void Discard(){}
+	public void Discard()
+	{
+		DestroyCard();
+	}
 	public void DestroyCard()
 	{
 		DisconnectEventSignals();

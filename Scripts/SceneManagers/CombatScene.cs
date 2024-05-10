@@ -12,14 +12,14 @@ public partial class CombatScene : Node2D
 
 		PlayerStats newStats = playerStats.CreateInstance();
 		UIManager.instance.battle.SetPlayerStats(newStats);
-		player.SetPlayerStats(newStats);
+		this.player.SetPlayerStats(newStats);
 
 		EventManager.instance.PlayerTurnEnded += OnPlayerTurnEnded;
-		EventManager.instance.PlayerTurnEnded += StartBattleEnemies;
+		EventManager.instance.PlayerHandDiscarded += StartEnemyTurn;
 		EventManager.instance.EnemyTurnEnded += OnEnemyTurnEnded;
 		EventManager.instance.PlayerDied += OnPlayerDied;
 
-		StartBattlePlayer(newStats);
+		StartBattlePlayer(this.player.stats);
 	}
 
 	private void GetSceneNodes()
@@ -31,20 +31,33 @@ public partial class CombatScene : Node2D
 	public void StartBattlePlayer(PlayerStats playerStats)
 	{
 		this.player.StartBattle(playerStats);
+		StartBattleEnemies();
 	}
 
 	public void StartBattleEnemies()
 	{
-		//player.StartBattle(playerStats);
+		StartPlayerTurn();
+	}
+
+	void StartPlayerTurn()
+	{
+		this.player.StartTurn();
+	}
+
+	void StartEnemyTurn()
+	{
+		OnEnemyTurnEnded();
 	}
 
 	void OnPlayerTurnEnded()
 	{
-
+		this.player.hand.DisableHand();
+		this.player.DiscardHand();
 	}
 
 	void OnEnemyTurnEnded()
 	{
+		StartPlayerTurn();
 		// enemyHandler.ResetEnemyActions();
 		// playerHandler.StartTurn();
 	}

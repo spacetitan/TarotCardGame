@@ -18,6 +18,7 @@ public partial class EventManager : Node
 	}
 
     #region Card Events
+	[Signal] public delegate void CardDrawnEventHandler();
 	[Signal] public delegate void CardPlayedEventHandler();
 	[Signal] public delegate void CardBurnedEventHandler();
 	[Signal] public delegate void CardDragStartedEventHandler(CardUI card);

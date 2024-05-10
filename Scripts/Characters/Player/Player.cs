@@ -75,10 +75,9 @@ public partial class Player : Node2D
 		this.stats.deck.InitDeck();
 		this.stats.deck.Shuffle();
 		this.stats.discard = new CardPile();
-		StartTurn();
 	}
 
-	private void StartTurn()
+	public void StartTurn()
 	{
 		this.stats.ResetArmor();
 		this.stats.ResetMana();
@@ -131,8 +130,8 @@ public partial class Player : Node2D
 
 		foreach(CardUI card in hand.GetChildren())
 		{
-			tween.TweenCallback(Callable.From(() => stats.discard.AddCard(card.cardStats)));
-			tween.TweenCallback(Callable.From(() => hand.DiscardCard(card)));
+			tween.TweenCallback(Callable.From(() => this.stats.discard.AddCard(card.cardStats)));
+			tween.TweenCallback(Callable.From(() => this.hand.DiscardCard(card)));
 			tween.TweenInterval(HAND_DISCARD_INTERVAL);
 		}
 
