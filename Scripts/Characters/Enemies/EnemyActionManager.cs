@@ -13,10 +13,10 @@ public partial class EnemyActionManager : Node
 	{
 		this.body = enemy;
 		SetActions(this.body);
-		SetTarget(this.body.GetTree().GetFirstNodeInGroup("Player") as Node2D);
+		SetTargets(this.body.GetTree().GetFirstNodeInGroup("Player") as Node2D);
 	}
 
-	private void SetTarget(Node2D value)
+	private void SetTargets(Node2D value)
 	{
 		target = value;
 
@@ -36,9 +36,10 @@ public partial class EnemyActionManager : Node
 
 		this.enemyActions.Clear();
 
-		foreach (EnemyAction value in enemy.actions)
+		foreach (EnemyAction enemyAction in enemy.actions)
 		{
-			this.enemyActions.Add(value);
+			enemyAction.enemy = this.body;
+			this.enemyActions.Add(enemyAction);
 		}
 
 		SetupChances();
@@ -79,9 +80,9 @@ public partial class EnemyActionManager : Node
 	{
 		EnemyAction action;
 
-		foreach(EnemyAction value in this.enemyActions)
+		foreach(EnemyAction enemyAction in this.enemyActions)
 		{
-			action = value;
+			action = enemyAction;
 
 			if((action == null) || action.type != EnemyActionType.CONDITIIONAL)
 			{
@@ -109,9 +110,9 @@ public partial class EnemyActionManager : Node
 			GD.Print("Out of bounds");
 		}
 
-		foreach(EnemyAction value in this.enemyActions)
+		foreach(EnemyAction enemyAction in this.enemyActions)
 		{
-			action = value;
+			action = enemyAction;
 
 			if((action == null) || action.type != EnemyActionType.CHANCE)
 			{

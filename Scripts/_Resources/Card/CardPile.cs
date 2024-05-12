@@ -36,6 +36,7 @@ public partial class CardPile : Resource
     {
         this.rand = new Random();
         this.cards = this.cards.OrderBy(x => rand.Next()).ToList();
+        EventManager.instance.EmitSignal(EventManager.SignalName.PlayerDeckReshuffled);
     }
 
     public void Clear()

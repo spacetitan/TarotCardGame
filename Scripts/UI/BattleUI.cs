@@ -17,6 +17,7 @@ public partial class BattleUI : CanvasLayer
 		this.endTurnButton.Pressed += OnEndTurnButtonPressed;
 
 		EventManager.instance.CardDrawn += SetRemainingCards;
+		EventManager.instance.PlayerDeckReshuffled += SetRemainingCards;
 		EventManager.instance.PlayerHandDrawn += OnPlayerHandDrawn;
 	}
 

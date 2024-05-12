@@ -36,11 +36,11 @@ public partial class Enemy : Area2D
 	public void SetEnemyStats(EnemyStats enemyStats)
 	{
 		this.stats = enemyStats.CreateInstance();
-		this.stats.StatsChanged += UpdateEnemyUI;
+		this.stats.StatsChanged += UpdateEnemy;
 
 		InititalizeUI();
 		InititalizeAI();
-		UpdateEnemyUI();
+		UpdateEnemy();
 	}
 
 	public void InititalizeUI()
@@ -59,7 +59,7 @@ public partial class Enemy : Area2D
 		this.actionManager = new EnemyActionManager(this);
 	}
 
-	public void UpdateEnemyUI()
+	public void UpdateEnemy()
 	{
 		this.statsUI.UpdateStats(this.stats);
 
@@ -75,7 +75,7 @@ public partial class Enemy : Area2D
 		}
 
 		EnemyAction newConditionalAction = this.actionManager.GetFirstConditionalAction();
-		if(newConditionalAction != null && currentAction != newConditionalAction)
+		if(newConditionalAction != null && this.currentAction != newConditionalAction)
 		{
 			SetCurrentAction(newConditionalAction);
 		}
@@ -83,11 +83,24 @@ public partial class Enemy : Area2D
 
 	public void SetCurrentAction(EnemyAction value)
 	{
-		currentAction = value;
-		if(currentAction != null)
+		this.currentAction = value;
+		if(this.currentAction != null)
 		{
 			this.intentUI.UpdateIntent(currentAction.intent);
 		}
+	}
+
+	public void TakeTurn()
+	{
+		this.stats.ResetArmor();
+
+		if(this.currentAction == null)
+		{
+			GD.Print("Current Action is null");
+			return;
+		}
+
+		this.currentAction.PerformAction();
 	}
 
 	public void TakeDamage(int damage)

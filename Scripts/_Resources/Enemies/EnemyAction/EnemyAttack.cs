@@ -30,7 +30,18 @@ public partial class EnemyAttack : EnemyAction
     {
         if(enemy == null || target == null || alreadyUsed)
         {
-            GD.Print("Enemy and/or target is null or this ability has already been used");
+            if(enemy == null)
+            {
+                GD.Print("Enemy is null");
+            }
+            else if(target == null)
+            {
+                GD.Print("target is null");
+            }
+            else
+            {
+                GD.Print("this ability has already been used");
+            }
             return;
         }
 
@@ -57,7 +68,7 @@ public partial class EnemyAttack : EnemyAction
 
         tween.Finished += () => 
         {
-            EventManager.instance.EmitSignal(EventManager.SignalName.EnemyActionCompleted, enemy);
+            EventManager.instance.EmitSignal(EventManager.SignalName.EnemyActionCompleted, enemy.GetIndex());
         };
     }
 }

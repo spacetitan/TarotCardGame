@@ -124,6 +124,7 @@ public partial class CardUI : Control
 	}
 	public void Discard()
 	{
+		this.playerStats.discard.AddCard(this.cardStats);
 		DestroyCard();
 	}
 	public void DestroyCard()

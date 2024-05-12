@@ -94,7 +94,6 @@ public partial class Player : Node2D
 	{
 		ReshuffleDeck();
 		hand.AddCard(this.stats.deck.DrawCard());
-		ReshuffleDeck();
 	}
 
 	public void DrawCards(int amount)

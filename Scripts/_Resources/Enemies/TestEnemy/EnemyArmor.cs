@@ -19,7 +19,7 @@ public partial class EnemyArmor : EnemyAction
 
 		this.enemy.GetTree().CreateTimer(0.6, false).Timeout += () => 
 		{
-			EventManager.instance.EmitSignal(EventManager.SignalName.EnemyActionCompleted, enemy);
+			EventManager.instance.EmitSignal(EventManager.SignalName.EnemyActionCompleted, enemy.GetIndex());
 		};
 	}
 }

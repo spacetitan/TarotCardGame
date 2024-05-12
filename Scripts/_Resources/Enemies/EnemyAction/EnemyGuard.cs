@@ -29,6 +29,14 @@ public partial class EnemyGuard : EnemyAction
     {
         if(enemy == null || alreadyUsed)
         {
+            if(enemy == null)
+            {
+                GD.Print("Enemy is null");
+            }
+            else
+            {
+                GD.Print("this ability has already been used");
+            }
             return;
         }
 
@@ -42,7 +50,7 @@ public partial class EnemyGuard : EnemyAction
 
         this.enemy.GetTree().CreateTimer(0.6, false).Timeout += () => 
 		{
-			EventManager.instance.EmitSignal(EventManager.SignalName.EnemyActionCompleted, enemy);
+			EventManager.instance.EmitSignal(EventManager.SignalName.EnemyActionCompleted, enemy.GetIndex());
 		};
     }
 }

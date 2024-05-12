@@ -32,6 +32,7 @@ public partial class EventManager : Node
 	#region Player Events
 	[Signal] public delegate void PlayerHandDrawnEventHandler();
 	[Signal] public delegate void PlayerHandDiscardedEventHandler();
+	[Signal] public delegate void PlayerDeckReshuffledEventHandler();
     [Signal] public delegate void PlayerTurnStartedEventHandler();
 	[Signal] public delegate void PlayerTurnEndedEventHandler();
 	[Signal] public delegate void PlayerHitEventHandler();
@@ -41,7 +42,7 @@ public partial class EventManager : Node
 	#region Enemy Events
     [Signal] public delegate void EnemyTurnStartedEventHandler();
 	[Signal] public delegate void EnemyTurnEndedEventHandler();
-    [Signal] public delegate void EnemyActionCompletedEventHandler();
+    [Signal] public delegate void EnemyActionCompletedEventHandler(int index);
     //[Signal] public delegate void EnemyHitEventHandler();
 	//[Signal] public delegate void EnemyDiedEventHandler();
 	#endregion 

@@ -57,7 +57,7 @@ scale = Vector2(12.0625, 12.875)
 texture = ExtResource("3_6sw4y")
 
 [node name="CardTargetSelector" parent="." instance=ExtResource("4_8x7dc")]
-position = Vector2(645, 157)
+position = Vector2(546, 338)
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("2_c076a")]
 unique_name_in_owner = true

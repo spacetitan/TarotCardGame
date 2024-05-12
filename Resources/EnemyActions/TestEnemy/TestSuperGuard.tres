@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EnemyGuard" load_steps=5 format=3 uid="uid://budxvuwuiwmgt"]
 
-[ext_resource type="Script" path="res://Scripts/_Resources/Enemies/TestEnemy/EnemyGuard.cs" id="1_fmj77"]
+[ext_resource type="Script" path="res://Scripts/_Resources/Enemies/EnemyAction/EnemyGuard.cs" id="1_fmj77"]
 [ext_resource type="Texture2D" uid="uid://blbrvh7iyh8wm" path="res://Art/Card/Armor2.png" id="1_igjsx"]
 [ext_resource type="Script" path="res://Scripts/_Resources/Enemies/EnemyIntent.cs" id="2_yebc1"]
 
