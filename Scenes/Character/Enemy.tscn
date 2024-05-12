@@ -1,10 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://dk2jos4xobojm"]
+[gd_scene load_steps=11 format=3 uid="uid://dk2jos4xobojm"]
 
-[ext_resource type="PackedScene" uid="uid://dqgi8ta50ru8y" path="res://Scenes/PlayerUI.tscn" id="1_8ehys"]
+[ext_resource type="PackedScene" uid="uid://dqgi8ta50ru8y" path="res://Scenes/UI/PlayerUI.tscn" id="1_8ehys"]
 [ext_resource type="Texture2D" uid="uid://cr0g37oytxpow" path="res://Art/Enemies/tile_0108.png" id="1_efu7d"]
 [ext_resource type="Script" path="res://Scripts/Characters/Enemies/Enemy.cs" id="1_onuao"]
 [ext_resource type="Texture2D" uid="uid://dn65xlnxgux42" path="res://Art/Misc/tile_0099.png" id="2_07vj1"]
 [ext_resource type="Resource" uid="uid://bt7ycasbbiu7y" path="res://Resources/Enemies/TestEnemy.tres" id="2_62b2x"]
+[ext_resource type="Resource" uid="uid://dqqunqdosm6o7" path="res://Resources/EnemyActions/TestEnemy/TestAttack.tres" id="3_ca161"]
+[ext_resource type="Resource" uid="uid://dni8j0goscuql" path="res://Resources/EnemyActions/TestEnemy/TestGuard.tres" id="4_tiyi2"]
+[ext_resource type="Resource" uid="uid://budxvuwuiwmgt" path="res://Resources/EnemyActions/TestEnemy/TestSuperGuard.tres" id="5_8bi1j"]
+[ext_resource type="PackedScene" uid="uid://c2tyhqstjvjlc" path="res://Scenes/UI/IntentUI.tscn" id="9_1jabo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ptu2"]
 size = Vector2(80, 80)
@@ -13,6 +17,7 @@ size = Vector2(80, 80)
 collision_layer = 8
 script = ExtResource("1_onuao")
 stats = ExtResource("2_62b2x")
+actions = Array[Object]([ExtResource("3_ca161"), ExtResource("4_tiyi2"), ExtResource("5_8bi1j")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(60, 97)
@@ -36,6 +41,13 @@ texture = ExtResource("2_07vj1")
 unique_name_in_owner = true
 offset_top = 141.0
 offset_bottom = 141.0
+
+[node name="IntentUI" parent="." instance=ExtResource("9_1jabo")]
+unique_name_in_owner = true
+offset_left = -53.0
+offset_top = 80.0
+offset_right = 1.0
+offset_bottom = 120.0
 
 [connection signal="area_entered" from="." to="." method="OnAreaEntered"]
 [connection signal="area_exited" from="." to="." method="OnAreaExited"]

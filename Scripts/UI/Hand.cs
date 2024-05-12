@@ -7,7 +7,7 @@ public partial class Hand : HBoxContainer
 
 	public PlayerStats playerStats{ get; private set; }
 
-    const string CARD_UI_PATH = "res://Scenes/CardUI.tscn";
+    const string CARD_UI_PATH = "res://Scenes/UI/CardUI.tscn";
     int cardsPlayedThisTurn = 0;
 
     public override void _Ready()

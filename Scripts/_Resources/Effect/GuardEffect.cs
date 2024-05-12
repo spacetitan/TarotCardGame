@@ -1,11 +1,11 @@
 using Godot;
 using System.Collections.Generic;
 
-public partial class ArmorEffect : Effect
+public partial class GuardEffect : Effect
 {
     public int amount = 0;
 
-	public ArmorEffect(int value)
+	public GuardEffect(int value)
 	{
 		amount = value;
 	}

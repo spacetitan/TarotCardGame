@@ -5,7 +5,7 @@ public partial class BasicArmor : CardStats
 {
     public override void ApplyEffects(List<Node2D> targets)
     {
-        ArmorEffect armor = new ArmorEffect(4);
+        GuardEffect armor = new GuardEffect(4);
         //block.sound = this.sound;
         armor.Execute(targets);
     }

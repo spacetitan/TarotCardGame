@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2tyhqstjvjlc"]
+
+[ext_resource type="Texture2D" uid="uid://c4204rp8lo5l3" path="res://Art/Card/TestArt.png" id="1_41bic"]
+[ext_resource type="Script" path="res://Scripts/UI/IntentUI.cs" id="1_jjdfe"]
+
+[node name="IntentUI" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_jjdfe")
+
+[node name="TextureRectIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("1_41bic")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="LabelNumber" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1
+"

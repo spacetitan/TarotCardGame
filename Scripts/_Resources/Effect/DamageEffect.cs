@@ -5,6 +5,11 @@ public partial class DamageEffect : Effect
 {
     public int amount = 0;
 
+	public DamageEffect(int value)
+	{
+		amount = value;
+	}
+
     public override void Execute(List<Node2D> targets)
     {
 		foreach (Node target in targets)

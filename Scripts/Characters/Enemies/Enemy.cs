@@ -6,10 +6,11 @@ public partial class Enemy : Area2D
 	Material whiteSprite;
 
 	[Export] public EnemyStats stats { get; private set; }
+	[Export] public EnemyAction[] actions { get; private set; }
 	private Sprite2D enemySprite;
 	private Sprite2D arrowSprite;
 	private StatsUI statsUI;
-	//IntentUI
+	private IntentUI intentUI;
 
 	private EnemyActionManager actionManager;
 	private EnemyAction currentAction;
@@ -29,45 +30,23 @@ public partial class Enemy : Area2D
 		this.enemySprite = GetNode<Sprite2D>("%Sprite2DEnemy");
 		this.arrowSprite = GetNode<Sprite2D>("%Sprite2DArrow");
 		this.statsUI = GetNode<StatsUI>("%StatsUI");
+		this.intentUI = GetNode<IntentUI>("%IntentUI");
 	}
 
 	public void SetEnemyStats(EnemyStats enemyStats)
 	{
 		this.stats = enemyStats.CreateInstance();
-		this.stats.StatsChanged += UpdateEnemy;
+		this.stats.StatsChanged += UpdateEnemyUI;
 
 		InititalizeUI();
 		InititalizeAI();
-	}
-
-	public void UpdateEnemy()
-	{
-		this.statsUI.UpdateStats(this.stats);
-
-		if(this.actionManager == null)
-		{
-			return;
-		}
-
-		// if(currentAction == null)
-		// {
-		// 	SetCurrentAction(this.actionManager.GetAction());
-		// 	return;
-		// }
-
-		// EnemyAction newConditionalAction = this.actionManager.GetFirstConditionalAction();
-		// if(newConditionalAction != null && currentAction != newConditionalAction)
-		// {
-		// 	SetCurrentAction(newConditionalAction);
-		// }
+		UpdateEnemyUI();
 	}
 
 	public void InititalizeUI()
 	{
 		this.enemySprite.Texture = this.stats.art;
 		this.arrowSprite.Position = Vector2.Up * (this.enemySprite.GetRect().Size.X/2 + ARROW_OFFSET);
-
-		this.statsUI.UpdateStats(this.stats);
 	}
 
 	private void InititalizeAI()
@@ -78,6 +57,37 @@ public partial class Enemy : Area2D
 		}
 
 		this.actionManager = new EnemyActionManager(this);
+	}
+
+	public void UpdateEnemyUI()
+	{
+		this.statsUI.UpdateStats(this.stats);
+
+		if(this.actionManager == null)
+		{
+			return;
+		}
+
+		if(currentAction == null)
+		{
+			SetCurrentAction(this.actionManager.GetAction());
+			return;
+		}
+
+		EnemyAction newConditionalAction = this.actionManager.GetFirstConditionalAction();
+		if(newConditionalAction != null && currentAction != newConditionalAction)
+		{
+			SetCurrentAction(newConditionalAction);
+		}
+	}
+
+	public void SetCurrentAction(EnemyAction value)
+	{
+		currentAction = value;
+		if(currentAction != null)
+		{
+			this.intentUI.UpdateIntent(currentAction.intent);
+		}
 	}
 
 	public void TakeDamage(int damage)
