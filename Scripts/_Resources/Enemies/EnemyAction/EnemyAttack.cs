@@ -52,7 +52,7 @@ public partial class EnemyAttack : EnemyAction
 
         Vector2 start = enemy.GlobalPosition;
         Vector2 end = target.GlobalPosition + Vector2.Right * 32;
-        DamageEffect damage = new DamageEffect(value);
+        DamageEffect damage = new DamageEffect(value, this.sound);
         List<Node2D> targetList = new List<Node2D>(){target};
 
         Tween tween = this.enemy.CreateTween().SetTrans(Tween.TransitionType.Quint);

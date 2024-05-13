@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="EnemyAttack" load_steps=5 format=3 uid="uid://dqqunqdosm6o7"]
+[gd_resource type="Resource" script_class="EnemyAttack" load_steps=6 format=3 uid="uid://dqqunqdosm6o7"]
 
 [ext_resource type="Script" path="res://Scripts/_Resources/Enemies/EnemyAction/EnemyAttack.cs" id="1_1x1jf"]
 [ext_resource type="Texture2D" uid="uid://dbgau48o2n3l8" path="res://Art/Card/TestAttack.png" id="1_73ro4"]
 [ext_resource type="Script" path="res://Scripts/_Resources/Enemies/EnemyIntent.cs" id="2_x1rrl"]
+[ext_resource type="AudioStream" uid="uid://bmrmw8csemax" path="res://Audio/SFX/Attack.wav" id="4_vhk2n"]
 
 [sub_resource type="Resource" id="Resource_uup5t"]
 script = ExtResource("2_x1rrl")
@@ -17,3 +18,4 @@ hpThreshold = 0
 intent = SubResource("Resource_uup5t")
 type = 2
 chanceWeight = 2
+sound = ExtResource("4_vhk2n")

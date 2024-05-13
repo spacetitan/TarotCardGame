@@ -12,14 +12,14 @@ public partial class CardStats : Resource
     [Export] public String cardDesc { get; private set;}
     [Export] public int cardCost { get; private set;}
     [Export] public int cardGen { get; private set;}
-    [Export] public Texture2D cardArt { get; private set;}
-
-    // [ExportGroup("Card Audio")]
-    // [Export] public AudioStream playSFX;
-    // [Export] public AudioStream burnSFX = ResourceLoader.Load<AudioStream>("res://Sounds/FireSFX2.wav");
-
+    
     [ExportGroup("Card Behavior")]
     [Export] public Target target { get; private set;}
+
+    [ExportGroup("External")]
+    [Export] public Texture2D cardArt { get; private set;}
+    [Export] public AudioStream playSFX { get; private set;}
+    public AudioStream burnSFX = ResourceLoader.Load<AudioStream>("res://Audio/SFX/CardBurn.wav");
 
     public bool isSingleTargeted()
     {
@@ -69,8 +69,8 @@ public partial class CardStats : Resource
     public void Burn(PlayerStats playerStats)
     {
         playerStats.AddMana(cardGen);
-        //AudioManager.instance.sfxPlayer.Play(burnSFX);
-        EventManager.instance.EmitSignal(EventManager.SignalName.CardPlayed, this);
+        AudioManager.instance.sfxPlayer.Play(this.burnSFX);
+        EventManager.instance.EmitSignal(EventManager.SignalName.CardBurned, this);
     }
     public virtual void ApplyEffects(List<Node2D> targets)
     {

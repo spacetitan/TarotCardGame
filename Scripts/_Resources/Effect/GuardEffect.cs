@@ -5,9 +5,10 @@ public partial class GuardEffect : Effect
 {
     public int amount = 0;
 
-	public GuardEffect(int value)
+	public GuardEffect(int value, AudioStream sfx)
 	{
-		amount = value;
+		this.amount = value;
+		this.sound = sfx;
 	}
 
     public override void Execute(List<Node2D> targets)

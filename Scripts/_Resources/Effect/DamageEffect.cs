@@ -5,9 +5,10 @@ public partial class DamageEffect : Effect
 {
     public int amount = 0;
 
-	public DamageEffect(int value)
+	public DamageEffect(int value, AudioStream sfx)
 	{
-		amount = value;
+		this.amount = value;
+		this.sound = sfx;
 	}
 
     public override void Execute(List<Node2D> targets)

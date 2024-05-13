@@ -13,6 +13,7 @@ public partial class Hand : HBoxContainer
     public override void _Ready()
 	{
 		EventManager.instance.CardPlayed += OnCardPlayed;
+		EventManager.instance.CardBurned += OnCardBurned;
 	}
 
 	public void SetPlayerStats(PlayerStats player)
@@ -57,8 +58,15 @@ public partial class Hand : HBoxContainer
 		MoveChild(child, newIndex);
 	}
 
-	void OnCardPlayed()
+	void OnCardPlayed(CardStats card)
 	{
 		cardsPlayedThisTurn++;
+
+		this.playerStats.discard.AddCard(card);
+	}
+
+	void OnCardBurned(CardStats card)
+	{
+		this.playerStats.discard.AddCard(card);
 	}
 }

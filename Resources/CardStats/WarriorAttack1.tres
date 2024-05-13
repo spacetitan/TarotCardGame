@@ -1,6 +1,7 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cma75ouxhsyne"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://cma75ouxhsyne"]
 
 [ext_resource type="Texture2D" uid="uid://yhlbe2jwllm4" path="res://Art/Card/WideAtt1.png" id="1_bbuvs"]
+[ext_resource type="AudioStream" uid="uid://bmrmw8csemax" path="res://Audio/SFX/Attack.wav" id="2_7exie"]
 [ext_resource type="Script" path="res://Scripts/_Resources/Cards/AllAttack.cs" id="2_rheoo"]
 
 [resource]
@@ -11,5 +12,6 @@ cardTag = 1
 cardDesc = "4 dmg"
 cardCost = 2
 cardGen = 1
-cardArt = ExtResource("1_bbuvs")
 target = 3
+cardArt = ExtResource("1_bbuvs")
+playSFX = ExtResource("2_7exie")

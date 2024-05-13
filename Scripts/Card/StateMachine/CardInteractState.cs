@@ -137,7 +137,7 @@ public partial class CardDraggingState : CardInteractState
 		bool cancel = inputEvent.IsActionPressed("RightMouse");
 		bool confirm = inputEvent.IsActionReleased("LeftMouse") || inputEvent.IsActionPressed("LeftMouse");
 
-		if(singleTargeted && mouseMotion && cardUI.targets.Count > 0)
+		if(singleTargeted && mouseMotion && cardUI.targets.Count > 0 && cardUI.burner == null)
 		{
 			EmitSignal(SignalName.ChangeState, this, (int)CardStates.AIMING);
 			return;

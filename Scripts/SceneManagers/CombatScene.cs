@@ -3,6 +3,7 @@ using Godot;
 public partial class CombatScene : Node2D
 {
 	[Export] private PlayerStats playerStats;
+	[Export] private AudioStream BGM;
 	private Player player;
 	private Node enemiesParent;
 
@@ -31,6 +32,7 @@ public partial class CombatScene : Node2D
 
 	public void StartBattlePlayer(PlayerStats playerStats)
 	{
+		AudioManager.instance.musicPlayer.Play(this.BGM);
 		this.player.StartBattle(playerStats);
 		StartBattleEnemies();
 	}

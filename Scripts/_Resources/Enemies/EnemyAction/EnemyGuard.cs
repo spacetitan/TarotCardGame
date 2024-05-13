@@ -45,7 +45,7 @@ public partial class EnemyGuard : EnemyAction
             alreadyUsed = true;
         }
 
-        GuardEffect guard = new GuardEffect(value);
+        GuardEffect guard = new GuardEffect(value, this.sound);
         guard.Execute(new List<Node2D>(){enemy});
 
         this.enemy.GetTree().CreateTimer(0.6, false).Timeout += () => 
