@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/GamePlay/CombatScene.tscn"
 config/features=PackedStringArray("4.2", "C#", "Mobile")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://Audio/default_bus_layout.tres"
+
 [autoload]
 
 EventManager="*res://Scripts/GlobalManagers/EventManager.cs"

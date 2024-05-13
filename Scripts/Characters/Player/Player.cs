@@ -9,6 +9,7 @@ public partial class Player : Node2D
 	public Hand hand{ get; private set; }
 	const float HAND_DRAW_INTERVAL = .25F;
 	const float HAND_DISCARD_INTERVAL = .15F;
+	private Material WHITE_SPRITE_MATERIAL = ResourceLoader.Load<Material>("res://Materials/DamageMaterial.tres");
 
 	public override void _Ready()
 	{
@@ -50,7 +51,7 @@ public partial class Player : Node2D
 			return;
 		}
 
-		//sprite2D.Material = WHITE_SPRITE_MATERIAL;
+		this.playerSprite.Material = WHITE_SPRITE_MATERIAL;
 
 		Tween tween = CreateTween();
 		tween.TweenCallback(Callable.From(()=>{VFXManager.instance.Shake(this, 16, .15f);}));
@@ -58,7 +59,7 @@ public partial class Player : Node2D
 		tween.TweenInterval(0.15f);
 		tween.Finished += ()=>
 		{
-			//sprite2D.Material = null;
+			this.playerSprite.Material = null;
 
 			if(stats.health <=0)
 			{

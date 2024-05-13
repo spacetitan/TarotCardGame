@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://beid3bjetllo2"]
 
 [ext_resource type="Script" path="res://Scripts/Card/CardTargetSelector.cs" id="1_2nk1g"]
-[ext_resource type="Texture2D" uid="uid://dhwm4r3sm85i2" path="res://Art/Misc/tile_0129.png" id="2_l4r0l"]
+[ext_resource type="Texture2D" uid="uid://dhwm4r3sm85i2" path="res://Sprites/Misc/tile_0129.png" id="2_l4r0l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xp13w"]
 

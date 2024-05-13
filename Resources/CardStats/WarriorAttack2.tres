@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=4 format=3 uid="uid://il4x7eei7kos"]
 
-[ext_resource type="Texture2D" uid="uid://dbgau48o2n3l8" path="res://Art/Card/TestAttack.png" id="1_4jyuj"]
+[ext_resource type="Texture2D" uid="uid://dbgau48o2n3l8" path="res://Sprites/Card/TestAttack.png" id="1_4jyuj"]
 [ext_resource type="AudioStream" uid="uid://bmrmw8csemax" path="res://Audio/SFX/Attack.wav" id="2_2hegh"]
 [ext_resource type="Script" path="res://Scripts/_Resources/Cards/BasicAttack.cs" id="2_nxdwo"]
 

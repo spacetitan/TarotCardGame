@@ -15,6 +15,8 @@ public partial class Enemy : Area2D
 	private EnemyActionManager actionManager;
 	private EnemyAction currentAction;
 
+	private Material WHITE_SPRITE_MATERIAL = ResourceLoader.Load<Material>("res://Materials/DamageMaterial.tres");
+
 	public override void _Ready()
 	{
 		GetSceneNodes();
@@ -110,7 +112,7 @@ public partial class Enemy : Area2D
 			return;
 		}
 
-		//sprite2D.Material = WHITE_SPRITE_MATERIAL;
+		this.enemySprite.Material = WHITE_SPRITE_MATERIAL;
 
 		Tween tween = CreateTween();
 		tween.TweenCallback(Callable.From(()=>{VFXManager.instance.Shake(this, 16, .15f);}));
