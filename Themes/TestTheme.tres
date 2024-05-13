@@ -1,16 +1,33 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bha0lbb86sk4x"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bha0lbb86sk4x"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e8n4x"]
-bg_color = Color(0.427451, 0.427451, 0.427451, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[ext_resource type="StyleBox" uid="uid://de1dhndesa0gr" path="res://Themes/StyleBox/Button/ButtonDisabled.tres" id="1_60s0y"]
+[ext_resource type="StyleBox" uid="uid://b6i0qnfhkyn51" path="res://Themes/StyleBox/Button/ButtonHover.tres" id="2_dtr06"]
+[ext_resource type="StyleBox" uid="uid://bnsqgmjwfkuno" path="res://Themes/StyleBox/Button/ButtonNormal.tres" id="3_5k71s"]
+[ext_resource type="StyleBox" uid="uid://boe2cob4woeiu" path="res://Themes/StyleBox/Button/ButtonPressed.tres" id="4_dgkpp"]
+[ext_resource type="StyleBox" uid="uid://bihgotce71gu8" path="res://Themes/StyleBox/Card/CardDefault.tres" id="5_16wru"]
 
 [resource]
-Panel/styles/panel = SubResource("StyleBoxFlat_e8n4x")
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_disabled_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/colors/icon_disabled_color = Color(0, 0, 0, 1)
+Button/colors/icon_focus_color = Color(0, 0, 0, 1)
+Button/colors/icon_hover_color = Color(0, 0, 0, 1)
+Button/colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/icon_normal_color = Color(0, 0, 0, 1)
+Button/colors/icon_pressed_color = Color(0, 0, 0, 1)
+Button/constants/h_separation = 0
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 16
+Button/fonts/font = null
+Button/styles/disabled = ExtResource("1_60s0y")
+Button/styles/focus = ExtResource("2_dtr06")
+Button/styles/hover = ExtResource("2_dtr06")
+Button/styles/normal = ExtResource("3_5k71s")
+Button/styles/pressed = ExtResource("4_dgkpp")
+Panel/styles/panel = ExtResource("5_16wru")

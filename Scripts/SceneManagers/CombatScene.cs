@@ -4,8 +4,11 @@ public partial class CombatScene : Node2D
 {
 	[Export] private PlayerStats playerStats;
 	[Export] private AudioStream BGM;
+	[Export] private EnemyStats[] enemies;
 	private Player player;
+	private PackedScene enemyScene = ResourceLoader.Load<PackedScene>("res://Scenes/Character/Enemy.tscn");
 	private Node enemiesParent;
+	private WinPrize totalPrize;
 
 	public override void _Ready()
 	{

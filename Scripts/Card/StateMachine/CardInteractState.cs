@@ -14,10 +14,7 @@ public partial class CardInteractState : RefCounted
 		this.state = initialState;
 	}
 
-	public virtual void Enter()
-	{
-		
-	}
+	public virtual void Enter(){}
 
 	public virtual void Exit(){}
 
@@ -46,13 +43,10 @@ public partial class CardDefaultState : CardInteractState
 			cardUI.tween.Kill();
 		}
 
+		cardUI.backgroundPanel.Set("theme_override_styles/panel", cardUI.cardstyleDefault);
 		cardUI.EmitSignal(CardUI.SignalName.ReturnToHand, this.cardUI);
 		cardUI.PivotOffset = Vector2.Zero;
 	}
-
-	public override void Exit(){}
-
-	public override void OnInput(InputEvent inputEvent){}
 
 	public override void OnGuiInput(InputEvent inputEvent)
 	{
@@ -63,9 +57,29 @@ public partial class CardDefaultState : CardInteractState
 		}
 	}
 
-	public override void OnMouseEntered(){}
+	public override void OnMouseEntered()
+	{
+		//EventManager.instance.EmitSignal(EventManager.SignalName.CardTooltipRequested, cardUI);
 
-	public override void OnMouseExited(){}
+		if(!this.cardUI.isPlayable || this.cardUI.isDisabled)
+		{
+			return;
+		}
+
+        cardUI.backgroundPanel.Set("theme_override_styles/panel", cardUI.cardstyleHover);
+	}
+
+	public override void OnMouseExited()
+	{
+		//EventManager.instance.EmitSignal(EventManager.SignalName.CardTooltipHideRequested);
+
+		if(!this.cardUI.isPlayable || this.cardUI.isDisabled)
+		{
+			return;
+		}
+
+        cardUI.backgroundPanel.Set("theme_override_styles/panel", cardUI.cardstyleDefault);
+	}
 }
 
 public partial class CardClickedState : CardInteractState
@@ -82,8 +96,6 @@ public partial class CardClickedState : CardInteractState
 		this.cardUI.playArea.Monitorable = true;
 	}
 
-	public override void Exit(){}
-
 	public override void OnInput(InputEvent inputEvent)
 	{
 		if(inputEvent is InputEventMouseMotion)
@@ -91,12 +103,6 @@ public partial class CardClickedState : CardInteractState
 			EmitSignal(SignalName.ChangeState, this, (int)CardStates.DRAGGING);
 		}
 	}
-
-	public override void OnGuiInput(InputEvent inputEvent){}
-
-	public override void OnMouseEntered(){}
-
-	public override void OnMouseExited(){}
 }
 
 public partial class CardDraggingState : CardInteractState
@@ -116,10 +122,20 @@ public partial class CardDraggingState : CardInteractState
 
 		if(uilayer != null)
 		{
-			cardUI.Reparent(uilayer);
+			this.cardUI.Reparent(uilayer);
+		}
+
+		if(!this.cardUI.isPlayable || this.cardUI.isDisabled)
+		{
+			this.cardUI.backgroundPanel.Set("theme_override_styles/panel", this.cardUI.cardstyleDisabled);
+		}
+		else
+		{
+			this.cardUI.backgroundPanel.Set("theme_override_styles/panel", this.cardUI.cardstyleDrag);
 		}
 
 		EventManager.instance.EmitSignal(EventManager.SignalName.CardDragStarted, cardUI);
+
 		this.minimumDragTimeElapsed = false;
 		SceneTreeTimer thresholdTimer = cardUI.GetTree().CreateTimer(DRAG_MINIMUM_THRESHOLD, false);
 		thresholdTimer.Timeout += () => {minimumDragTimeElapsed = true;};
@@ -159,12 +175,6 @@ public partial class CardDraggingState : CardInteractState
 			EmitSignal(SignalName.ChangeState, this, (int)CardStates.RELEASED);
 		}
 	}
-
-	public override void OnGuiInput(InputEvent inputEvent){}
-
-	public override void OnMouseEntered(){}
-
-	public override void OnMouseExited(){}
 }
 
 public partial class CardAimingState : CardInteractState
@@ -209,12 +219,6 @@ public partial class CardAimingState : CardInteractState
 			EmitSignal(SignalName.ChangeState, this, (int)CardStates.RELEASED);
 		}
 	}
-
-	public override void OnGuiInput(InputEvent inputEvent){}
-
-	public override void OnMouseEntered(){}
-
-	public override void OnMouseExited(){}
 }
 
 public partial class CardReleasedState : CardInteractState
@@ -253,18 +257,10 @@ public partial class CardReleasedState : CardInteractState
 		}
 	}
 
-	public override void Exit(){}
-
 	public override void OnInput(InputEvent inputEvent)
 	{
 		if(played) {return;}
 
 		EmitSignal(SignalName.ChangeState, this, (int)CardStates.DEFAULT);
 	}
-
-	public override void OnGuiInput(InputEvent inputEvent){}
-
-	public override void OnMouseEntered(){}
-
-	public override void OnMouseExited(){}
 }

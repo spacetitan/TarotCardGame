@@ -11,6 +11,7 @@ public partial class CardUI : Control
 	private CardStateMachine cardStateMachine;
 
 	#region Scene Nodes
+	public Panel backgroundPanel { get; private set;}
 	private TextureRect cardArt;
 	private Label cardName;
 	private Label cardTags;
@@ -19,6 +20,11 @@ public partial class CardUI : Control
 	public Area2D playArea { get; private set;}
 	public HBoxContainer hand { get; private set;}
 	#endregion
+
+	public StyleBox cardstyleDefault { get; private set;} = ResourceLoader.Load<StyleBox>("res://Themes/StyleBox/Card/CardDefault.tres");
+	public StyleBox cardstyleDrag { get; private set;} = ResourceLoader.Load<StyleBox>("res://Themes/StyleBox/Card/CardDragging.tres");
+	public StyleBox cardstyleHover { get; private set;} = ResourceLoader.Load<StyleBox>("res://Themes/StyleBox/Card/CardHover.tres");
+	public StyleBox cardstyleDisabled { get; private set;} = ResourceLoader.Load<StyleBox>("res://Themes/StyleBox/Card/CardDisabled.tres");
 
 	public List<Node2D> targets = new List<Node2D>();
 	public Node2D burner = null;
@@ -29,7 +35,6 @@ public partial class CardUI : Control
 
 	public override void _Ready()
 	{
-		cardStateMachine = new CardStateMachine(this);
 		GetSceneNodes();
 		ConnectEventSignals();
 
@@ -39,10 +44,13 @@ public partial class CardUI : Control
 		{
 			this.SetCardStats(this.cardStats);
 		}
+
+		cardStateMachine = new CardStateMachine(this);
 	}
 
 	private void GetSceneNodes()
 	{
+		this.backgroundPanel = GetNode<Panel>("%PanelBackground");
 		this.cardArt = GetNode<TextureRect>("%TextureRectCardArt");
 		this.cardName = GetNode<Label>("%LabelCardName");
 		this.cardTags = GetNode<Label>("%LabelCardTags");
@@ -87,16 +95,16 @@ public partial class CardUI : Control
 	public void SetPlayable(bool value)
 	{
 		this.isPlayable = value;
-		// if(!isPlayable)
-		// {
-		// 	costLabel.AddThemeColorOverride("font_color", Colors.Red);
-		// 	icon.Modulate = new Color(1,1,1,.05f);
-		// }
-		// else
-		// {
-		// 	costLabel.RemoveThemeColorOverride("font_color");
-		// 	icon.Modulate = new Color(1,1,1,1);
-		// }
+		if(!isPlayable)
+		{
+			this.cardMana.AddThemeColorOverride("font_color", Colors.Red);
+			this.cardArt.Modulate = new Color(1,1,1,.05f);
+		}
+		else
+		{
+			this.cardMana.RemoveThemeColorOverride("font_color");
+			this.cardArt.Modulate = new Color(1,1,1,1);
+		}
 	}
 	public void SetDisabled(bool value)
 	{
@@ -205,6 +213,7 @@ public partial class CardUI : Control
 	}
 	private void DisconnectEventSignals()
 	{
+		this.playerStats.StatsChanged -= OnStatsChanged;
 		EventManager.instance.CardDragStarted -= OnCardDragOrAimingStarted;
 		EventManager.instance.CardDragEnded -= OnCardDragOrAimingEnded;
 		EventManager.instance.CardAimStarted -= OnCardDragOrAimingStarted;

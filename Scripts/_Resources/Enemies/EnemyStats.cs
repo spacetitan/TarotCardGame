@@ -3,6 +3,7 @@ using System;
 
 public partial class EnemyStats : CharacterStats
 {
+    [Export] WinPrize winPrize;
     public override EnemyStats CreateInstance()
     {
         EnemyStats instance = (EnemyStats)this.Duplicate();

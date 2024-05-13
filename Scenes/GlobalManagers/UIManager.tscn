@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bn865ppkrix6r"]
+[gd_scene load_steps=10 format=3 uid="uid://bn865ppkrix6r"]
 
 [ext_resource type="Script" path="res://Scripts/GlobalManagers/UIManager.cs" id="1_wd2ph"]
 [ext_resource type="Script" path="res://Scripts/UI/Hand.cs" id="2_aoxfe"]
 [ext_resource type="Script" path="res://Scripts/UI/BattleUI.cs" id="3_8fk0u"]
 [ext_resource type="Resource" uid="uid://c4laimu52rucf" path="res://Resources/CardStats/WarriorBlock.tres" id="3_32do1"]
 [ext_resource type="Script" path="res://Scripts/UI/VFXRedFlash.cs" id="4_xutay"]
+[ext_resource type="Theme" uid="uid://bha0lbb86sk4x" path="res://Themes/TestTheme.tres" id="6_act4y"]
 [ext_resource type="Script" path="res://Scripts/UI/ManaUI.cs" id="6_mq3ll"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ythap"]
@@ -16,10 +17,6 @@ font_size = 64
 [node name="UIManager" type="Node" node_paths=PackedStringArray("battle")]
 script = ExtResource("1_wd2ph")
 battle = NodePath("CanvasLayerBattle")
-
-[node name="CanvasLayerHUD" type="CanvasLayer" parent="."]
-unique_name_in_owner = true
-visible = false
 
 [node name="CanvasLayerVFX" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -67,6 +64,7 @@ spawnCard = ExtResource("3_32do1")
 
 [node name="ManaUI" type="Panel" parent="CanvasLayerBattle"]
 unique_name_in_owner = true
+z_index = -1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -75,6 +73,7 @@ offset_top = -220.0
 offset_right = 175.0
 offset_bottom = -89.0
 grow_vertical = 0
+theme = ExtResource("6_act4y")
 script = ExtResource("6_mq3ll")
 
 [node name="LabelMana" type="Label" parent="CanvasLayerBattle/ManaUI"]
@@ -107,6 +106,7 @@ offset_right = -48.0
 offset_bottom = -77.0
 grow_horizontal = 0
 grow_vertical = 0
+theme = ExtResource("6_act4y")
 text = "End Turn
 "
 
@@ -122,6 +122,7 @@ offset_right = -50.0
 offset_bottom = -173.0
 grow_horizontal = 0
 grow_vertical = 0
+theme = ExtResource("6_act4y")
 
 [node name="LabelRemaingCards" type="Label" parent="CanvasLayerBattle/Panel"]
 unique_name_in_owner = true
@@ -135,3 +136,14 @@ text = "25"
 label_settings = SubResource("LabelSettings_4mtcx")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="CanvasLayerEndBattle" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="Background" type="Panel" parent="CanvasLayerEndBattle"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
