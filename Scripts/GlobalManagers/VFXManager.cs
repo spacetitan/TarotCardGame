@@ -37,11 +37,17 @@ public partial class VFXManager : Node
                 target = origPos;
             }
 
-            tween.TweenProperty(thing, "position", target, duration/shakeCount);
+            if(thing != null) 
+            {
+                tween.TweenProperty(thing, "position", target, duration/shakeCount);
+            }
             strength *= 0.75f;
         }
 
-        tween.Finished += () => {thing.Position = origPos;};
+        tween.Finished += () => 
+        { 
+            thing.Position = origPos; // causes error when player dies before finished
+        };
     }
 }
 

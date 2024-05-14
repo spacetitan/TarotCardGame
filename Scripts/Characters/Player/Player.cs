@@ -11,6 +11,8 @@ public partial class Player : Node2D
 	const float HAND_DISCARD_INTERVAL = .15F;
 	private Material WHITE_SPRITE_MATERIAL = ResourceLoader.Load<Material>("res://Materials/DamageMaterial.tres");
 
+	private bool isDead = false;
+
 	public override void _Ready()
 	{
 		GetSceneNodes();
@@ -32,6 +34,7 @@ public partial class Player : Node2D
 	{
 		this.stats = null;
 		this.stats = playerStats;
+		this.stats.SetPlayer(this);
 		this.stats.StatsChanged -= UpdateStatsUI;
 		this.stats.StatsChanged += UpdateStatsUI;
 
@@ -46,7 +49,7 @@ public partial class Player : Node2D
 
 	public void TakeDamage(int damage)
 	{
-		if(this.stats.health <=0)
+		if(this.stats.health <=0 || isDead)
 		{
 			return;
 		}
@@ -54,19 +57,26 @@ public partial class Player : Node2D
 		this.playerSprite.Material = WHITE_SPRITE_MATERIAL;
 
 		Tween tween = CreateTween();
-		tween.TweenCallback(Callable.From(()=>{VFXManager.instance.Shake(this, 16, .15f);}));
+		tween.TweenCallback(Callable.From(()=>{VFXManager.instance.Shake(this, 16, .15f);})); // must be less than interval time
 		tween.TweenCallback(Callable.From(()=>{stats.TakeDamage(damage);}));
-		tween.TweenInterval(0.15f);
+		tween.TweenInterval(0.17f); // this is the interval time
 		tween.Finished += ()=>
 		{
 			this.playerSprite.Material = null;
 
 			if(stats.health <=0)
 			{
-				EventManager.instance.EmitSignal(EventManager.SignalName.PlayerDied);
-				QueueFree();
+				DestroyPlayer();
 			}
 		};
+	}
+
+	private void DestroyPlayer()
+	{
+		isDead = true;
+		this.stats.StatsChanged -= UpdateStatsUI;
+		EventManager.instance.EmitSignal(EventManager.SignalName.PlayerDied);
+		QueueFree();
 	}
 
 	public void StartBattle(PlayerStats playerStats)

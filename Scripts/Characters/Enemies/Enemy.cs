@@ -24,6 +24,8 @@ public partial class Enemy : Area2D
 		{
 			SetEnemyStats(this.stats);
 		}
+
+		ConnectEventSignals();
 	}
 
 	private void GetSceneNodes()
@@ -32,6 +34,16 @@ public partial class Enemy : Area2D
 		this.arrowSprite = GetNode<Sprite2D>("%Sprite2DArrow");
 		this.statsUI = GetNode<StatsUI>("%StatsUI");
 		this.intentUI = GetNode<IntentUI>("%IntentUI");
+	}
+
+	private void ConnectEventSignals()
+	{
+
+	}
+
+	private void DisconnectEventSignals()
+	{
+		this.stats.StatsChanged -= UpdateEnemy;
 	}
 
 	public void SetEnemyStats(EnemyStats enemyStats)
@@ -123,10 +135,16 @@ public partial class Enemy : Area2D
 
 			if(stats.health <=0)
 			{
-				this.stats.StatsChanged -= UpdateEnemy;
-				QueueFree();
+				DestroyEnemy();
 			}
 		};
+	}
+
+	private void DestroyEnemy()
+	{
+		EventManager.instance.EmitSignal(EventManager.SignalName.EnemyDied, this.stats);
+		DisconnectEventSignals();
+		QueueFree();
 	}
 
 	void OnAreaEntered(Area2D area2D)

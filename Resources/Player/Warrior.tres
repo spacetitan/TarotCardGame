@@ -13,6 +13,6 @@ strength = 8
 dexterity = 6
 intelligence = 4
 art = ExtResource("1_owdso")
-maxHealth = 20
+maxHealth = 5
 health = 0
 armor = 0

@@ -44,11 +44,11 @@ public partial class EventManager : Node
 	[Signal] public delegate void EnemyTurnEndedEventHandler();
     [Signal] public delegate void EnemyActionCompletedEventHandler(int index);
     //[Signal] public delegate void EnemyHitEventHandler();
-	//[Signal] public delegate void EnemyDiedEventHandler();
+	[Signal] public delegate void EnemyDiedEventHandler(EnemyStats enemy);
 	#endregion 
 
 	#region Battle Events
     [Signal] public delegate void BattleStartedEventHandler();
-	[Signal] public delegate void BattleEndedEventHandler(bool win);
+	[Signal] public delegate void BattleEndedEventHandler(bool win, WinPrize winPrize);
 	#endregion
 }

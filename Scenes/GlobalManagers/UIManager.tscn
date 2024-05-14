@@ -18,9 +18,8 @@ font_size = 64
 [sub_resource type="LabelSettings" id="LabelSettings_ma85p"]
 font_size = 64
 
-[node name="UIManager" type="Node" node_paths=PackedStringArray("battle")]
+[node name="UIManager" type="Node"]
 script = ExtResource("1_wd2ph")
-battle = NodePath("CanvasLayerBattle")
 
 [node name="CanvasLayerVFX" type="CanvasLayer" parent="."]
 unique_name_in_owner = true

@@ -8,7 +8,9 @@ public partial class CombatScene : Node2D
 	private Player player;
 	private PackedScene enemyScene = ResourceLoader.Load<PackedScene>("res://Scenes/Character/Enemy.tscn");
 	private Node enemiesParent;
-	private WinPrize totalPrize;
+	private WinPrize totalPrize = new WinPrize();
+
+	public bool battleOver { get; private set; } = false;
 
 	public override void _Ready()
 	{
@@ -18,11 +20,7 @@ public partial class CombatScene : Node2D
 		UIManager.instance.battle.SetPlayerStats(newStats);
 		this.player.SetPlayerStats(newStats);
 
-		EventManager.instance.PlayerTurnEnded += OnPlayerTurnEnded;
-		EventManager.instance.PlayerHandDiscarded += StartEnemyTurn;
-		EventManager.instance.EnemyActionCompleted += OnEnemyActionCompleted;
-		EventManager.instance.EnemyTurnEnded += OnEnemyTurnEnded;
-		EventManager.instance.PlayerDied += OnPlayerDied;
+		ConnectEventSignals();
 
 		StartBattlePlayer(this.player.stats);
 	}
@@ -31,6 +29,26 @@ public partial class CombatScene : Node2D
 	{
 		this.player = GetNode<Player>("%Player");
 		this.enemiesParent = GetNode("%Enemies");
+	}
+
+	private void ConnectEventSignals()
+	{
+		EventManager.instance.PlayerTurnEnded += OnPlayerTurnEnded;
+		EventManager.instance.PlayerHandDiscarded += StartEnemyTurn;
+		EventManager.instance.PlayerDied += OnPlayerDied;
+		EventManager.instance.EnemyActionCompleted += OnEnemyActionCompleted;
+		EventManager.instance.EnemyTurnEnded += OnEnemyTurnEnded;
+		EventManager.instance.EnemyDied += OnEnemyDeath;
+	}
+
+	private void DisconnectEventSignals()
+	{
+		EventManager.instance.PlayerTurnEnded -= OnPlayerTurnEnded;
+		EventManager.instance.PlayerHandDiscarded -= StartEnemyTurn;
+		EventManager.instance.PlayerDied -= OnPlayerDied;
+		EventManager.instance.EnemyActionCompleted -= OnEnemyActionCompleted;
+		EventManager.instance.EnemyTurnEnded -= OnEnemyTurnEnded;
+		EventManager.instance.EnemyDied -= OnEnemyDeath;
 	}
 
 	public void StartBattlePlayer(PlayerStats playerStats)
@@ -47,6 +65,7 @@ public partial class CombatScene : Node2D
 
 	void StartPlayerTurn()
 	{
+		if(this.battleOver) {return;}
 		this.player.StartTurn();
 	}
 
@@ -58,7 +77,7 @@ public partial class CombatScene : Node2D
 
 	void StartEnemyTurn()
 	{
-		if(this.enemiesParent.GetChildCount() == 0) {return;}
+		if(this.enemiesParent.GetChildCount() == 0 || battleOver) {return;}
 
 		Enemy firstEnemy = this.enemiesParent.GetChild(0) as Enemy;
 		firstEnemy.TakeTurn();
@@ -66,7 +85,7 @@ public partial class CombatScene : Node2D
 
 	void OnEnemyActionCompleted(int index)
 	{
-		if(index == this.enemiesParent.GetChildCount() - 1)
+		if(index == this.enemiesParent.GetChildCount() - 1 || battleOver)
 		{
 			EventManager.instance.EmitSignal(EventManager.SignalName.EnemyTurnEnded);
 			return;
@@ -79,7 +98,10 @@ public partial class CombatScene : Node2D
 	void OnEnemyTurnEnded()
 	{
 		ResetEnemyActions();
-		StartPlayerTurn();
+		if(this.player != null)
+		{
+			StartPlayerTurn();
+		}
 	}
 
 	private void ResetEnemyActions()
@@ -91,17 +113,25 @@ public partial class CombatScene : Node2D
 		}
 	}
 
+	//before enemy dies
+	void OnEnemyDeath(EnemyStats enemy)
+	{
+		this.totalPrize.AddPrize(enemy.winPrize);
+	}
+
+	//after enemy dies
 	void OnEnemiesChildOrderChanged()
 	{
-		GD.Print("Boogie");
 		if(this.enemiesParent.GetChildCount() == 0)
 		{
-			EventManager.instance.EmitSignal(EventManager.SignalName.BattleEnded, true);
+			this.battleOver = true;
+			EventManager.instance.EmitSignal(EventManager.SignalName.BattleEnded, true, this.totalPrize);
 		}
 	}
 
 	void OnPlayerDied()
 	{
-		EventManager.instance.EmitSignal(EventManager.SignalName.BattleEnded, false);
+		this.battleOver = true;
+		EventManager.instance.EmitSignal(EventManager.SignalName.BattleEnded, false, this.totalPrize);
 	}
 }

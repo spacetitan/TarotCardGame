@@ -12,7 +12,8 @@ public partial class UIManager : Node
 		}
 	}
 
-	[Export] public BattleUI battle { get; private set; }
+	public BattleUI battle { get; private set; }
+	public BattleEndUI battleEndUI { get; private set; }
 	private CanvasLayer VFX;
 
 	private Player player;
@@ -28,6 +29,7 @@ public partial class UIManager : Node
 	private void GetSceneNodes()
 	{
 		this.battle = GetNode<BattleUI>("%CanvasLayerBattle");
+		this.battleEndUI = GetNode<BattleEndUI>("%CanvasLayerEndBattle");
 		this.VFX = GetNode<CanvasLayer>("%CanvasLayerVFX");
 	}
 

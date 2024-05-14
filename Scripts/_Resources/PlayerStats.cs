@@ -10,6 +10,19 @@ public partial class PlayerStats : CharacterStats
     public CardPile deck;
     public CardPile discard;
 
+    public Player player { get; private set; }
+
+    // public override void TakeDamage(int damage)
+    // {
+    //     int initialHealth = this.health;
+    //     VFXManager.instance.Shake(this.player, 16, .15f);
+    //     base.TakeDamage(damage);
+    //     if(initialHealth > this.health)
+    //     {
+    //         EventManager.instance.EmitSignal(EventManager.SignalName.PlayerHit);
+    //     }
+    // }
+
     private void SetMana(int value)
     {
         this.mana = value;
@@ -31,6 +44,11 @@ public partial class PlayerStats : CharacterStats
     public bool CanPlayCard(CardUI card)
     {
         return this.mana >= card.cardStats.cardCost;
+    }
+
+    public void SetPlayer(Player player)
+    {
+        this.player = player;
     }
 
     public override PlayerStats CreateInstance()

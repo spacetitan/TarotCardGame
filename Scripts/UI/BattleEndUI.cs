@@ -36,7 +36,7 @@ public partial class BattleEndUI : CanvasLayer
 		this.quitButton = GetNode<Button>("%ButtonQuit");
 	}
 
-	private void BattleOver(bool hasWon)
+	private void BattleOver(bool hasWon, WinPrize winPrize)
 	{
 		if(hasWon)
 		{
@@ -49,6 +49,9 @@ public partial class BattleEndUI : CanvasLayer
 
 		this.continueButton.Visible = hasWon;
 		this.restartButton.Visible = !hasWon;
+
+		this.EXPLabel.Text = "EXP: " + winPrize.xp.ToString();
+		this.moneyLabel.Text = "Money: " + winPrize.money.ToString();
 
 		Show();
 	}
