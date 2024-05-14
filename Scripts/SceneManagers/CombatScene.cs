@@ -72,7 +72,7 @@ public partial class CombatScene : Node2D
 			return;
 		}
 
-		Enemy nextEnemy = GetChild(index + 1) as Enemy;
+		Enemy nextEnemy = this.enemiesParent.GetChild(index + 1) as Enemy;
 		nextEnemy.TakeTurn();
 	}
 
@@ -93,14 +93,15 @@ public partial class CombatScene : Node2D
 
 	void OnEnemiesChildOrderChanged()
 	{
+		GD.Print("Boogie");
 		if(this.enemiesParent.GetChildCount() == 0)
 		{
-			//EventManager.instance.EmitSignal(EventManager.SignalName.BattleOverScreenRequested,"Victory!", true);
+			EventManager.instance.EmitSignal(EventManager.SignalName.BattleEnded, true);
 		}
 	}
 
 	void OnPlayerDied()
 	{
-		// EventManager.instance.EmitSignal(EventManager.SignalName.BattleOverScreenRequested, "Game Over!", false);
+		EventManager.instance.EmitSignal(EventManager.SignalName.BattleEnded, false);
 	}
 }

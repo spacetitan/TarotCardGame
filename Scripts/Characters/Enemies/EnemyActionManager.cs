@@ -28,7 +28,7 @@ public partial class EnemyActionManager : Node
 
 	private void SetActions(Enemy enemy)
 	{
-		if(enemy.actions == null || enemy.actions.Length < 1)
+		if(enemy.stats.actions == null || enemy.stats.actions.Length < 1)
 		{
 			GD.Print("No actions set.");
 			return;
@@ -36,7 +36,7 @@ public partial class EnemyActionManager : Node
 
 		this.enemyActions.Clear();
 
-		foreach (EnemyAction enemyAction in enemy.actions)
+		foreach (EnemyAction enemyAction in enemy.stats.actions)
 		{
 			enemyAction.enemy = this.body;
 			this.enemyActions.Add(enemyAction);

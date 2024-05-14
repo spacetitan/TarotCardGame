@@ -45,7 +45,7 @@ public partial class StatsData : Resource
 		int initial_dmg = damage;
 		damage = Math.Clamp(damage - armor, 0, damage);
 		this.armor = Math.Clamp(armor - initial_dmg, 0, armor);
-		this.health -= damage;
+		this.health = Math.Clamp(this.health - damage, 0, this.health);
 		EmitSignal(SignalName.StatsChanged);
 	}
 

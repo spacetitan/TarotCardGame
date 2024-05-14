@@ -58,9 +58,14 @@ public partial class EnemyAttack : EnemyAction
         Tween tween = this.enemy.CreateTween().SetTrans(Tween.TransitionType.Quint);
         tween.TweenProperty(enemy, "global_position", end, .4);
 
-        for(int i = 0; i < this.numOfAtt; i++)
+        tween.TweenCallback(Callable.From(() => damage.Execute(targetList)));
+        if(this.numOfAtt > 1)
         {
-            tween.TweenCallback(Callable.From(() => damage.Execute(targetList)));
+            for(int i = 0; i < this.numOfAtt-1; i++)
+            {
+                tween.TweenInterval(.35);
+                tween.TweenCallback(Callable.From(() => damage.Execute(targetList)));
+            }
         }
 
         tween.TweenInterval(.25);

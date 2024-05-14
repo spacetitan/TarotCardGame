@@ -7,7 +7,7 @@
 [ext_resource type="StyleBox" uid="uid://bihgotce71gu8" path="res://Themes/StyleBox/Card/CardDefault.tres" id="5_16wru"]
 
 [resource]
-Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_disabled_color = Color(0, 0, 0, 1)
 Button/colors/font_focus_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_color = Color(0, 0, 0, 1)
@@ -31,3 +31,4 @@ Button/styles/hover = ExtResource("2_dtr06")
 Button/styles/normal = ExtResource("3_5k71s")
 Button/styles/pressed = ExtResource("4_dgkpp")
 Panel/styles/panel = ExtResource("5_16wru")
+VBoxContainer/constants/separation = 0

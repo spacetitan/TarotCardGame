@@ -49,6 +49,6 @@ public partial class EventManager : Node
 
 	#region Battle Events
     [Signal] public delegate void BattleStartedEventHandler();
-	[Signal] public delegate void BattleEndedEventHandler();
+	[Signal] public delegate void BattleEndedEventHandler(bool win);
 	#endregion
 }

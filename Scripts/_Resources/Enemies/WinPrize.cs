@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[GlobalClass]
 public partial class WinPrize : Resource
 {
     [Export] int xp = 0;

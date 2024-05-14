@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cqie57h6uoub5"]
+[gd_scene load_steps=12 format=3 uid="uid://cqie57h6uoub5"]
 
 [ext_resource type="Script" path="res://Scripts/SceneManagers/CombatScene.cs" id="1_6bgin"]
 [ext_resource type="PackedScene" uid="uid://bcocl40xi65yn" path="res://Scenes/Character/Player.tscn" id="2_c076a"]
@@ -7,6 +7,8 @@
 [ext_resource type="AudioStream" uid="uid://ch5x1rxcnuxid" path="res://Audio/BGM/Adventures in Adventureland.mp3" id="3_ov2b0"]
 [ext_resource type="PackedScene" uid="uid://beid3bjetllo2" path="res://Scenes/UI/CardTargetSelector.tscn" id="4_8x7dc"]
 [ext_resource type="PackedScene" uid="uid://dk2jos4xobojm" path="res://Scenes/Character/Enemy.tscn" id="5_2m5ll"]
+[ext_resource type="Resource" uid="uid://dpfen8hk4vyeg" path="res://Resources/Enemies/Rat.tres" id="8_83mek"]
+[ext_resource type="Resource" uid="uid://b3yekesrdf054" path="res://Resources/Enemies/Bat.tres" id="9_owswu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rvbwx"]
 size = Vector2(1000, 300)
@@ -69,6 +71,11 @@ position = Vector2(93, 131)
 unique_name_in_owner = true
 
 [node name="Rat" parent="Enemies" instance=ExtResource("5_2m5ll")]
-position = Vector2(645, 157)
+position = Vector2(597, 154)
+stats = ExtResource("8_83mek")
+
+[node name="Bat" parent="Enemies" instance=ExtResource("5_2m5ll")]
+position = Vector2(821, 109)
+stats = ExtResource("9_owswu")
 
 [connection signal="child_order_changed" from="Enemies" to="." method="OnEnemiesChildOrderChanged"]

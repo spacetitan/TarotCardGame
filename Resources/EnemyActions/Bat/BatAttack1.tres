@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EnemyAttack" load_steps=6 format=3 uid="uid://bycofv22p2l3n"]
+
+[ext_resource type="Texture2D" uid="uid://dbgau48o2n3l8" path="res://Sprites/Card/TestAttack.png" id="1_ctluw"]
+[ext_resource type="Script" path="res://Scripts/_Resources/Enemies/EnemyAction/EnemyAttack.cs" id="1_xekxb"]
+[ext_resource type="Script" path="res://Scripts/_Resources/Enemies/EnemyIntent.cs" id="2_5lwo2"]
+[ext_resource type="AudioStream" uid="uid://bmrmw8csemax" path="res://Audio/SFX/Attack.wav" id="4_un5g3"]
+
+[sub_resource type="Resource" id="Resource_uecel"]
+script = ExtResource("2_5lwo2")
+number = "1x3"
+icon = ExtResource("1_ctluw")
+
+[resource]
+script = ExtResource("1_xekxb")
+value = 1
+numOfAtt = 3
+hpThreshold = 0
+intent = SubResource("Resource_uecel")
+type = 2
+chanceWeight = 2
+sound = ExtResource("4_un5g3")

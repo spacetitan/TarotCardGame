@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EnemyStats" load_steps=8 format=3 uid="uid://dpfen8hk4vyeg"]
+
+[ext_resource type="Resource" uid="uid://cecds6d12iitf" path="res://Resources/EnemyActions/Rat/RatAttack1.tres" id="1_cpstn"]
+[ext_resource type="Script" path="res://Scripts/_Resources/Enemies/EnemyStats.cs" id="1_e1akk"]
+[ext_resource type="Resource" uid="uid://dn38u6vvs7toh" path="res://Resources/EnemyActions/Rat/RatAttack2.tres" id="2_y4dw5"]
+[ext_resource type="Resource" uid="uid://duv6inx1xp7ia" path="res://Resources/EnemyActions/Rat/RatGuard.tres" id="3_qpxs4"]
+[ext_resource type="Texture2D" uid="uid://hr6lh7f2pykn" path="res://Sprites/Enemies/tile_0124.png" id="4_h2kcu"]
+[ext_resource type="Script" path="res://Scripts/_Resources/Enemies/WinPrize.cs" id="6_s58xg"]
+
+[sub_resource type="Resource" id="Resource_sdlsu"]
+script = ExtResource("6_s58xg")
+xp = 10
+money = 3
+items = null
+
+[resource]
+script = ExtResource("1_e1akk")
+actions = Array[Object]([ExtResource("1_cpstn"), ExtResource("2_y4dw5"), ExtResource("3_qpxs4")])
+winPrize = SubResource("Resource_sdlsu")
+strength = 2
+dexterity = 4
+intelligence = 2
+art = ExtResource("4_h2kcu")
+maxHealth = 8
+health = 0
+armor = 0

@@ -1,8 +1,10 @@
 using Godot;
 using System;
 
+[GlobalClass]
 public partial class EnemyStats : CharacterStats
 {
+    [Export] public EnemyAction[] actions { get; private set; }
     [Export] WinPrize winPrize;
     public override EnemyStats CreateInstance()
     {

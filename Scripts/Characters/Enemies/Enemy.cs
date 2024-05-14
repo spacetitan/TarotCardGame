@@ -6,7 +6,6 @@ public partial class Enemy : Area2D
 	Material whiteSprite;
 
 	[Export] public EnemyStats stats { get; private set; }
-	[Export] public EnemyAction[] actions { get; private set; }
 	private Sprite2D enemySprite;
 	private Sprite2D arrowSprite;
 	private StatsUI statsUI;
@@ -124,7 +123,8 @@ public partial class Enemy : Area2D
 
 			if(stats.health <=0)
 			{
-				//QueueFree();
+				this.stats.StatsChanged -= UpdateEnemy;
+				QueueFree();
 			}
 		};
 	}

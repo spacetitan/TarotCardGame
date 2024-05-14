@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="EnemyGuard" load_steps=6 format=3 uid="uid://dj36fit1h7cr7"]
+
+[ext_resource type="Texture2D" uid="uid://blbrvh7iyh8wm" path="res://Sprites/Card/Armor2.png" id="1_d4fmv"]
+[ext_resource type="Script" path="res://Scripts/_Resources/Enemies/EnemyAction/EnemyGuard.cs" id="1_nx18t"]
+[ext_resource type="Script" path="res://Scripts/_Resources/Enemies/EnemyIntent.cs" id="2_v64re"]
+[ext_resource type="AudioStream" uid="uid://2yry5op2fkjy" path="res://Audio/SFX/Guard.wav" id="4_hbaf5"]
+
+[sub_resource type="Resource" id="Resource_sbn73"]
+script = ExtResource("2_v64re")
+number = "6"
+icon = ExtResource("1_d4fmv")
+
+[resource]
+script = ExtResource("1_nx18t")
+value = 6
+hpThreshold = 0
+intent = SubResource("Resource_sbn73")
+type = 2
+chanceWeight = 1
+sound = ExtResource("4_hbaf5")
