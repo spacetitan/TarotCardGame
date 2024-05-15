@@ -4,7 +4,7 @@
 [ext_resource type="StyleBox" uid="uid://b6i0qnfhkyn51" path="res://Themes/StyleBox/Button/ButtonHover.tres" id="2_dtr06"]
 [ext_resource type="StyleBox" uid="uid://bnsqgmjwfkuno" path="res://Themes/StyleBox/Button/ButtonNormal.tres" id="3_5k71s"]
 [ext_resource type="StyleBox" uid="uid://boe2cob4woeiu" path="res://Themes/StyleBox/Button/ButtonPressed.tres" id="4_dgkpp"]
-[ext_resource type="StyleBox" uid="uid://bihgotce71gu8" path="res://Themes/StyleBox/Card/CardDefault.tres" id="5_16wru"]
+[ext_resource type="StyleBox" uid="uid://bc3jy7g7chwbg" path="res://Themes/StyleBox/Card/Panel.tres" id="5_mu42f"]
 
 [resource]
 Button/colors/font_color = Color(1, 1, 1, 1)
@@ -30,5 +30,5 @@ Button/styles/focus = ExtResource("2_dtr06")
 Button/styles/hover = ExtResource("2_dtr06")
 Button/styles/normal = ExtResource("3_5k71s")
 Button/styles/pressed = ExtResource("4_dgkpp")
-Panel/styles/panel = ExtResource("5_16wru")
+Panel/styles/panel = ExtResource("5_mu42f")
 VBoxContainer/constants/separation = 0

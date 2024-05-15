@@ -5,5 +5,6 @@ using System.Collections.Generic;
 public partial class Effect : RefCounted
 {
     [Export] public AudioStream sound;
+    public virtual void Execute(Node2D target){}
     public virtual void Execute(List<Node2D> target){}
 }

@@ -31,7 +31,7 @@ public partial class StatsData : Resource
 
 	public void Heal(int amount)
 	{
-		this.health += amount;
+		this.health = Math.Clamp(this.health + amount, 0, this.maxHealth);
 		EmitSignal(SignalName.StatsChanged);
 	}
 

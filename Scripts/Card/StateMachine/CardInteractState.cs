@@ -59,7 +59,7 @@ public partial class CardDefaultState : CardInteractState
 
 	public override void OnMouseEntered()
 	{
-		//EventManager.instance.EmitSignal(EventManager.SignalName.CardTooltipRequested, cardUI);
+		this.cardUI.cardToolTip.ShowTooltip();
 
 		if(!this.cardUI.isPlayable || this.cardUI.isDisabled)
 		{
@@ -71,7 +71,7 @@ public partial class CardDefaultState : CardInteractState
 
 	public override void OnMouseExited()
 	{
-		//EventManager.instance.EmitSignal(EventManager.SignalName.CardTooltipHideRequested);
+		this.cardUI.cardToolTip.HideTooltip();
 
 		if(!this.cardUI.isPlayable || this.cardUI.isDisabled)
 		{
@@ -94,6 +94,7 @@ public partial class CardClickedState : CardInteractState
     public override void Enter()
 	{
 		this.cardUI.playArea.Monitorable = true;
+		this.cardUI.cardToolTip.HideTooltip();
 	}
 
 	public override void OnInput(InputEvent inputEvent)

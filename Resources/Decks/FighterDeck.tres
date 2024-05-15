@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CardPile" load_steps=9 format=3 uid="uid://dvbgoem3o3bd6"]
+
+[ext_resource type="Resource" uid="uid://cg1lhrimpe7hn" path="res://Resources/Cards/Basic/BasicAttack.tres" id="1_1ma1n"]
+[ext_resource type="Resource" uid="uid://cqi406d47453i" path="res://Resources/Cards/Basic/BasicGuard.tres" id="2_dpyk3"]
+[ext_resource type="Resource" uid="uid://c44wmm3y0wcx5" path="res://Resources/Cards/Basic/BasicHeal.tres" id="3_hwqvw"]
+[ext_resource type="Script" path="res://Scripts/_Resources/Card/CardPile.cs" id="4_fpp1k"]
+[ext_resource type="Resource" uid="uid://ds18s6g4j7gys" path="res://Resources/Cards/Fighter/FighterAttack.tres" id="4_tadoq"]
+[ext_resource type="Resource" uid="uid://bkxtkx2dadkyt" path="res://Resources/Cards/Fighter/FighterAllAttack.tres" id="5_jopdu"]
+[ext_resource type="Resource" uid="uid://bi8fqrddmtyiw" path="res://Resources/Cards/Fighter/FighterGuard.tres" id="6_aymvr"]
+[ext_resource type="Resource" uid="uid://c4oehu5m88trj" path="res://Resources/Cards/Fighter/FighterSelfDmgAtt.tres" id="7_j1a4r"]
+
+[resource]
+script = ExtResource("4_fpp1k")
+cardStates = Array[Object]([ExtResource("1_1ma1n"), ExtResource("1_1ma1n"), ExtResource("2_dpyk3"), ExtResource("2_dpyk3"), ExtResource("3_hwqvw"), ExtResource("4_tadoq"), ExtResource("4_tadoq"), ExtResource("5_jopdu"), ExtResource("6_aymvr"), ExtResource("7_j1a4r")])

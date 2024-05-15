@@ -12,17 +12,6 @@ public partial class PlayerStats : CharacterStats
 
     public Player player { get; private set; }
 
-    // public override void TakeDamage(int damage)
-    // {
-    //     int initialHealth = this.health;
-    //     VFXManager.instance.Shake(this.player, 16, .15f);
-    //     base.TakeDamage(damage);
-    //     if(initialHealth > this.health)
-    //     {
-    //         EventManager.instance.EmitSignal(EventManager.SignalName.PlayerHit);
-    //     }
-    // }
-
     private void SetMana(int value)
     {
         this.mana = value;

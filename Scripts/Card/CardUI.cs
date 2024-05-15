@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using Godot;
 
 [GlobalClass]
@@ -11,14 +12,17 @@ public partial class CardUI : Control
 	private CardStateMachine cardStateMachine;
 
 	#region Scene Nodes
-	public Panel backgroundPanel { get; private set;}
+	public Panel backgroundPanel { get; private set; }
 	private TextureRect cardArt;
 	private Label cardName;
 	private Label cardTags;
 	private Label cardDesc;
 	private Label cardMana;
-	public Area2D playArea { get; private set;}
-	public HBoxContainer hand { get; private set;}
+	public Area2D playArea { get; private set; }
+	public HBoxContainer hand { get; private set; }
+	public CardToolTip cardToolTip { get; private set; }
+	public ColorRect cardTypeColorRect { get; private set; }
+	public ColorRect cardTypeTTColorRect { get; private set; }
 	#endregion
 
 	public StyleBox cardstyleDefault { get; private set;} = ResourceLoader.Load<StyleBox>("res://Themes/StyleBox/Card/CardDefault.tres");
@@ -57,6 +61,9 @@ public partial class CardUI : Control
 		this.cardDesc = GetNode<Label>("%LabelCardDesc");
 		this.cardMana = GetNode<Label>("%LabelCardMana");
 		this.playArea = GetNode<Area2D>("%Area2DPlayArea");
+		this.cardToolTip = GetNode<CardToolTip>("%PanelTooltip");
+		this.cardTypeColorRect = GetNode<ColorRect>("%ColorRectCardType");
+		this.cardTypeTTColorRect = GetNode<ColorRect>("%ColorRectTTCardType");
 	}
 
 	public void SetCardStats(CardStats cardStats)
@@ -72,6 +79,29 @@ public partial class CardUI : Control
 		this.cardTags.Text = "Type: " + cardStats.cardType.ToString() + " Tag: " + cardStats.cardTag.ToString();
 		this.cardDesc.Text = cardStats.cardDesc;
 		this.cardMana.Text = "Cost: " + cardStats.cardCost.ToString() + " Gen: " + cardStats.cardGen.ToString();
+
+		this.cardToolTip.SetToolTip(cardStats);
+
+		SetCardColor();
+	}
+
+	public void SetCardColor()
+	{
+		Color color;
+
+		switch(this.cardStats.cardType)
+		{
+			case CardType.FIGHTER:
+			color = new Color(.6f,0,0);
+			break;
+
+			default:
+			color = new Color(.6f,.6f,.6f);
+			break;
+		}
+
+		this.cardTypeColorRect.Color = color;
+		this.cardTypeTTColorRect.Color = color;
 	}
 
 	public void SetPlayerStats(PlayerStats value)

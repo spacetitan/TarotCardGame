@@ -1,12 +1,13 @@
 using Godot;
 using System.Collections.Generic;
 
+[GlobalClass]
 public partial class AllAttack : CardStats
 {
-   public override void ApplyEffects(List<Node2D> targets)
+   [Export] private int value = 0;
+   public override void ApplyEffects(List<Node2D> targets, Node2D player)
 	{
-		DamageEffect damage = new DamageEffect(4, this.playSFX);
-        //damage.sound = this.sound;
-        damage.Execute(targets);
+		DamageEffect damage = new DamageEffect(this.value, this.playSFX);
+      damage.Execute(targets);
 	}
 }

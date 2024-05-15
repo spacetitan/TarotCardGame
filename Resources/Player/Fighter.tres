@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="PlayerStats" load_steps=4 format=3 uid="uid://cnebs6xuv48e0"]
+
+[ext_resource type="Texture2D" uid="uid://bby2qhet56vgi" path="res://Sprites/Player/Warrior.png" id="1_122pr"]
+[ext_resource type="Script" path="res://Scripts/_Resources/PlayerStats.cs" id="2_mms2x"]
+[ext_resource type="Resource" uid="uid://dvbgoem3o3bd6" path="res://Resources/Decks/FighterDeck.tres" id="3_muaex"]
+
+[resource]
+script = ExtResource("2_mms2x")
+startingDeck = ExtResource("3_muaex")
+handSize = 4
+mana = 0
+strength = 8
+dexterity = 6
+intelligence = 4
+art = ExtResource("1_122pr")
+maxHealth = 10
+health = 0
+armor = 0

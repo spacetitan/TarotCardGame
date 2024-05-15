@@ -10,6 +10,7 @@ public partial class Player : Node2D
 	const float HAND_DRAW_INTERVAL = .25F;
 	const float HAND_DISCARD_INTERVAL = .15F;
 	private Material WHITE_SPRITE_MATERIAL = ResourceLoader.Load<Material>("res://Materials/DamageMaterial.tres");
+	private Material GREEN_SPRITE_MATERIAL = ResourceLoader.Load<Material>("res://Materials/HealMaterial.tres");
 
 	private bool isDead = false;
 
@@ -59,6 +60,24 @@ public partial class Player : Node2D
 		Tween tween = CreateTween();
 		tween.TweenCallback(Callable.From(()=>{VFXManager.instance.Shake(this, 16, .15f);})); // must be less than interval time
 		tween.TweenCallback(Callable.From(()=>{stats.TakeDamage(damage);}));
+		tween.TweenInterval(0.17f); // this is the interval time
+		tween.Finished += ()=>
+		{
+			this.playerSprite.Material = null;
+
+			if(stats.health <=0)
+			{
+				DestroyPlayer();
+			}
+		};
+	}
+
+	public void Heal(int value)
+	{
+		this.playerSprite.Material = GREEN_SPRITE_MATERIAL;
+
+		Tween tween = CreateTween();
+		tween.TweenCallback(Callable.From(()=>{stats.Heal(value);}));
 		tween.TweenInterval(0.17f); // this is the interval time
 		tween.Finished += ()=>
 		{

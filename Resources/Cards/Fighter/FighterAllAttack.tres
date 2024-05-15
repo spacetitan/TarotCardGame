@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AllAttack" load_steps=4 format=3 uid="uid://bkxtkx2dadkyt"]
+
+[ext_resource type="Script" path="res://Scripts/_Resources/Cards/AllAttack.cs" id="1_2rti3"]
+[ext_resource type="Texture2D" uid="uid://yhlbe2jwllm4" path="res://Sprites/Card/WideAtt1.png" id="1_7f7sg"]
+[ext_resource type="AudioStream" uid="uid://bmrmw8csemax" path="res://Audio/SFX/Attack.wav" id="2_hqd7i"]
+
+[resource]
+script = ExtResource("1_2rti3")
+value = 5
+cardName = "Big Swing"
+cardType = 1
+cardTag = 1
+cardDesc = "5 dmg to all"
+cardCost = 2
+cardGen = 1
+target = 3
+cardArt = ExtResource("1_7f7sg")
+playSFX = ExtResource("2_hqd7i")

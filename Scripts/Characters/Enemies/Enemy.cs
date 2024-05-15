@@ -15,6 +15,7 @@ public partial class Enemy : Area2D
 	private EnemyAction currentAction;
 
 	private Material WHITE_SPRITE_MATERIAL = ResourceLoader.Load<Material>("res://Materials/DamageMaterial.tres");
+	private Material GREEN_SPRITE_MATERIAL = ResourceLoader.Load<Material>("res://Materials/HealMaterial.tres");
 
 	public override void _Ready()
 	{
@@ -129,6 +130,24 @@ public partial class Enemy : Area2D
 		tween.TweenCallback(Callable.From(()=>{VFXManager.instance.Shake(this, 16, .15f);}));
 		tween.TweenCallback(Callable.From(()=>{stats.TakeDamage(damage);}));
 		tween.TweenInterval(0.17f);
+		tween.Finished += ()=>
+		{
+			this.enemySprite.Material = null;
+
+			if(stats.health <=0)
+			{
+				DestroyEnemy();
+			}
+		};
+	}
+
+	public void Heal(int value)
+	{
+		this.enemySprite.Material = GREEN_SPRITE_MATERIAL;
+
+		Tween tween = CreateTween();
+		tween.TweenCallback(Callable.From(()=>{stats.Heal(value);}));
+		tween.TweenInterval(0.17f); // this is the interval time
 		tween.Finished += ()=>
 		{
 			this.enemySprite.Material = null;

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://blbrvh7iyh8wm" path="res://Sprites/Card/Armor2.png" id="1_lsf1r"]
 [ext_resource type="AudioStream" uid="uid://2yry5op2fkjy" path="res://Audio/SFX/Guard.wav" id="2_8hstk"]
-[ext_resource type="Script" path="res://Scripts/_Resources/Cards/BasicArmor.cs" id="2_21gad"]
+[ext_resource type="Script" path="res://Scripts/_Resources/Cards/BasicGuard.cs" id="2_21gad"]
 
 [resource]
 script = ExtResource("2_21gad")
