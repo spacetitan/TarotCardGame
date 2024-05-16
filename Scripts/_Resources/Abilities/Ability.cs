@@ -1,9 +1,12 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 [GlobalClass]
 public partial class Ability : Resource
 {
+    [Export] public String name;
+    [Export] public String desc;
     [Export] public int value { get; private set; }
     [Export] public Target targetType { get; private set; }
     [Export] public AudioStream playSFX { get; private set; }

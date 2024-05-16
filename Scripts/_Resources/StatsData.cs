@@ -5,7 +5,8 @@ using System;
 public partial class StatsData : Resource
 {
 	[Signal] public delegate void StatsChangedEventHandler();
-
+	[Export] public String name;
+	[Export] public String desc;
 	[Export] public Texture2D art;
 	[Export] public int maxHealth { get; private set;} 
 	[Export] public int health{ get; private set;}

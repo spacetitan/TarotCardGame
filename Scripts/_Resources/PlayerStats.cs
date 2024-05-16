@@ -3,6 +3,7 @@ using Godot;
 [GlobalClass]
 public partial class PlayerStats : CharacterStats
 {
+    [Export] public CardType type { get; private set; }
     [Export] public CardPile startingDeck{ get; private set; }
     [Export] public int handSize{ get; private set; } = 5;
     [Export] public int mana{ get; private set; } = 0;

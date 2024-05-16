@@ -87,19 +87,7 @@ public partial class CardUI : Control
 
 	public void SetCardColor()
 	{
-		Color color;
-
-		switch(this.cardStats.cardType)
-		{
-			case CardType.FIGHTER:
-			color = new Color(.6f,0,0);
-			break;
-
-			default:
-			color = new Color(.6f,.6f,.6f);
-			break;
-		}
-
+		Color color = ToolsManager.instance.GetCharColor(this.cardStats.cardType);
 		this.cardTypeColorRect.Color = color;
 		this.cardTypeTTColorRect.Color = color;
 	}

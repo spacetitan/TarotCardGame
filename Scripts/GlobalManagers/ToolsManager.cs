@@ -29,5 +29,31 @@ public partial class ToolsManager : Node
 
 		return nodes;
 	}
+
+	public Color GetCharColor(CardType type)
+	{
+		Color color;
+
+		switch(type)
+		{
+			case CardType.FIGHTER:
+			color = new Color(.6f,0,0);
+			break;
+
+			case CardType.RANGER:
+			color = new Color(0,.6f,0);
+			break;
+
+			case CardType.MAGE:
+			color = new Color(0,0,.6f);
+			break;
+
+			default:
+			color = new Color(.6f,.6f,.6f);
+			break;
+		}
+
+		return color;
+	}
 }
 
