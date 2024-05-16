@@ -12,7 +12,7 @@ icon = ExtResource("1_jebqr")
 
 [resource]
 script = ExtResource("1_nf136")
-value = 2
+value = 0
 numOfAtt = 2
 hpThreshold = 0
 intent = SubResource("Resource_35txe")

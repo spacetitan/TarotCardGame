@@ -39,6 +39,7 @@ public partial class EnemyActionManager : Node
 		foreach (EnemyAction enemyAction in enemy.stats.actions)
 		{
 			enemyAction.enemy = this.body;
+			enemyAction.InitializeAction();
 			this.enemyActions.Add(enemyAction);
 		}
 

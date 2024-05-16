@@ -12,8 +12,8 @@ icon = ExtResource("1_r7gdw")
 
 [resource]
 script = ExtResource("1_jqh16")
-value = 5
-hpThreshold = 6
+value = 1
+hpThreshold = 0
 intent = SubResource("Resource_7clmv")
 type = 1
 chanceWeight = 0

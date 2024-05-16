@@ -12,8 +12,8 @@ icon = ExtResource("1_ctluw")
 
 [resource]
 script = ExtResource("1_xekxb")
-value = 1
-numOfAtt = 3
+value = 0
+numOfAtt = 2
 hpThreshold = 0
 intent = SubResource("Resource_uecel")
 type = 2

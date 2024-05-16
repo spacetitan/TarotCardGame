@@ -2,7 +2,7 @@ using Godot;
 
 public partial class Enemy : Area2D
 {
-	const float ARROW_OFFSET = 200;
+	const float ARROW_OFFSET = 70;
 	Material whiteSprite;
 
 	[Export] public EnemyStats stats { get; private set; }
@@ -146,6 +146,7 @@ public partial class Enemy : Area2D
 		this.enemySprite.Material = GREEN_SPRITE_MATERIAL;
 
 		Tween tween = CreateTween();
+		tween.TweenCallback(Callable.From(()=>{VFXManager.instance.Shake(this, 16, .15f);}));
 		tween.TweenCallback(Callable.From(()=>{stats.Heal(value);}));
 		tween.TweenInterval(0.17f); // this is the interval time
 		tween.Finished += ()=>

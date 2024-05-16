@@ -6,11 +6,13 @@ public partial class PlayerStats : CharacterStats
     [Export] public CardPile startingDeck{ get; private set; }
     [Export] public int handSize{ get; private set; } = 5;
     [Export] public int mana{ get; private set; } = 0;
+    [Export] public Ability ability { get; private set; }
 
     public CardPile deck;
     public CardPile discard;
 
     public Player player { get; private set; }
+
 
     private void SetMana(int value)
     {

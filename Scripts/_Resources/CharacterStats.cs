@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 [GlobalClass]
@@ -15,6 +16,20 @@ public partial class CharacterStats : StatsData
         {
             EventManager.instance.EmitSignal(EventManager.SignalName.PlayerHit);
         }
+    }
+
+    public virtual int GetHighestStatNumber()
+    {
+        int num = this.strength;
+        if(num < this.dexterity)
+        {
+            num = this.dexterity;
+        }
+        else if(num < this.intelligence)
+        {
+            num = this.intelligence;
+        }
+        return num;
     }
 
     public override CharacterStats CreateInstance()

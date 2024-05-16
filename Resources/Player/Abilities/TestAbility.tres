@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://boncdd3yv1m6v"]
+
+[ext_resource type="AudioStream" uid="uid://03bgsrb3318p" path="res://Audio/SFX/648747__j8054__musket_fire_4.wav" id="1_7p60b"]
+[ext_resource type="Script" path="res://Scripts/_Resources/Abilities/Ability.cs" id="1_s4jfr"]
+
+[resource]
+script = ExtResource("1_s4jfr")
+value = 2
+targetType = 2
+playSFX = ExtResource("1_7p60b")

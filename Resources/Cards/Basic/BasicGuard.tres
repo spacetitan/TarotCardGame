@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BasicArmor" load_steps=4 format=3 uid="uid://cqi406d47453i"]
+[gd_resource type="Resource" script_class="BasicGuard" load_steps=4 format=3 uid="uid://cqi406d47453i"]
 
 [ext_resource type="Texture2D" uid="uid://blbrvh7iyh8wm" path="res://Sprites/Card/Armor2.png" id="1_2yxv8"]
 [ext_resource type="AudioStream" uid="uid://2yry5op2fkjy" path="res://Audio/SFX/Guard.wav" id="2_nr8t2"]

@@ -33,6 +33,10 @@ public partial class EventManager : Node
 	[Signal] public delegate void PlayerHandDrawnEventHandler();
 	[Signal] public delegate void PlayerHandDiscardedEventHandler();
 	[Signal] public delegate void PlayerDeckReshuffledEventHandler();
+	[Signal] public delegate void PlayerAbilityActivateEventHandler();
+	[Signal] public delegate void PlayerAbilityusedEventHandler();
+	[Signal] public delegate void PlayerAbilityAimStartedEventHandler(Player player);
+	[Signal] public delegate void PlayerAbilityAimEndedEventHandler();
     [Signal] public delegate void PlayerTurnStartedEventHandler();
 	[Signal] public delegate void PlayerTurnEndedEventHandler();
 	[Signal] public delegate void PlayerHitEventHandler();

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bha0lbb86sk4x"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://bha0lbb86sk4x"]
 
 [ext_resource type="StyleBox" uid="uid://de1dhndesa0gr" path="res://Themes/StyleBox/Button/ButtonDisabled.tres" id="1_60s0y"]
 [ext_resource type="StyleBox" uid="uid://b6i0qnfhkyn51" path="res://Themes/StyleBox/Button/ButtonHover.tres" id="2_dtr06"]
@@ -6,12 +6,15 @@
 [ext_resource type="StyleBox" uid="uid://boe2cob4woeiu" path="res://Themes/StyleBox/Button/ButtonPressed.tres" id="4_dgkpp"]
 [ext_resource type="StyleBox" uid="uid://bc3jy7g7chwbg" path="res://Themes/StyleBox/Card/Panel.tres" id="5_mu42f"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q8bvu"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
 [resource]
 Button/colors/font_color = Color(1, 1, 1, 1)
-Button/colors/font_disabled_color = Color(0, 0, 0, 1)
+Button/colors/font_disabled_color = Color(1, 1, 1, 1)
 Button/colors/font_focus_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_color = Color(0, 0, 0, 1)
-Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 Button/colors/font_outline_color = Color(0, 0, 0, 1)
 Button/colors/font_pressed_color = Color(0, 0, 0, 1)
 Button/colors/icon_disabled_color = Color(0, 0, 0, 1)
@@ -26,7 +29,7 @@ Button/constants/outline_size = 0
 Button/font_sizes/font_size = 16
 Button/fonts/font = null
 Button/styles/disabled = ExtResource("1_60s0y")
-Button/styles/focus = ExtResource("2_dtr06")
+Button/styles/focus = SubResource("StyleBoxFlat_q8bvu")
 Button/styles/hover = ExtResource("2_dtr06")
 Button/styles/normal = ExtResource("3_5k71s")
 Button/styles/pressed = ExtResource("4_dgkpp")

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public partial class AllAttack : CardStats
 {
    [Export] private int value = 0;
-   public override void ApplyEffects(List<Node2D> targets, Node2D player)
+   public override void ApplyEffects(List<Node2D> targets, PlayerStats playerStats)
 	{
 		DamageEffect damage = new DamageEffect(this.value, this.playSFX);
       damage.Execute(targets);

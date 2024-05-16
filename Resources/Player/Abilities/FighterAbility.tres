@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FighterAbility" load_steps=3 format=3 uid="uid://b418ogsu0of4x"]
+
+[ext_resource type="AudioStream" uid="uid://2yry5op2fkjy" path="res://Audio/SFX/Guard.wav" id="1_1is84"]
+[ext_resource type="Script" path="res://Scripts/_Resources/Abilities/FighterAbility.cs" id="1_hgaq7"]
+
+[resource]
+script = ExtResource("1_hgaq7")
+value = 2
+targetType = 1
+playSFX = ExtResource("1_1is84")

@@ -1,13 +1,20 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 [GlobalClass]
 public partial class EnemyGuard : EnemyAction
 {
-	[Export] int value = 15;
-    [Export] int hpThreshold = 6;
+	[Export] int value = 0;
+    [Export] int hpThreshold = 0;
 
     bool alreadyUsed = false;
+
+    public override void InitializeAction()
+    {
+        String intentString = (value + this.enemy.stats.strength).ToString();
+        this.intent.SetIntent(intentString, null);
+    }
 
     public override bool IsPerformable()
     {
@@ -45,7 +52,7 @@ public partial class EnemyGuard : EnemyAction
             alreadyUsed = true;
         }
 
-        GuardEffect guard = new GuardEffect(value, this.sound);
+        GuardEffect guard = new GuardEffect(value + this.enemy.stats.strength, this.sound);
         guard.Execute(new List<Node2D>(){enemy});
 
         this.enemy.GetTree().CreateTimer(0.6, false).Timeout += () => 

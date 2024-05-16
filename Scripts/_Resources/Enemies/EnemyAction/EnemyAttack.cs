@@ -1,15 +1,29 @@
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Godot;
 
 [GlobalClass]
 public partial class EnemyAttack : EnemyAction
 {
-    [Export] int value = 7;
+    [Export] int value = 0;
     [Export] int numOfAtt = 1;
     [Export] int hpThreshold = 0;
 
     bool alreadyUsed = false;
+
+    public override void InitializeAction()
+    {
+        String intentString;
+        if(this.numOfAtt > 1)
+        {
+            intentString = (value + this.enemy.stats.GetHighestStatNumber()).ToString() + " x " + this.numOfAtt.ToString();
+        }
+        else
+        {
+            intentString = (value + this.enemy.stats.GetHighestStatNumber()).ToString();
+        }
+        this.intent.SetIntent(intentString, null);
+    }
 
     public override bool IsPerformable()
     {
@@ -52,8 +66,8 @@ public partial class EnemyAttack : EnemyAction
         }
 
         Vector2 start = enemy.GlobalPosition;
-        Vector2 end = target.GlobalPosition + Vector2.Right * 32;
-        DamageEffect damage = new DamageEffect(value, this.sound);
+        Vector2 end = target.GlobalPosition + Vector2.Right * 16;
+        DamageEffect damage = new DamageEffect(value + this.enemy.stats.GetHighestStatNumber(), this.sound);
         List<Node2D> targetList = new List<Node2D>(){target};
 
         Tween tween = this.enemy.CreateTween().SetTrans(Tween.TransitionType.Quint);

@@ -139,6 +139,15 @@ label_settings = SubResource("LabelSettings_4mtcx")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ButtonAbility" type="Button" parent="CanvasLayerBattle"]
+unique_name_in_owner = true
+offset_left = 40.0
+offset_top = 349.0
+offset_right = 172.0
+offset_bottom = 415.0
+theme = ExtResource("6_act4y")
+text = "Ability"
+
 [node name="CanvasLayerEndBattle" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 visible = false

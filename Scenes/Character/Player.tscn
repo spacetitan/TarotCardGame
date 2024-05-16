@@ -9,9 +9,13 @@ script = ExtResource("1_tspdk")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(62, 98)
+position = Vector2(7.62939e-06, 7.62939e-06)
 scale = Vector2(5, 5)
 texture = ExtResource("1_rueo3")
 
 [node name="PlayerUI" parent="." instance=ExtResource("2_o4xxn")]
 unique_name_in_owner = true
+offset_left = -62.0
+offset_top = -97.0
+offset_right = -62.0
+offset_bottom = -97.0

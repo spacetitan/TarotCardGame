@@ -13,6 +13,11 @@ public partial class EnemyAction : Resource
 	public Enemy enemy;
 	public Node2D target;
 
+	public virtual void InitializeAction()
+	{
+		return;
+	}
+
 	public virtual bool IsPerformable()
 	{
 		return true;

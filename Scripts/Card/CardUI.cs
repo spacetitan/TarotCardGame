@@ -193,10 +193,8 @@ public partial class CardUI : Control
 
 	void OnPlayAreaEntered(Area2D area)
 	{
-		//GD.Print("Adding Target");
 		if(area.IsInGroup("Burner"))
 		{
-			//GD.Print("Adding burner");
 			burner = area;
 		}
 

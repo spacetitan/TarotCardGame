@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="BasicGuard" load_steps=4 format=3 uid="uid://bi8fqrddmtyiw"]
+[gd_resource type="Resource" script_class="StrGuard" load_steps=4 format=3 uid="uid://bi8fqrddmtyiw"]
 
-[ext_resource type="Texture2D" uid="uid://blbrvh7iyh8wm" path="res://Sprites/Card/Armor2.png" id="1_15h45"]
-[ext_resource type="Script" path="res://Scripts/_Resources/Cards/BasicGuard.cs" id="1_wbv2a"]
+[ext_resource type="Texture2D" uid="uid://bi0fklyjcf2vj" path="res://Sprites/Card/Armor.png" id="1_qv8ch"]
 [ext_resource type="AudioStream" uid="uid://2yry5op2fkjy" path="res://Audio/SFX/Guard.wav" id="2_f83xx"]
+[ext_resource type="Script" path="res://Scripts/_Resources/Cards/Fighter/StrGuard.cs" id="3_qel6s"]
 
 [resource]
-script = ExtResource("1_wbv2a")
+script = ExtResource("3_qel6s")
 value = 4
 cardName = "Shields Up"
 cardType = 1
@@ -14,5 +14,5 @@ cardDesc = "4 amr"
 cardCost = 1
 cardGen = 2
 target = 1
-cardArt = ExtResource("1_15h45")
+cardArt = ExtResource("1_qv8ch")
 playSFX = ExtResource("2_f83xx")

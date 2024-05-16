@@ -19,7 +19,7 @@ outline_size = 2
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1w2v0"]
-size = Vector2(100, 93)
+size = Vector2(100, 123)
 
 [sub_resource type="LabelSettings" id="LabelSettings_0aooa"]
 font_size = 12
@@ -144,7 +144,7 @@ position = Vector2(15, 15)
 collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DPlayArea"]
-position = Vector2(41, 81.5)
+position = Vector2(41, 66.5)
 shape = SubResource("RectangleShape2D_1w2v0")
 
 [node name="ColorRectTTCardType" type="ColorRect" parent="."]

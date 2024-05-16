@@ -12,7 +12,7 @@ icon = ExtResource("1_d4fmv")
 
 [resource]
 script = ExtResource("1_nx18t")
-value = 6
+value = 2
 hpThreshold = 0
 intent = SubResource("Resource_sbn73")
 type = 2

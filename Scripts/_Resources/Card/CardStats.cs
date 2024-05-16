@@ -58,11 +58,11 @@ public partial class CardStats : Resource
 
         if(isSingleTargeted())
         {
-            ApplyEffects(targets, playerStats.player);
+            ApplyEffects(targets, playerStats);
         }
         else
         {
-            ApplyEffects(GetTargets(targets), playerStats.player);
+            ApplyEffects(GetTargets(targets), playerStats);
         }
         EventManager.instance.EmitSignal(EventManager.SignalName.CardPlayed, this);
     }
@@ -72,7 +72,7 @@ public partial class CardStats : Resource
         AudioManager.instance.sfxPlayer.Play(this.burnSFX);
         EventManager.instance.EmitSignal(EventManager.SignalName.CardBurned, this);
     }
-    public virtual void ApplyEffects(List<Node2D> targets, Node2D player)
+    public virtual void ApplyEffects(List<Node2D> targets, PlayerStats playerStats)
     {
         return;
     }

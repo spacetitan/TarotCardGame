@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 public partial class Player : Node2D
@@ -17,6 +18,7 @@ public partial class Player : Node2D
 	public override void _Ready()
 	{
 		GetSceneNodes();
+		ConnectEventSignals();
 
 		if(this.stats != null)
 		{
@@ -29,6 +31,18 @@ public partial class Player : Node2D
 		this.playerSprite = GetNode<Sprite2D>("%PlayerSprite");
 		this.statsUI = GetNode<StatsUI>("%PlayerUI");
 		this.SetHand(UIManager.instance.battle.hand);
+	}
+
+	private void ConnectEventSignals()
+	{
+		EventManager.instance.PlayerAbilityActivate += ActivateAbility;
+	}
+
+	private void DisconnectSignals()
+	{
+		this.stats.StatsChanged -= UpdateStatsUI;
+
+		EventManager.instance.PlayerAbilityActivate -= ActivateAbility;
 	}
 
 	public void SetPlayerStats(PlayerStats playerStats)
@@ -77,6 +91,7 @@ public partial class Player : Node2D
 		this.playerSprite.Material = GREEN_SPRITE_MATERIAL;
 
 		Tween tween = CreateTween();
+		tween.TweenCallback(Callable.From(()=>{VFXManager.instance.Shake(this, 16, .15f);}));
 		tween.TweenCallback(Callable.From(()=>{stats.Heal(value);}));
 		tween.TweenInterval(0.17f); // this is the interval time
 		tween.Finished += ()=>
@@ -93,9 +108,30 @@ public partial class Player : Node2D
 	private void DestroyPlayer()
 	{
 		isDead = true;
-		this.stats.StatsChanged -= UpdateStatsUI;
+		DisconnectSignals();
 		EventManager.instance.EmitSignal(EventManager.SignalName.PlayerDied);
 		QueueFree();
+	}
+
+	private void ActivateAbility()
+	{
+		if(!this.stats.ability.abilityUsed)
+		{
+			if(this.stats.ability.targetType == Target.NONE)
+			{
+				GD.Print("No target type set");
+				return;
+			}
+
+			if(this.stats.ability.targetType == Target.SINGLE)
+			{
+				EventManager.instance.EmitSignal(EventManager.SignalName.PlayerAbilityAimStarted, this);
+			}
+			else
+			{
+				this.stats.ability.ApplyEffects(this.stats.ability.GetTargets(new List<Node2D>{this}), this.stats);
+			}
+		}
 	}
 
 	public void StartBattle(PlayerStats playerStats)
@@ -111,6 +147,7 @@ public partial class Player : Node2D
 	{
 		this.stats.ResetArmor();
 		this.stats.ResetMana();
+		this.stats.ability.abilityUsed = false;
 		DrawCards(this.stats.handSize);
 	}
 
