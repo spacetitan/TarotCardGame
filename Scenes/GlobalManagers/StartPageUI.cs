@@ -16,6 +16,7 @@ public partial class StartPageUI : CanvasLayer
 			UIManager.instance.SetStartPageVisibilty(false);
 			UIManager.instance.SetChooseCharacterVisisbility(true);
 		};
+		this.quitGameButton.Pressed += () =>{GetTree().Quit();};
 	}
 
 	private void GetSceneNodes()
@@ -23,6 +24,6 @@ public partial class StartPageUI : CanvasLayer
 		this.newRunButton = GetNode<Button>("%ButtonNewRun");
 		this.continueRunButton = GetNode<Button>("%ButtonContinueRun");
 		this.settingsButton = GetNode<Button>("%ButtonSettings");
-		this.quitGameButton = GetNode<Button>("%ButtonSettings");
+		this.quitGameButton = GetNode<Button>("%ButtonQuitGame");
 	}
 }

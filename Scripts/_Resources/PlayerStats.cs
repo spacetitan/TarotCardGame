@@ -56,9 +56,11 @@ public partial class PlayerStats : CharacterStats
         instance.intelligence = this.intelligence;
 
         instance.ResetMana();
+        instance.type = this.type;
         instance.deck = (CardPile)instance.startingDeck.Duplicate();
         instance.deck.InitDeck();
         instance.discard = new CardPile();
+        instance.ability = this.ability;
         return instance;
     }
 }

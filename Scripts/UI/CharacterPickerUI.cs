@@ -2,7 +2,7 @@ using Godot;
 
 public partial class CharacterPickerUI : Node
 {
-	[Export] PlayerStats testStats;
+	[Export] PlayerStats playerStats;
 	public ColorRect backgroundColorRect;
 	public TextureRect charSprite;
 	public Label healthLabel;
@@ -14,9 +14,9 @@ public partial class CharacterPickerUI : Node
 	{
 		GetSceneNodes();
 
-		if(testStats != null)
+		if(playerStats != null)
 		{
-			SetUI(this.testStats);
+			SetUI(this.playerStats);
 		}
 	}
 
@@ -33,12 +33,22 @@ public partial class CharacterPickerUI : Node
 
 	public void SetUI(PlayerStats playerStats)
 	{
-		this.backgroundColorRect.Color = ToolsManager.instance.GetCharColor(playerStats.type);
-		this.charSprite.Texture = playerStats.art;
-		this.healthLabel.Text = playerStats.maxHealth.ToString();
-		this.nameLabel.Text = playerStats.name;
-		this.abilityNameLabel.Text = playerStats.ability.name;
-		this.abilityDescLabel.Text = playerStats.ability.desc;
+		this.playerStats = playerStats;
+
+		this.backgroundColorRect.Color = ToolsManager.instance.GetCharColor(this.playerStats.type);
+		this.charSprite.Texture = this.playerStats.art;
+		this.healthLabel.Text = this.playerStats.maxHealth.ToString();
+		this.nameLabel.Text = this.playerStats.name;
+		this.abilityNameLabel.Text = "Ability: " + this.playerStats.ability.name;
+		this.abilityDescLabel.Text = this.playerStats.ability.desc;
+
+		this.backgroundColorRect.Color = ToolsManager.instance.GetCharColor(this.playerStats.type);
+
+		this.chooseButton.Pressed += () =>
+		{
+			GameManager.instance.SetPlayerStats(this.playerStats);
+			UIManager.instance.SetChooseCharacterVisisbility(false);
+		};
 	}
 }
 

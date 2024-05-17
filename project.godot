@@ -26,6 +26,7 @@ AudioManager="*res://Scenes/GlobalManagers/AudioManager.tscn"
 UIManager="*res://Scenes/GlobalManagers/UIManager.tscn"
 ToolsManager="*res://Scripts/GlobalManagers/ToolsManager.cs"
 VfxManager="*res://Scripts/GlobalManagers/VFXManager.cs"
+GameManager="*res://Scripts/GlobalManagers/GameManager.cs"
 
 [display]
 

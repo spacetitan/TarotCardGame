@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=4 format=3 uid="uid://il4x7eei7kos"]
+[gd_resource type="Resource" script_class="BasicAttack" load_steps=4 format=3 uid="uid://il4x7eei7kos"]
 
 [ext_resource type="Texture2D" uid="uid://dbgau48o2n3l8" path="res://Sprites/Card/TestAttack.png" id="1_4jyuj"]
 [ext_resource type="AudioStream" uid="uid://bmrmw8csemax" path="res://Audio/SFX/Attack.wav" id="2_2hegh"]
@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("2_nxdwo")
+value = 0
 cardName = "Slash"
 cardType = 1
 cardTag = 1

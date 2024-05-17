@@ -5,6 +5,8 @@
 
 [resource]
 script = ExtResource("1_664ka")
+name = "Arrow"
+desc = "deals 2 dmg to an enemy"
 value = 2
 targetType = 2
 playSFX = ExtResource("1_naqeh")

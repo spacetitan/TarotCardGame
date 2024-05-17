@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bn865ppkrix6r"]
+[gd_scene load_steps=18 format=3 uid="uid://bn865ppkrix6r"]
 
 [ext_resource type="Script" path="res://Scripts/GlobalManagers/UIManager.cs" id="1_wd2ph"]
 [ext_resource type="Script" path="res://Scripts/UI/Hand.cs" id="2_aoxfe"]
@@ -10,6 +10,9 @@
 [ext_resource type="Script" path="res://Scripts/UI/BattleEndUI.cs" id="8_3qw57"]
 [ext_resource type="Script" path="res://Scenes/GlobalManagers/StartPageUI.cs" id="9_ia24h"]
 [ext_resource type="Script" path="res://Scripts/UI/ChooseCharacterUI.cs" id="10_nnxbo"]
+[ext_resource type="Resource" uid="uid://cnebs6xuv48e0" path="res://Resources/Player/Fighter.tres" id="11_ocaos"]
+[ext_resource type="Resource" uid="uid://co6m2pvfcpyoj" path="res://Resources/Player/Mage.tres" id="12_mmje4"]
+[ext_resource type="Resource" uid="uid://dg7shdftmsw8i" path="res://Resources/Player/Ranger.tres" id="13_dovk7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ythap"]
 font_size = 40
@@ -19,6 +22,11 @@ font_size = 64
 
 [sub_resource type="LabelSettings" id="LabelSettings_ma85p"]
 font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_rm5ti"]
+font_size = 32
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
 
 [node name="UIManager" type="Node"]
 script = ExtResource("1_wd2ph")
@@ -297,6 +305,7 @@ text = "New Run"
 
 [node name="ButtonContinueRun" type="Button" parent="CanvasLayerStartPage/Panel/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_vertical = 4
 text = "Continue"
@@ -315,8 +324,8 @@ text = "Quit"
 
 [node name="CanvasLayerChooseCharacter" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
-visible = false
 script = ExtResource("10_nnxbo")
+classes = Array[Object]([ExtResource("11_ocaos"), ExtResource("12_mmje4"), ExtResource("13_dovk7")])
 
 [node name="Panel" type="Panel" parent="CanvasLayerChooseCharacter"]
 anchors_preset = 15
@@ -326,16 +335,33 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("6_act4y")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayerChooseCharacter/Panel"]
+[node name="Label" type="Label" parent="CanvasLayerChooseCharacter/Panel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -179.5
+offset_top = -174.0
+offset_right = 179.5
+offset_bottom = -129.0
 grow_horizontal = 2
 grow_vertical = 2
+text = "Choose your character!"
+label_settings = SubResource("LabelSettings_rm5ti")
+
+[node name="HBoxContainerPicker" type="HBoxContainer" parent="CanvasLayerChooseCharacter/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 230.0
+offset_top = 238.0
+offset_right = -230.0
+offset_bottom = -130.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1

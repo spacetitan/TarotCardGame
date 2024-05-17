@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_hgaq7")
 name = "Guard"
-desc = "Add 2 Armor to char"
+desc = "Add 2 amr"
 value = 2
 targetType = 1
 playSFX = ExtResource("1_1is84")

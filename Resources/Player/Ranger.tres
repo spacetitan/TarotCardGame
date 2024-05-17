@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="PlayerStats" load_steps=5 format=3 uid="uid://dg7shdftmsw8i"]
+
+[ext_resource type="Resource" uid="uid://bre6bwscl7slb" path="res://Resources/Player/Abilities/RangerAbility.tres" id="1_oli8b"]
+[ext_resource type="Script" path="res://Scripts/_Resources/PlayerStats.cs" id="1_qefaa"]
+[ext_resource type="Texture2D" uid="uid://boqero2tcco4w" path="res://Sprites/Player/Ranger.png" id="2_2kxuf"]
+[ext_resource type="Resource" uid="uid://ckpxtdqht3jaf" path="res://Resources/Decks/TestDeck.tres" id="4_qv8cf"]
+
+[resource]
+script = ExtResource("1_qefaa")
+type = 2
+startingDeck = ExtResource("4_qv8cf")
+handSize = 5
+mana = 0
+ability = ExtResource("1_oli8b")
+strength = 4
+dexterity = 5
+intelligence = 3
+name = "Ranger"
+desc = "Dex Char"
+art = ExtResource("2_2kxuf")
+maxHealth = 50
+health = 0
+armor = 0

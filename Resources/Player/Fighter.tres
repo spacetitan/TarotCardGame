@@ -18,6 +18,6 @@ intelligence = 2
 name = "Fighter"
 desc = "Str Character"
 art = ExtResource("1_122pr")
-maxHealth = 10
+maxHealth = 60
 health = 0
 armor = 0
