@@ -30,13 +30,13 @@ public partial class Ability : Resource
         switch(targetType)
         {
             case Target.SELF:
-            return ToolsManager.instance.GDArrayToList(tree.GetNodesInGroup("Player"));
+            return ToolsManager.GDArrayToList(tree.GetNodesInGroup("Player"));
 
             case Target.ALL:
-            return ToolsManager.instance.GDArrayToList(tree.GetNodesInGroup("Enemies"));
+            return ToolsManager.GDArrayToList(tree.GetNodesInGroup("Enemies"));
 
             case Target.EVERYONE:
-            return ToolsManager.instance.GDArrayToList(tree.GetNodesInGroup("Player") + tree.GetNodesInGroup("Enemies"));
+            return ToolsManager.GDArrayToList(tree.GetNodesInGroup("Player") + tree.GetNodesInGroup("Enemies"));
 
             case Target.SINGLE:
             case Target.NONE:

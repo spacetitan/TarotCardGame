@@ -18,7 +18,7 @@ public partial class ToolsManager : Node
 		init();
 	}
 
-	public List<Node2D> GDArrayToList(Godot.Collections.Array<Node> arrayNodes)
+	public static List<Node2D> GDArrayToList(Godot.Collections.Array<Node> arrayNodes)
 	{
 		List<Node2D> nodes = new List<Node2D>();
 
@@ -30,7 +30,7 @@ public partial class ToolsManager : Node
 		return nodes;
 	}
 
-	public Color GetCharColor(CardType type)
+	public static Color GetCharColor(CardType type)
 	{
 		Color color;
 

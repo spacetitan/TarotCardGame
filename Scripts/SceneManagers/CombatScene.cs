@@ -1,13 +1,15 @@
+using System;
+using System.Collections.Generic;
 using Godot;
 
 public partial class CombatScene : Node2D
 {
-	[Export] private PlayerStats playerStats;
 	[Export] private AudioStream BGM;
+	private PlayerStats playerStats;
 	[Export] private EnemyStats[] enemies;
 	private Player player;
-	private PackedScene enemyScene = ResourceLoader.Load<PackedScene>("res://Scenes/Character/Enemy.tscn");
-	private Node enemiesParent;
+	const String ENEMY_SCENE = "res://Scenes/Character/Enemy.tscn";
+	private Node2D enemiesParent;
 	private WinPrize totalPrize = new WinPrize();
 
 	public bool battleOver { get; private set; } = false;
@@ -15,20 +17,22 @@ public partial class CombatScene : Node2D
 	public override void _Ready()
 	{
 		GetSceneNodes();
-
-		PlayerStats newStats = playerStats.CreateInstance();
-		UIManager.instance.battle.SetPlayerStats(newStats);
-		this.player.SetPlayerStats(newStats);
-
 		ConnectEventSignals();
 
-		StartBattlePlayer(this.player.stats);
+
+		//temporary
+		List<EnemyStats> temp  = new List<EnemyStats>();
+		foreach(EnemyStats enemy in enemies)
+		{
+			temp.Add(enemy);
+		}
+		this.InitializeBattle(GameManager.instance.playerStats, temp);
 	}
 
 	private void GetSceneNodes()
 	{
 		this.player = GetNode<Player>("%Player");
-		this.enemiesParent = GetNode("%Enemies");
+		this.enemiesParent = GetNode<Node2D>("%Enemies");
 	}
 
 	private void ConnectEventSignals()
@@ -51,16 +55,47 @@ public partial class CombatScene : Node2D
 		EventManager.instance.EnemyDied -= OnEnemyDeath;
 	}
 
-	public void StartBattlePlayer(PlayerStats playerStats)
+	public void InitializeBattle(PlayerStats playerStats, List<EnemyStats> enemyList)
 	{
+		PlayerStats newStats = playerStats.CreateInstance();
+		this.playerStats = newStats;
+		UIManager.instance.battle.SetPlayerStats(this.playerStats);
+		this.player.SetPlayerStats(this.playerStats);
+
+		foreach (EnemyStats enemy in enemyList)
+		{
+			var scene = GD.Load<PackedScene>(ENEMY_SCENE);
+			var newEnemy = scene.Instantiate();
+			this.enemiesParent.AddChild(newEnemy);
+
+			Enemy spawn = newEnemy as Enemy;
+			spawn.SetEnemyStats(enemy);
+		}
+
+		AudioManager.instance.musicPlayer.Stop();
 		AudioManager.instance.musicPlayer.Play(this.BGM);
-		this.player.StartBattle(playerStats);
-		StartBattleEnemies();
+		this.player.StartBattle(this.playerStats);
+
+		UIManager.instance.SetBattleUIVisibility(true);
+
+		StartPlayerPhase();
 	}
 
-	public void StartBattleEnemies()
+	public void StartPlayerPhase()
 	{
+		PlayerStartUpgrades();
+		PlayerStartEffects();
 		StartPlayerTurn();
+	}
+
+	void PlayerStartUpgrades()
+	{
+		
+	}
+
+	void PlayerStartEffects()
+	{
+
 	}
 
 	void StartPlayerTurn()
@@ -72,6 +107,23 @@ public partial class CombatScene : Node2D
 	void OnPlayerTurnEnded()
 	{
 		this.player.hand.DisableHand();
+		EndTurnUpgrades();
+		EndTurnEffects();
+		EndPlayerTurn();
+	}
+
+	void EndTurnUpgrades()
+	{
+
+	}
+
+	void EndTurnEffects()
+	{
+
+	}
+
+	void EndPlayerTurn()
+	{
 		this.player.DiscardHand();
 	}
 

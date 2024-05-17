@@ -14,7 +14,7 @@ public partial class ChooseCharacterUI : CanvasLayer
 	{
 		GetSceneNodes();
 
-		DelayedSpawn();
+		SpawnCards();
 	}
 
 	private void GetSceneNodes()

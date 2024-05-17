@@ -87,7 +87,7 @@ public partial class CardUI : Control
 
 	public void SetCardColor()
 	{
-		Color color = ToolsManager.instance.GetCharColor(this.cardStats.cardType);
+		Color color = ToolsManager.GetCharColor(this.cardStats.cardType);
 		this.cardTypeColorRect.Color = color;
 		this.cardTypeTTColorRect.Color = color;
 	}

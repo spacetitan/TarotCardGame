@@ -14,6 +14,8 @@ public partial class GameManager : Node
 
 	[Export] public PlayerStats playerStats { get; private set; }
 
+	public static PackedScene COMBAT_SCENE { get; private set; } = ResourceLoader.Load<PackedScene>("res://Scenes/GamePlay/CombatScene.tscn");
+
 	public override void _Ready()
 	{
 		init();
