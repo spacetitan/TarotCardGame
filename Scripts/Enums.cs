@@ -12,3 +12,8 @@ public enum PlayerClass { NONE, FIGHTER, RANGER, MAGE}
 #region Enemy
 public enum EnemyActionType{NONE, CONDITIIONAL, CHANCE}
 #endregion
+
+#region Status Effects
+public enum StatusType { NONE, STARTOFTURN, ENDOFTURN, EVENT}
+public enum StatusStackType { NONE, INTENSITY, DURATION}
+#endregion

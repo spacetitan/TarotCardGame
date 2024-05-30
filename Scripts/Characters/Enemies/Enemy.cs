@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class Enemy : Area2D
@@ -17,9 +18,13 @@ public partial class Enemy : Area2D
 	private Material WHITE_SPRITE_MATERIAL = ResourceLoader.Load<Material>("res://Materials/DamageMaterial.tres");
 	private Material GREEN_SPRITE_MATERIAL = ResourceLoader.Load<Material>("res://Materials/HealMaterial.tres");
 
+	const String STATUS_MANAGER_SCENE = "res://Scenes/GamePlay/StatusManager.tscn";
+	public StatusManager statusManager { get; private set; } //instantiate in scene
+
 	public override void _Ready()
 	{
 		GetSceneNodes();
+		SpawnManagers();
 
 		if(this.stats != null)
 		{
@@ -35,6 +40,15 @@ public partial class Enemy : Area2D
 		this.arrowSprite = GetNode<Sprite2D>("%Sprite2DArrow");
 		this.statsUI = GetNode<StatsUI>("%StatsUI");
 		this.intentUI = GetNode<IntentUI>("%IntentUI");
+	}
+
+	private void SpawnManagers()
+	{
+		PackedScene scene = GD.Load<PackedScene>(STATUS_MANAGER_SCENE);
+		Node newScene = scene.Instantiate();
+		UIManager.instance.battle.AddChild(newScene);
+		this.statusManager = newScene as StatusManager;
+		this.statusManager.SetOwner(this);
 	}
 
 	private void ConnectEventSignals()
@@ -162,7 +176,7 @@ public partial class Enemy : Area2D
 
 	private void DestroyEnemy()
 	{
-		EventManager.instance.EmitSignal(EventManager.SignalName.EnemyDied, this.stats);
+		EventManager.instance.EmitSignal(EventManager.SignalName.EnemyDied, this);
 		DisconnectEventSignals();
 		QueueFree();
 	}

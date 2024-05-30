@@ -8,7 +8,7 @@
 [ext_resource type="Theme" uid="uid://bha0lbb86sk4x" path="res://Themes/TestTheme.tres" id="6_act4y"]
 [ext_resource type="Script" path="res://Scripts/UI/ManaUI.cs" id="6_mq3ll"]
 [ext_resource type="Script" path="res://Scripts/UI/BattleEndUI.cs" id="8_3qw57"]
-[ext_resource type="Script" path="res://Scenes/GlobalManagers/StartPageUI.cs" id="9_ia24h"]
+[ext_resource type="Script" path="res://Scripts/UI/StartPageUI.cs" id="9_ia24h"]
 [ext_resource type="Script" path="res://Scripts/UI/ChooseCharacterUI.cs" id="10_nnxbo"]
 [ext_resource type="Resource" uid="uid://cnebs6xuv48e0" path="res://Resources/Player/Fighter.tres" id="11_ocaos"]
 [ext_resource type="Resource" uid="uid://co6m2pvfcpyoj" path="res://Resources/Player/Mage.tres" id="12_mmje4"]

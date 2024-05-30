@@ -88,7 +88,7 @@ public partial class EnemyAttack : EnemyAction
 
         tween.Finished += () => 
         {
-            EventManager.instance.EmitSignal(EventManager.SignalName.EnemyActionCompleted, enemy.GetIndex());
+            EventManager.instance.EmitSignal(EventManager.SignalName.EnemyActionCompleted, enemy);
         };
     }
 }

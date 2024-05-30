@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 public partial class CombatScene : Node2D
@@ -7,6 +8,8 @@ public partial class CombatScene : Node2D
 	[Export] private AudioStream BGM;
 	private PlayerStats playerStats;
 	[Export] private EnemyStats[] enemies;
+	private List<Enemy> currentEnemies = new List<Enemy>();
+	private List<Enemy> actingEnemies = new List<Enemy>();
 	private Player player;
 	const String ENEMY_SCENE = "res://Scenes/Character/Enemy.tscn";
 	private Node2D enemiesParent;
@@ -38,7 +41,6 @@ public partial class CombatScene : Node2D
 	private void ConnectEventSignals()
 	{
 		EventManager.instance.PlayerTurnEnded += OnPlayerTurnEnded;
-		EventManager.instance.PlayerHandDiscarded += StartEnemyTurn;
 		EventManager.instance.PlayerDied += OnPlayerDied;
 		EventManager.instance.EnemyActionCompleted += OnEnemyActionCompleted;
 		EventManager.instance.EnemyTurnEnded += OnEnemyTurnEnded;
@@ -48,7 +50,6 @@ public partial class CombatScene : Node2D
 	private void DisconnectEventSignals()
 	{
 		EventManager.instance.PlayerTurnEnded -= OnPlayerTurnEnded;
-		EventManager.instance.PlayerHandDiscarded -= StartEnemyTurn;
 		EventManager.instance.PlayerDied -= OnPlayerDied;
 		EventManager.instance.EnemyActionCompleted -= OnEnemyActionCompleted;
 		EventManager.instance.EnemyTurnEnded -= OnEnemyTurnEnded;
@@ -62,6 +63,7 @@ public partial class CombatScene : Node2D
 		UIManager.instance.battle.SetPlayerStats(this.playerStats);
 		this.player.SetPlayerStats(this.playerStats);
 
+		int count = 0;
 		foreach (EnemyStats enemy in enemyList)
 		{
 			var scene = GD.Load<PackedScene>(ENEMY_SCENE);
@@ -70,11 +72,15 @@ public partial class CombatScene : Node2D
 
 			Enemy spawn = newEnemy as Enemy;
 			spawn.SetEnemyStats(enemy);
+			this.currentEnemies.Add(spawn);
+			spawn.Position = new Vector2(spawn.Position.X - 100 * count, spawn.Position.Y + 100 * count);
+			count++;
 		}
 
 		AudioManager.instance.musicPlayer.Stop();
 		AudioManager.instance.musicPlayer.Play(this.BGM);
 		this.player.StartBattle(this.playerStats);
+		this.player.statusManager.StatusesApplied += OnPlayerStatusApplied;
 
 		UIManager.instance.SetBattleUIVisibility(true);
 
@@ -84,18 +90,16 @@ public partial class CombatScene : Node2D
 	public void StartPlayerPhase()
 	{
 		PlayerStartUpgrades();
-		PlayerStartEffects();
-		StartPlayerTurn();
 	}
 
 	void PlayerStartUpgrades()
 	{
-		
+		PlayerStartEffects();
 	}
 
 	void PlayerStartEffects()
 	{
-
+		player.statusManager.ApplyStatusByType(StatusType.STARTOFTURN);
 	}
 
 	void StartPlayerTurn()
@@ -107,44 +111,99 @@ public partial class CombatScene : Node2D
 	void OnPlayerTurnEnded()
 	{
 		this.player.hand.DisableHand();
-		EndTurnUpgrades();
-		EndTurnEffects();
-		EndPlayerTurn();
-	}
-
-	void EndTurnUpgrades()
-	{
-
-	}
-
-	void EndTurnEffects()
-	{
-
-	}
-
-	void EndPlayerTurn()
-	{
 		this.player.DiscardHand();
+		PlayerEndTurnUpgrades();
+		PlayerEndTurnEffects();
 	}
 
-	void StartEnemyTurn()
+	void PlayerEndTurnUpgrades()
 	{
-		if(this.enemiesParent.GetChildCount() == 0 || battleOver) {return;}
 
-		Enemy firstEnemy = this.enemiesParent.GetChild(0) as Enemy;
-		firstEnemy.TakeTurn();
 	}
 
-	void OnEnemyActionCompleted(int index)
+	void PlayerEndTurnEffects()
 	{
-		if(index == this.enemiesParent.GetChildCount() - 1 || battleOver)
+		player.statusManager.ApplyStatusByType(StatusType.ENDOFTURN);
+	}
+
+	void OnPlayerStatusApplied(StatusType type)
+	{
+		switch(type)
 		{
-			EventManager.instance.EmitSignal(EventManager.SignalName.EnemyTurnEnded);
-			return;
-		}
+			case StatusType.STARTOFTURN:
+			StartPlayerTurn();
+			break;
 
-		Enemy nextEnemy = this.enemiesParent.GetChild(index + 1) as Enemy;
-		nextEnemy.TakeTurn();
+			case StatusType.ENDOFTURN:
+			StartEnemyPhase();
+			break;
+
+			case StatusType.EVENT:
+			break;
+		}
+	}
+
+	void StartEnemyPhase()
+	{
+		if(this.currentEnemies != null && this.currentEnemies.Any())
+		{
+			this.actingEnemies.Clear();
+			foreach(Enemy enemy in this.currentEnemies)
+			{
+				this.actingEnemies.Add(enemy);
+			}
+			
+			EnemyStartUpgrades(this.actingEnemies[0]);
+		}
+	}
+
+	void StartEnemyPhase(Enemy enemy)
+	{
+		if(this.actingEnemies != null && this.actingEnemies.Any())
+		{
+			EnemyStartUpgrades(enemy);
+		}
+	}
+
+	void EnemyStartUpgrades(Enemy enemy)
+	{
+		EnemyStartEffects(enemy);
+	}
+
+	void EnemyStartEffects(Enemy enemy)
+	{
+		enemy.statusManager.ApplyStatusByType(StatusType.STARTOFTURN);
+		StartEnemyTurn(enemy);
+	}
+
+	void StartEnemyTurn(Enemy enemy)
+	{
+		enemy.TakeTurn();
+		this.actingEnemies.Remove(enemy);
+	}
+
+	void EnemyEndTurnUpgrades()
+	{
+
+	}
+
+	void OnEnemyActionCompleted(Enemy enemy)
+	{
+		EnemyEndTurnEffects(enemy);
+	}
+
+	void EnemyEndTurnEffects(Enemy enemy)
+	{
+		enemy.statusManager.ApplyStatusByType(StatusType.ENDOFTURN);
+
+		if(this.actingEnemies != null && this.actingEnemies.Any())
+		{
+			StartEnemyTurn(this.actingEnemies[0]);
+		}
+		else
+		{
+			OnEnemyTurnEnded();
+		}
 	}
 
 	void OnEnemyTurnEnded()
@@ -166,9 +225,42 @@ public partial class CombatScene : Node2D
 	}
 
 	//before enemy dies
-	void OnEnemyDeath(EnemyStats enemy)
+	void OnEnemyDeath(Enemy enemy)
 	{
-		this.totalPrize.AddPrize(enemy.winPrize);
+		this.totalPrize.AddPrize(enemy.stats.winPrize);
+		this.currentEnemies.Remove(enemy);
+		
+		if(this.actingEnemies != null && this.actingEnemies.Any())
+		{
+			this.actingEnemies.Remove(enemy);
+
+			if(this.actingEnemies.Any())
+			{
+				EnemyStartUpgrades(this.actingEnemies[0]);
+			}
+		}
+	}
+
+	void OnEnemyStatusApplied(StatusType type, Enemy enemy)
+	{
+		switch(type)
+		{
+			case StatusType.STARTOFTURN:
+			StartEnemyTurn(enemy);
+			break;
+
+			case StatusType.ENDOFTURN:
+			this.actingEnemies.Remove(enemy);
+
+			if(this.actingEnemies.Any())
+			{
+				EnemyStartUpgrades(this.actingEnemies[0]);
+			}
+			break;
+
+			case StatusType.EVENT:
+			break;
+		}
 	}
 
 	//after enemy dies
@@ -183,6 +275,7 @@ public partial class CombatScene : Node2D
 
 	void OnPlayerDied()
 	{
+		this.player.statusManager.StatusesApplied -= OnPlayerStatusApplied;
 		this.battleOver = true;
 		EventManager.instance.EmitSignal(EventManager.SignalName.BattleEnded, false, this.totalPrize);
 	}

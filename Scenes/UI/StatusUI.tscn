@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpgshdi1b6ysl"]
+
+[ext_resource type="Script" path="res://Scripts/UI/StatusUI.cs" id="1_8l6om"]
+[ext_resource type="Texture2D" uid="uid://45boxqyqfxbi" path="res://Sprites/Status/beserk.png" id="2_xb7ui"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ffqpp"]
+font_size = 24
+
+[node name="StatusUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8l6om")
+
+[node name="TextureRectIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_xb7ui")
+
+[node name="LabelStack" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 25.0
+offset_right = 40.0
+offset_bottom = 59.0
+text = "0
+"
+label_settings = SubResource("LabelSettings_ffqpp")
+horizontal_alignment = 1
+vertical_alignment = 1

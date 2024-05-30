@@ -55,7 +55,7 @@ public partial class CardToolTip : Panel
 
 	public void HideAnimation()
 	{
-		if(tween == null) { return;}
+		if(!this.IsInsideTree() || tween == null) { return;}
 		tween = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
 		tween.TweenProperty(this, "modulate", Colors.Transparent, .02f);
 		tween.TweenCallback(Callable.From(this.tooltipBackground.Hide));

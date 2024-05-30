@@ -57,7 +57,7 @@ public partial class EnemyGuard : EnemyAction
 
         this.enemy.GetTree().CreateTimer(0.6, false).Timeout += () => 
 		{
-			EventManager.instance.EmitSignal(EventManager.SignalName.EnemyActionCompleted, enemy.GetIndex());
+			EventManager.instance.EmitSignal(EventManager.SignalName.EnemyActionCompleted, enemy);
 		};
     }
 }

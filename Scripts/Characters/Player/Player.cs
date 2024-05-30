@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -15,9 +16,13 @@ public partial class Player : Node2D
 
 	private bool isDead = false;
 
+	const String STATUS_MANAGER_SCENE = "res://Scenes/GamePlay/StatusManager.tscn";
+	public StatusManager statusManager { get; private set; } //instantiate in scene
+
 	public override void _Ready()
 	{
 		GetSceneNodes();
+		SpawnManagers();
 		ConnectEventSignals();
 
 		if(this.stats != null)
@@ -31,6 +36,15 @@ public partial class Player : Node2D
 		this.playerSprite = GetNode<Sprite2D>("%PlayerSprite");
 		this.statsUI = GetNode<StatsUI>("%PlayerUI");
 		this.SetHand(UIManager.instance.battle.hand);
+	}
+
+	private void SpawnManagers()
+	{
+		PackedScene scene = GD.Load<PackedScene>(STATUS_MANAGER_SCENE);
+		Node newScene = scene.Instantiate();
+		UIManager.instance.battle.AddChild(newScene);
+		this.statusManager = newScene as StatusManager;
+		this.statusManager.SetOwner(this);
 	}
 
 	private void ConnectEventSignals()
