@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Mark" load_steps=3 format=3 uid="uid://daleyp86s2xld"]
+
+[ext_resource type="Script" path="res://Scripts/_Resources/StatusEffect/Mark.cs" id="1_icqsf"]
+[ext_resource type="Texture2D" uid="uid://cb5donpyltx0j" path="res://Sprites/Status/marked.png" id="2_jrfvr"]
+
+[resource]
+script = ExtResource("1_icqsf")
+value = 2
+id = &"Mark"
+type = 3
+stackType = 2
+canExpire = false
+duration = 0
+stacks = 0
+statusIcon = ExtResource("2_jrfvr")
+desc = "+2 dmg on next attack"

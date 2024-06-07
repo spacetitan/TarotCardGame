@@ -16,12 +16,12 @@ public partial class CombatScene : Node2D
 	private WinPrize totalPrize = new WinPrize();
 
 	public bool battleOver { get; private set; } = false;
+	public bool playerTurn { get; private set; } = false;
 
 	public override void _Ready()
 	{
 		GetSceneNodes();
 		ConnectEventSignals();
-
 
 		//temporary
 		List<EnemyStats> temp  = new List<EnemyStats>();
@@ -29,6 +29,8 @@ public partial class CombatScene : Node2D
 		{
 			temp.Add(enemy);
 		}
+		//
+
 		this.InitializeBattle(GameManager.instance.playerStats, temp);
 	}
 
@@ -79,6 +81,7 @@ public partial class CombatScene : Node2D
 
 		AudioManager.instance.musicPlayer.Stop();
 		AudioManager.instance.musicPlayer.Play(this.BGM);
+
 		this.player.StartBattle(this.playerStats);
 		this.player.statusManager.StatusesApplied += OnPlayerStatusApplied;
 
@@ -89,6 +92,7 @@ public partial class CombatScene : Node2D
 
 	public void StartPlayerPhase()
 	{
+		this.playerTurn = true;
 		PlayerStartUpgrades();
 	}
 
@@ -110,6 +114,7 @@ public partial class CombatScene : Node2D
 
 	void OnPlayerTurnEnded()
 	{
+		this.playerTurn = false;
 		this.player.hand.DisableHand();
 		this.player.DiscardHand();
 		PlayerEndTurnUpgrades();
@@ -198,7 +203,7 @@ public partial class CombatScene : Node2D
 
 		if(this.actingEnemies != null && this.actingEnemies.Any())
 		{
-			StartEnemyTurn(this.actingEnemies[0]);
+			StartEnemyPhase(this.actingEnemies[0]);
 		}
 		else
 		{
@@ -238,6 +243,15 @@ public partial class CombatScene : Node2D
 			{
 				EnemyStartUpgrades(this.actingEnemies[0]);
 			}
+			else
+			{
+				OnEnemyTurnEnded();
+			}
+		}
+
+		if(this.currentEnemies != null && this.currentEnemies.Any() && !this.playerTurn)
+		{
+			OnEnemyTurnEnded();
 		}
 	}
 

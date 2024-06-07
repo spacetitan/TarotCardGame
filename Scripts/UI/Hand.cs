@@ -62,6 +62,8 @@ public partial class Hand : HBoxContainer
 	{
 		cardsPlayedThisTurn++;
 
+		if(card.isExhaust) { return; }
+
 		this.playerStats.discard.AddCard(card);
 	}
 

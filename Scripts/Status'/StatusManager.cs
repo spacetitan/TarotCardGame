@@ -7,7 +7,7 @@ public partial class StatusManager : GridContainer
 {
 	[Signal] public delegate void StatusesAppliedEventHandler(StatusType type);
 
-	const string STATUS_PATH = "";
+	const string STATUS_PATH = "res://Scenes/UI/StatusUI.tscn";
 	const float STATUS_APPLY_INTERVAL = 0.25f;
 	public Node2D owner { get; private set;}
 
@@ -18,7 +18,7 @@ public partial class StatusManager : GridContainer
 		this.owner = owner;
 	}
 
-	private void SpawnStatusUI(Node2D target, Status status)
+	public void AddStatus(Node2D target, Status status)
 	{
 		if(status.stackType == StatusStackType.NONE)
 		{
@@ -30,13 +30,13 @@ public partial class StatusManager : GridContainer
 
 		if(!HasStatus(status.id))
 		{
-			var cardScene = GD.Load<PackedScene>(STATUS_PATH);
-			var newStatus = cardScene.Instantiate();
-			AddChild(newStatus);
+			PackedScene newScene = GD.Load<PackedScene>(STATUS_PATH);
+			Node newStatus = newScene.Instantiate();
+			this.AddChild(newStatus);
 
 			StatusUI statusUI = newStatus as StatusUI;
 			statusUI.Reparent(this);
-			statusUI.SetUI(status);
+			statusUI.SetStatus(status);
 			statusUI.status.StatusApplied += OnStatusApplied;
 			statusUI.status.InitializeStatus(target);
 			return;
@@ -112,7 +112,7 @@ public partial class StatusManager : GridContainer
 		return null;
 	}
 
-	private List<Status> GetAllStatuses()
+	public List<Status> GetAllStatuses()
 	{
 		List<Status> statuses = new List<Status>();
 

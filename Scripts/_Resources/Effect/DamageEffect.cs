@@ -28,7 +28,8 @@ public partial class DamageEffect : Effect
 			Player player = (Player)target;
 			player.TakeDamage(amount);
 		}
-		AudioManager.instance.sfxPlayer.Play(sound);
+		
+		if(this.sound != null) { AudioManager.instance.sfxPlayer.Play(sound); }
     }
 
     public override void Execute(List<Node2D> targets)

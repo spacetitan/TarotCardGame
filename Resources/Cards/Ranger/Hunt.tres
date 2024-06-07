@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Hunt" load_steps=4 format=3 uid="uid://d2xnvqs1ql3it"]
+
+[ext_resource type="Texture2D" uid="uid://b5lb68bcb5xqx" path="res://Sprites/Card/tile_0118.png" id="1_bpbhu"]
+[ext_resource type="Script" path="res://Scripts/_Resources/Cards/Ranger/Hunt.cs" id="1_kxjpr"]
+[ext_resource type="AudioStream" uid="uid://cbk18n3qe71wu" path="res://Audio/SFX/Attack2.wav" id="2_nux10"]
+
+[resource]
+script = ExtResource("1_kxjpr")
+value = 2
+cardName = "Hunt"
+cardType = 2
+cardTag = 1
+cardDesc = "DEX dmg + 2 for each status"
+cardCost = 2
+cardGen = 1
+isExhaust = false
+target = 2
+cardArt = ExtResource("1_bpbhu")
+playSFX = ExtResource("2_nux10")

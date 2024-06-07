@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Expose" load_steps=3 format=3 uid="uid://dkbfid6qhmcw8"]
+
+[ext_resource type="Script" path="res://Scripts/_Resources/StatusEffect/Expose.cs" id="1_qrv5y"]
+[ext_resource type="Texture2D" uid="uid://ck0l088qxu61u" path="res://Sprites/Status/tile_0131.png" id="2_0c2n4"]
+
+[resource]
+script = ExtResource("1_qrv5y")
+id = &"Expose"
+type = 3
+stackType = 2
+canExpire = true
+duration = 0
+stacks = 0
+statusIcon = ExtResource("2_0c2n4")
+desc = "take more dmg"

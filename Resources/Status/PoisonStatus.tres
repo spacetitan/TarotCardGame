@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Poison" load_steps=4 format=3 uid="uid://bpgr1xucqp6r7"]
+
+[ext_resource type="Script" path="res://Scripts/_Resources/StatusEffect/Poison.cs" id="1_lkvnq"]
+[ext_resource type="AudioStream" uid="uid://bmrmw8csemax" path="res://Audio/SFX/Attack.wav" id="2_7hog7"]
+[ext_resource type="Texture2D" uid="uid://cnd5uii0vxbhr" path="res://Sprites/Status/poison.png" id="2_widt5"]
+
+[resource]
+script = ExtResource("1_lkvnq")
+id = &"Poison"
+type = 1
+stackType = 1
+canExpire = true
+duration = 0
+stacks = 0
+statusIcon = ExtResource("2_widt5")
+desc = "takes damage based on stacks"
+sfx = ExtResource("2_7hog7")

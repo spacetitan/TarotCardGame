@@ -12,6 +12,7 @@ public partial class CardStats : Resource
     [Export] public String cardDesc { get; private set;}
     [Export] public int cardCost { get; private set;}
     [Export] public int cardGen { get; private set;}
+    [Export] public bool isExhaust { get; private set; } = false;
     
     [ExportGroup("Card Behavior")]
     [Export] public Target target { get; private set;}

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CardPile" load_steps=8 format=3 uid="uid://clr1y6kx1kbqk"]
+
+[ext_resource type="Script" path="res://Scripts/_Resources/Card/CardPile.cs" id="1_crfd7"]
+[ext_resource type="Resource" uid="uid://cg1lhrimpe7hn" path="res://Resources/Cards/Basic/BasicAttack.tres" id="1_hapmv"]
+[ext_resource type="Resource" uid="uid://cqi406d47453i" path="res://Resources/Cards/Basic/BasicGuard.tres" id="2_uqj3v"]
+[ext_resource type="Resource" uid="uid://c44wmm3y0wcx5" path="res://Resources/Cards/Basic/BasicHeal.tres" id="3_buto4"]
+[ext_resource type="Resource" uid="uid://bhnwa1oadxv1t" path="res://Resources/Cards/Ranger/PoisonArrow.tres" id="4_bfuqd"]
+[ext_resource type="Resource" uid="uid://cndevt01sgtou" path="res://Resources/Cards/Ranger/MarkEnemy.tres" id="5_tyobg"]
+[ext_resource type="Resource" uid="uid://d2xnvqs1ql3it" path="res://Resources/Cards/Ranger/Hunt.tres" id="6_8iesj"]
+
+[resource]
+script = ExtResource("1_crfd7")
+cardStates = Array[Object]([ExtResource("1_hapmv"), ExtResource("1_hapmv"), ExtResource("2_uqj3v"), ExtResource("2_uqj3v"), ExtResource("3_buto4"), ExtResource("4_bfuqd"), ExtResource("5_tyobg"), ExtResource("5_tyobg"), ExtResource("4_bfuqd"), ExtResource("6_8iesj")])

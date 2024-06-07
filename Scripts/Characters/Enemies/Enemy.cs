@@ -46,7 +46,7 @@ public partial class Enemy : Area2D
 	{
 		PackedScene scene = GD.Load<PackedScene>(STATUS_MANAGER_SCENE);
 		Node newScene = scene.Instantiate();
-		UIManager.instance.battle.AddChild(newScene);
+		this.AddChild(newScene);
 		this.statusManager = newScene as StatusManager;
 		this.statusManager.SetOwner(this);
 	}

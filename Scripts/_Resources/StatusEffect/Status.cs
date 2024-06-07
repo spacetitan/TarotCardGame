@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[GlobalClass]
 public partial class Status : Resource
 {
     [Signal] public delegate void StatusAppliedEventHandler(Status status);
@@ -14,12 +15,17 @@ public partial class Status : Resource
     [Export] public int duration { get; private set; }
     [Export] public int stacks { get; private set; }
 
-    [ExportGroup("Status Visuals")]
+    [ExportGroup("Status External")]
     [Export] public Texture2D statusIcon { get; private set; }
     [Export] public String desc { get; private set; }
+    [Export] public AudioStream sfx { get; private set; }
 
     public void InitializeStatus(Node target) { return; }
-    public void ApplyStatus(Node target) { EmitSignal(SignalName.StatusApplied); }
+    public virtual void ApplyStatus(Node target) 
+    {
+        GD.Print("Apply: " + id);
+        EmitSignal(SignalName.StatusApplied);
+    }
     public void SetDuration(int newVal)
     {
         this.duration = newVal;
