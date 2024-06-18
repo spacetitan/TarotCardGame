@@ -5,9 +5,9 @@ using System.Collections.Generic;
 public partial class StrAllAttack : CardStats
 {
     [Export] private int value = 0;
-    public override void ApplyEffects(List<Node2D> targets, PlayerStats playerStats)
+    public override void ApplyEffects(List<Node2D> targets, PlayerStats playerStats, ModifierManager modifiers)
 	{
-		DamageEffect damage = new DamageEffect(playerStats.strength + this.value, this.playSFX);
+		DamageEffect damage = new DamageEffect(modifiers.GetModifiedValue(playerStats.strength + this.value, ModifierType.DMGDEALT), this.playSFX);
         damage.Execute(targets);
 	}
 }

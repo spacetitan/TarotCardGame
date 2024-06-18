@@ -5,12 +5,11 @@
 
 [resource]
 script = ExtResource("1_icqsf")
-value = 2
 id = &"Mark"
-type = 3
-stackType = 2
-canExpire = false
+type = 1
+stackType = 1
+canExpire = true
 duration = 0
 stacks = 0
 statusIcon = ExtResource("2_jrfvr")
-desc = "+2 dmg on next attack"
+desc = ""

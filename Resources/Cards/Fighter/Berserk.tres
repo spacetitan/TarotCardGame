@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Berserk" load_steps=3 format=3 uid="uid://fw72yefdfeet"]
+
+[ext_resource type="Script" path="res://Scripts/_Resources/Cards/Fighter/Berserk.cs" id="1_ak7xu"]
+[ext_resource type="Texture2D" uid="uid://45boxqyqfxbi" path="res://Sprites/Status/beserk.png" id="1_ko4u2"]
+
+[resource]
+script = ExtResource("1_ak7xu")
+value = 2
+cardName = "Berserk"
+cardType = 1
+cardTag = 3
+cardDesc = ""
+cardCost = 1
+cardGen = 2
+isExhaust = false
+target = 1
+cardArt = ExtResource("1_ko4u2")

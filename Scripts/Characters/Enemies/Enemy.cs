@@ -19,7 +19,8 @@ public partial class Enemy : Area2D
 	private Material GREEN_SPRITE_MATERIAL = ResourceLoader.Load<Material>("res://Materials/HealMaterial.tres");
 
 	const String STATUS_MANAGER_SCENE = "res://Scenes/GamePlay/StatusManager.tscn";
-	public StatusManager statusManager { get; private set; } //instantiate in scene
+	public StatusManager statusManager { get; private set; } 
+	public ModifierManager modifierManager { get; private set; }
 
 	public override void _Ready()
 	{
@@ -49,6 +50,8 @@ public partial class Enemy : Area2D
 		this.AddChild(newScene);
 		this.statusManager = newScene as StatusManager;
 		this.statusManager.SetOwner(this);
+
+		this.modifierManager = new ModifierManager();
 	}
 
 	private void ConnectEventSignals()
@@ -131,7 +134,7 @@ public partial class Enemy : Area2D
 		this.currentAction.PerformAction();
 	}
 
-	public void TakeDamage(int damage)
+	public void TakeDamage(int damage, ModifierType type = ModifierType.NONE)
 	{
 		if(stats.health <=0)
 		{
@@ -139,10 +142,11 @@ public partial class Enemy : Area2D
 		}
 
 		this.enemySprite.Material = WHITE_SPRITE_MATERIAL;
+		int modifiedDmg = modifierManager.GetModifiedValue(damage, type);
 
 		Tween tween = CreateTween();
 		tween.TweenCallback(Callable.From(()=>{VFXManager.instance.Shake(this, 16, .15f);}));
-		tween.TweenCallback(Callable.From(()=>{stats.TakeDamage(damage);}));
+		tween.TweenCallback(Callable.From(()=>{stats.TakeDamage(modifiedDmg);}));
 		tween.TweenInterval(0.17f);
 		tween.Finished += ()=>
 		{

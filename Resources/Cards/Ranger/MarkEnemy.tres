@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("3_ivnpj")
-value = 0
+value = 1
 cardName = "Mark Enemy"
 cardType = 2
 cardTag = 2

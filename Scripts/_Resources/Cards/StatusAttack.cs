@@ -10,17 +10,16 @@ public partial class StatusAttack : CardStats
 
     const String EXPOSED_STATUS = "res://Resources/Status/ExposeStatus.tres";
 
-    public override void ApplyEffects(List<Node2D> targets, PlayerStats playerStats)
+    public override void ApplyEffects(List<Node2D> targets, PlayerStats playerStats, ModifierManager modifiers)
     {
-        DamageEffect damage = new DamageEffect(this.value, this.playSFX);
+        DamageEffect damage = new DamageEffect(modifiers.GetModifiedValue(this.value, ModifierType.DMGDEALT), this.playSFX);
         damage.Execute(targets);
 
         Expose status = ResourceLoader.Load<Expose>(EXPOSED_STATUS);
         Expose expose = status.Duplicate() as Expose;
         expose.SetDuration(this.duration);
 
-        StatusEffect statusEffect = new StatusEffect(this.duration);
-        statusEffect.status = expose;
+        StatusEffect statusEffect = new StatusEffect(expose);
         statusEffect.Execute(targets);
     }
 }

@@ -42,10 +42,27 @@ public partial class StatusUI : Control
 		if (status.stackType == StatusStackType.INTENSITY)
 		{
 			this.label.Text = this.status.stacks.ToString();
+
+			if(this.status.stacks < 1)
+			{
+				DestroyUI();
+			}
 		}
 		else if (status.stackType == StatusStackType.DURATION)
 		{
 			this.label.Text = this.status.duration.ToString();
+
+			if(this.status.duration < 1)
+			{
+				DestroyUI();
+			}
 		}
+	}
+
+	void DestroyUI()
+	{
+		this.status.StatusApplied -= SetStatus;
+		this.status.StatusChanged -= UpdateUI;
+		QueueFree();
 	}
 }

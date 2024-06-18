@@ -17,7 +17,8 @@ public partial class Player : Node2D
 	private bool isDead = false;
 
 	const String STATUS_MANAGER_SCENE = "res://Scenes/GamePlay/StatusManager.tscn";
-	public StatusManager statusManager { get; private set; } //instantiate in scene
+	public StatusManager statusManager { get; private set; }
+	public ModifierManager modifierManager { get; private set; }
 
 	public override void _Ready()
 	{
@@ -45,6 +46,8 @@ public partial class Player : Node2D
 		this.AddChild(newScene);
 		this.statusManager = newScene as StatusManager;
 		this.statusManager.SetOwner(this);
+
+		this.modifierManager = new ModifierManager();	
 	}
 
 	private void ConnectEventSignals()
@@ -76,7 +79,7 @@ public partial class Player : Node2D
 		this.statsUI.UpdateStats(stats);
 	}
 
-	public void TakeDamage(int damage)
+	public void TakeDamage(int damage, ModifierType type = ModifierType.NONE)
 	{
 		if(this.stats.health <=0 || isDead)
 		{
@@ -84,10 +87,11 @@ public partial class Player : Node2D
 		}
 
 		this.playerSprite.Material = WHITE_SPRITE_MATERIAL;
+		int modifiedDmg = modifierManager.GetModifiedValue(damage, type);
 
 		Tween tween = CreateTween();
 		tween.TweenCallback(Callable.From(()=>{VFXManager.instance.Shake(this, 16, .15f);})); // must be less than interval time
-		tween.TweenCallback(Callable.From(()=>{stats.TakeDamage(damage);}));
+		tween.TweenCallback(Callable.From(()=>{stats.TakeDamage(modifiedDmg);}));
 		tween.TweenInterval(0.17f); // this is the interval time
 		tween.Finished += ()=>
 		{

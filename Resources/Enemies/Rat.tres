@@ -23,6 +23,6 @@ intelligence = 1
 name = "Rat"
 desc = ""
 art = ExtResource("4_h2kcu")
-maxHealth = 8
+maxHealth = 50
 health = 0
 armor = 0

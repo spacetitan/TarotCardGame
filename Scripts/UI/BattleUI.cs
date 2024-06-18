@@ -36,9 +36,9 @@ public partial class BattleUI : CanvasLayer
 		this.abilityButton = GetNode<Button>("%ButtonAbility");
 	}
 
-	public void SetPlayerStats(PlayerStats value)
+	public void SetPlayerStats(Player value)
 	{
-		playerStats = value;
+		playerStats = value.stats;
 		hand.SetPlayerStats(value);
 		manaUI.SetPlayerStats(value);
 

@@ -62,8 +62,8 @@ public partial class CombatScene : Node2D
 	{
 		PlayerStats newStats = playerStats.CreateInstance();
 		this.playerStats = newStats;
-		UIManager.instance.battle.SetPlayerStats(this.playerStats);
 		this.player.SetPlayerStats(this.playerStats);
+		UIManager.instance.battle.SetPlayerStats(this.player);
 
 		int count = 0;
 		foreach (EnemyStats enemy in enemyList)
@@ -216,7 +216,7 @@ public partial class CombatScene : Node2D
 		ResetEnemyActions();
 		if(this.player != null)
 		{
-			StartPlayerTurn();
+			StartPlayerPhase();
 		}
 	}
 

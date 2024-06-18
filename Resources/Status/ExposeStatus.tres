@@ -6,10 +6,10 @@
 [resource]
 script = ExtResource("1_qrv5y")
 id = &"Expose"
-type = 3
-stackType = 2
+type = 1
+stackType = 1
 canExpire = true
 duration = 0
 stacks = 0
 statusIcon = ExtResource("2_0c2n4")
-desc = "take more dmg"
+desc = "0"

@@ -20,11 +20,11 @@ public partial class Status : Resource
     [Export] public String desc { get; private set; }
     [Export] public AudioStream sfx { get; private set; }
 
-    public void InitializeStatus(Node target) { return; }
+    public virtual void InitializeStatus(Node target) { return; }
     public virtual void ApplyStatus(Node target) 
     {
         GD.Print("Apply: " + id);
-        EmitSignal(SignalName.StatusApplied);
+        EmitSignal(SignalName.StatusApplied, this);
     }
     public void SetDuration(int newVal)
     {

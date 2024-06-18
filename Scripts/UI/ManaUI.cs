@@ -16,9 +16,9 @@ public partial class ManaUI : Panel
 		manaLabel = GetNode<Label>("%LabelMana");
 	}
 
-	public void SetPlayerStats(PlayerStats value)
+	public void SetPlayerStats(Player value)
 	{
-		this.playerStats = value;
+		this.playerStats = value.stats;
 		this.playerStats.StatsChanged -= OnStatsChanged;
 		this.playerStats.StatsChanged += OnStatsChanged;
 		OnStatsChanged();

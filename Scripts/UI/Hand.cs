@@ -5,7 +5,8 @@ public partial class Hand : HBoxContainer
 {
     [Export] public CardStats spawnCard;
 
-	public PlayerStats playerStats{ get; private set; }
+	public Player player { get; private set; }
+	public PlayerStats playerStats { get; private set; }
 
     const string CARD_UI_PATH = "res://Scenes/UI/CardUI.tscn";
     int cardsPlayedThisTurn = 0;
@@ -16,9 +17,10 @@ public partial class Hand : HBoxContainer
 		EventManager.instance.CardBurned += OnCardBurned;
 	}
 
-	public void SetPlayerStats(PlayerStats player)
+	public void SetPlayerStats(Player player)
 	{
-		playerStats = player;
+		this.player = player;
+		this.playerStats = player.stats;
 	}
 
     public void AddCard(CardStats cardStats)
@@ -31,7 +33,7 @@ public partial class Hand : HBoxContainer
 		newCardUI.ReturnToHand += OnCardReturnedtoHand;
 		newCardUI.SetCardStats(cardStats);
 		newCardUI.Reparent(this);
-		newCardUI.SetPlayerStats(this.playerStats);
+		newCardUI.SetPlayerStats(this.player);
 		newCardUI.SetHand(this);
 
 		EventManager.instance.EmitSignal(EventManager.SignalName.CardDrawn);

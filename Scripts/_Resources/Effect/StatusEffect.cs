@@ -6,9 +6,9 @@ public partial class StatusEffect : Effect
 {
     public Status status;
 
-    public StatusEffect(int value)
+    public StatusEffect(Status status)
 	{
-
+        this.status = status;
 	}
 
     public override void Execute(Node2D target)

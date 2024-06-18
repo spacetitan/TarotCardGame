@@ -8,6 +8,7 @@ public partial class CardUI : Control
 	[Signal] public delegate void ReturnToHandEventHandler(CardUI card);
 	public int originalIndex = 0;
 	[Export] public CardStats cardStats{ get; private set; }
+	private Player player;
 	private PlayerStats playerStats;
 	private CardStateMachine cardStateMachine;
 
@@ -92,9 +93,10 @@ public partial class CardUI : Control
 		this.cardTypeTTColorRect.Color = color;
 	}
 
-	public void SetPlayerStats(PlayerStats value)
+	public void SetPlayerStats(Player player)
 	{
-		this.playerStats = value;
+		this.player = player;
+		this.playerStats = player.stats;
 		this.playerStats.StatsChanged += OnStatsChanged;
 		SetPlayable(playerStats.CanPlayCard(this));
 	}
@@ -135,7 +137,7 @@ public partial class CardUI : Control
 			return;
 		}
 
-		cardStats.Play(playerStats, targets);
+		cardStats.Play(playerStats, targets, player.modifierManager);
 		DestroyCard();
 	}
 	public void Burn()

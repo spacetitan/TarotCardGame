@@ -9,16 +9,16 @@ public partial class PoisonArrow : CardStats
 
 	const String POISON_STATUS = "res://Resources/Status/PoisonStatus.tres";
 
-	public override void ApplyEffects(List<Node2D> targets, PlayerStats playerStats)
+	public override void ApplyEffects(List<Node2D> targets, PlayerStats playerStats, ModifierManager modifiers)
 	{
-		DamageEffect damageEffect = new DamageEffect(playerStats.dexterity, this.playSFX);
+		DamageEffect damageEffect = new DamageEffect(modifiers.GetModifiedValue(playerStats.dexterity, ModifierType.DMGDEALT), this.playSFX);
         damageEffect.Execute(targets);
 
 		Poison status = ResourceLoader.Load<Poison>(POISON_STATUS);
 		Poison poison = status.Duplicate() as Poison;
 		poison.SetStacks(value);
 
-		StatusEffect statusEffect = new StatusEffect(this.value);
+		StatusEffect statusEffect = new StatusEffect(poison);
 		statusEffect.status = poison;
 		statusEffect.Execute(targets);
 	}

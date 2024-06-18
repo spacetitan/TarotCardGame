@@ -10,7 +10,12 @@ public enum PlayerClass { NONE, FIGHTER, RANGER, MAGE}
 #endregion
 
 #region Enemy
-public enum EnemyActionType{NONE, CONDITIIONAL, CHANCE}
+public enum EnemyActionType{ NONE, CONDITIIONAL, CHANCE}
+#endregion
+
+#region Modifiers
+public enum ModifierType{ NONE, DMGDEALT, DMGTAKEN, CARDCOST, SHOPCOST}
+public enum ModifierValueType{ NONE, PERCENT, FLAT}
 #endregion
 
 #region Status Effects

@@ -53,17 +53,17 @@ public partial class CardStats : Resource
             return null;
         }
     }
-    public void Play(PlayerStats playerStats, List<Node2D> targets)
+    public void Play(PlayerStats playerStats, List<Node2D> targets, ModifierManager modifiers)
     {
         playerStats.AddMana(-cardCost);
 
         if(isSingleTargeted())
         {
-            ApplyEffects(targets, playerStats);
+            ApplyEffects(targets, playerStats, modifiers);
         }
         else
         {
-            ApplyEffects(GetTargets(targets), playerStats);
+            ApplyEffects(GetTargets(targets), playerStats, modifiers);
         }
         EventManager.instance.EmitSignal(EventManager.SignalName.CardPlayed, this);
     }
@@ -73,7 +73,7 @@ public partial class CardStats : Resource
         AudioManager.instance.sfxPlayer.Play(this.burnSFX);
         EventManager.instance.EmitSignal(EventManager.SignalName.CardBurned, this);
     }
-    public virtual void ApplyEffects(List<Node2D> targets, PlayerStats playerStats)
+    public virtual void ApplyEffects(List<Node2D> targets, PlayerStats playerStats, ModifierManager modifiers)
     {
         return;
     }

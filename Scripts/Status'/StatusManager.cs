@@ -7,6 +7,8 @@ public partial class StatusManager : GridContainer
 {
 	[Signal] public delegate void StatusesAppliedEventHandler(StatusType type);
 
+	public List<Status> statuses { get; private set; } = new List<Status>();
+
 	const string STATUS_PATH = "res://Scenes/UI/StatusUI.tscn";
 	const float STATUS_APPLY_INTERVAL = 0.25f;
 	public Node2D owner { get; private set;}
@@ -26,8 +28,6 @@ public partial class StatusManager : GridContainer
 			return;
 		}
 
-		StatusStackType stackType = status.stackType;
-
 		if(!HasStatus(status.id))
 		{
 			PackedScene newScene = GD.Load<PackedScene>(STATUS_PATH);
@@ -39,6 +39,8 @@ public partial class StatusManager : GridContainer
 			statusUI.SetStatus(status);
 			statusUI.status.StatusApplied += OnStatusApplied;
 			statusUI.status.InitializeStatus(target);
+
+			this.statuses.Add(status);
 			return;
 		}
 
@@ -51,7 +53,7 @@ public partial class StatusManager : GridContainer
 
 		if(status.canExpire && status.stackType == StatusStackType.INTENSITY)
 		{
-			GetStatus(status.id).AddStacks(status.duration);
+			GetStatus(status.id).AddStacks(status.stacks);
 		}
 	}
 
@@ -59,7 +61,7 @@ public partial class StatusManager : GridContainer
 	{
 		if(type == StatusType.EVENT) { return; }
 
-		List<Status> statuses = GetAllStatuses().FindAll(x => x.type == type);
+		List<Status> statuses = this.statuses.FindAll(x => x.type == type);
 
 		if(statuses == null || !statuses.Any())
 		{
@@ -82,14 +84,23 @@ public partial class StatusManager : GridContainer
 		if(status.canExpire)
 		{
 			status.SetDuration(status.duration-1);
+
+			if(status.stackType == StatusStackType.INTENSITY && status.stacks < 1)
+			{
+				this.statuses.Remove(status);
+			}
+			else if(status.stackType == StatusStackType.DURATION && status.duration < 1)
+			{
+				this.statuses.Remove(status);
+			}
 		}
 	}
 
 	private bool HasStatus(StringName id)
 	{
-		foreach(StatusUI statusUI in GetChildren())
+		foreach(Status status in this.statuses)
 		{
-			if(statusUI.status.id == id)
+			if(status.id == id)
 			{
 				return true;
 			}
@@ -100,27 +111,15 @@ public partial class StatusManager : GridContainer
 
 	private Status GetStatus(StringName id)
 	{
-		foreach(StatusUI statusUI in GetChildren())
+		foreach(Status status in this.statuses)
 		{
-			if(statusUI.status.id == id)
+			if(status.id == id)
 			{
-				return statusUI.status;
+				return status;
 			}
 		}
 
 		GD.Print("No Status Present");
 		return null;
-	}
-
-	public List<Status> GetAllStatuses()
-	{
-		List<Status> statuses = new List<Status>();
-
-		foreach(StatusUI statusUI in GetChildren())
-		{
-			statuses.Add(statusUI.status);
-		}
-
-		return statuses;
 	}
 }
